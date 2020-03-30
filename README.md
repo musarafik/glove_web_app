@@ -1,1 +1,1 @@
-# senior_design_web_app
+# glove_web_app
