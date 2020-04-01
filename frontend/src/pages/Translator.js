@@ -34,7 +34,7 @@ export default class Translator extends React.Component{
                 <h2>Translator Page</h2>
                 <Form onSubmit={this.handleOnSubmit}>
                     <FormGroup style={{paddingTop: '5%'}}>
-                        <Label for="userInput">Enter a letter to get a translation</Label>
+                        <Label for="userInput">Enter a letter to see what it looks like in sign language</Label>
                         <div style={styles.inputContainer}>
                             <Input type="textArea" name="input" id="userInput" />
                             <Button style={{marginLeft: '1%'}}>Submit</Button>
