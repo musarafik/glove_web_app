@@ -10,7 +10,7 @@ const Styles = styled.div`
         color: bbb;
 
         &:hover{
-            color: white;
+            color: teal;
 
         }
     }
@@ -19,8 +19,8 @@ const Styles = styled.div`
 
 const NavigationBar = () =>(
     <Styles>
-        <Navbar expand="lg">
-            <Navbar.Brand href="/">Glove Project</Navbar.Brand>
+        <Navbar bg="dark" variant="dark" expand="lg" >
+            <Navbar.Brand href="/">I4: Sign Language Translator</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav"/>
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="ml-auto">

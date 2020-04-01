@@ -6,7 +6,7 @@ import {Layout, NavigationBar} from  './components/index';
 
 function App() {
   return (
-    <>
+    <div style={{backgroundColor:'#DBF1FF', backgroundSize:'cover', backgroundRepeat: 'repeat', height:'100vh'}}>
       <NavigationBar/>
       <Layout>
         <Router>
@@ -19,7 +19,7 @@ function App() {
           </Switch>
         </Router>
       </Layout>
-    </>
+    </div>
   );
 }
 
