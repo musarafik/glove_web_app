@@ -14,24 +14,26 @@ export default class Translator extends React.Component{
         this.state = {}
     }
 
-    // Send response to backend in json with POST request whenever page loads
+    // Send response to backend in json form with POST request whenever form is submitted
     handleOnSubmit(event){
         event.preventDefault();
-        console.log(event);
-        // fetch('backend url', { // TODO: fill in route with backend info
-        //     method: 'POST',
-        //     mode: 'cors',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify(data)
-        // })
+        console.log(event.target.userInput.value);
+        fetch('/translator', { 
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(event.target.userInput.value)
+        })
+        .then(response => console.log(response.JSON));
     }
 
     render(){
         return(
             <div>
                 <h2>Translator Page</h2>
+
                 <Form onSubmit={this.handleOnSubmit}>
                     <FormGroup style={{paddingTop: '5%'}}>
                         <Label for="userInput">Enter a letter to see what it looks like in sign language</Label>
@@ -39,9 +41,9 @@ export default class Translator extends React.Component{
                             <Input type="textArea" name="input" id="userInput" />
                             <Button style={{marginLeft: '1%'}}>Submit</Button>
                         </div>
-                        
                     </FormGroup>
                 </Form>
+
             </div>
         );
     }
