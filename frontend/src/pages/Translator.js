@@ -17,7 +17,6 @@ export default class Translator extends React.Component{
     // Send response to backend in json form with POST request whenever form is submitted
     handleOnSubmit(event){
         event.preventDefault();
-        console.log(event.target.userInput.value);
         fetch('/translator', { 
             method: 'POST',
             mode: 'cors',
@@ -26,7 +25,8 @@ export default class Translator extends React.Component{
             },
             body: JSON.stringify(event.target.userInput.value)
         })
-        .then(response => console.log(response.JSON));
+        .then(response => response.json())
+        .then(data => console.log(data))
     }
 
     render(){
