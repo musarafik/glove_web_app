@@ -1,13 +1,8 @@
 import React from 'react';
 import './App.css';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import {Home} from './Home';
-import {About} from './About';
-import {Reports} from './Reports';
-import {Translator} from './Translator';
-import {NoMatch} from  './NoMatch';
-import {Layout} from  './components/Layout';
-import {NavigationBar} from './components/NavigationBar';
+import {Home, About, Reports, Translator, NoMatch} from './pages/index';
+import {Layout, NavigationBar} from  './components/index';
 
 function App() {
   return (
