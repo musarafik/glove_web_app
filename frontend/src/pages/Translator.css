@@ -1,0 +1,18 @@
+.choicesContainer{
+    display: flex;
+    justify-content: center;    
+}
+
+.questionContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.wordsButton{
+    margin-right: 10%;
+}
+
+.lettersButton{
+    margin-left: 10%;
+}

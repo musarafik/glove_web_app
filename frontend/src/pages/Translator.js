@@ -1,6 +1,7 @@
 import React from 'react';
-import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
+import {Form, FormGroup, Label, Input, Button, Jumbotron, Container} from 'reactstrap';
 import Speech from 'speak-tts';
+import './Translator.css';
 
 // Images for translation
 import a from '../assets/a.png';
@@ -45,7 +46,7 @@ const styles = {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        paddingTop: '10%'
+        paddingTop: '3%'
     },
 }
 
@@ -57,6 +58,8 @@ export default class Translator extends React.Component{
         super(props);
         this.state = {
             renderImage: false,
+            renderLetterForm: false,
+            renderWordList: false,
             image: '',
             textToSpeak: ''
         }
@@ -200,12 +203,46 @@ export default class Translator extends React.Component{
         }
     }
 
+    handleLetterPress = () =>{
+        this.setState({renderLetterForm: true});
+        if(this.state.renderWordList){
+            this.setState({renderWordList: false});
+        }
+    }
+
+    handleWordPress = () =>{
+        this.setState({renderWordList: true});
+        if(this.state.renderLetterForm){
+            this.setState({renderLetterForm: false});
+        }
+    }
+
     render(){
         return(
             <div>
-                <h2>Translator Page</h2>
-
-                <div style={styles.pageContainer}>
+                <div>
+                    <Jumbotron fluid>
+                        <Container fluid>
+                            <h1 className="display-3">Translator</h1>
+                            <p className="lead">Want to learn some American Sign Language?</p>
+                            <p className="lead">Well you're at the right place!</p>
+                            <p className="lead">Choose between words and letters to see how they're signed.</p>
+                            <p className="lead">Make sure to have your sound on so you can hear each word and letter!</p>
+                        </Container>
+                    </Jumbotron>
+                </div>
+                
+                <div className="questionContainer">
+                    <p className="lead">Do you want to learn:</p>
+                    <div className="choicesContainer">
+                        <Button className="wordsButton" onClick={this.handleWordPress}>Words</Button> 
+                        <p style={{paddingTop: '5%'}} className="lead">or</p> 
+                        <Button onClick={this.handleLetterPress}className="lettersButton">Letters</Button>
+                    </div>
+                </div>
+               
+                {this.state.renderLetterForm ? 
+                    <div style={styles.pageContainer}>
                     <Form onSubmit={this.handleOnSubmit} id="inputForm">
                         <FormGroup style={{paddingTop: '5%'}}>
                             <Label for="userInput">Enter a letter to see what it looks like in sign language</Label>
@@ -226,25 +263,22 @@ export default class Translator extends React.Component{
                         (null)
                     }
                 </div>
+                :
+                    null
+                }
+
+                {this.state.renderWordList ? 
+                    <div>
+                        <h1>words</h1>
+                    </div>
+                :
+                    null
+                }
+
+                
 
                 
             </div>
         );
     }
 }
-
-
-const style = {
-    play: {
-      button: {
-        width: '28',
-        height: '28',
-        cursor: 'pointer',
-        pointerEvents: 'none',
-        outline: 'none',
-        backgroundColor: 'yellow',
-        border: 'solid 1px rgba(255,255,255,1)',
-        borderRadius: 6
-      },
-    }
-  };
