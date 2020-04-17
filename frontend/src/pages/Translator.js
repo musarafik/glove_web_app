@@ -1,5 +1,8 @@
 import React from 'react';
 import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
+import Speech from 'speak-tts';
+
+// Images for translation
 import a from '../assets/a.png';
 import b from '../assets/b.jpg';
 import c from '../assets/c.jpg';
@@ -27,6 +30,7 @@ import x from '../assets/x.png';
 import y from '../assets/y.jpg';
 import z from '../assets/z.png';
 
+
 const styles = {
     inputContainer:{
         display: 'flex',
@@ -42,15 +46,37 @@ const styles = {
         flexDirection: 'column',
         alignItems: 'center',
         paddingTop: '10%'
-    }
+    },
 }
+
+let speechPtr = null; 
+
 
 export default class Translator extends React.Component{
     constructor(props){
         super(props);
         this.state = {
             renderImage: false,
-            image: ''
+            image: '',
+            textToSpeak: ''
+        }
+    }
+
+    componentDidMount = () =>{
+        const speech = new Speech();
+
+        if(speech.hasBrowserSupport()){
+            console.log("speech translation supported");
+            speech.init().then((data) =>{
+                console.log("Speech is ready, voices are available", data)
+            }).catch(e =>{
+                console.log("An error occurred while initializing: ", e)
+            })
+
+            speechPtr = speech;
+        }
+        else{
+            console.log("Speech translation not supported");
         }
     }
 
@@ -71,6 +97,13 @@ export default class Translator extends React.Component{
                 this.handleImage(data);
                 this.chooseImage();
                 document.getElementById("inputForm").reset();
+                speechPtr.speak({
+                    text: this.state.textToSpeak,
+                }).then(() =>{
+                    console.log("Success!")
+                }).catch(e =>{
+                    console.log("An error occurred:", e)
+                })
             });
         }
     }
@@ -84,82 +117,82 @@ export default class Translator extends React.Component{
     chooseImage = () =>{
         switch(this.state.image){
             case 'a':
-                this.setState({image: a});
+                this.setState({image: a, textToSpeak: 'a'});
                 break;
             case 'b':
-                this.setState({image: b});
+                this.setState({image: b, textToSpeak: 'b'});
                 break;
             case 'c':
-                this.setState({image: c});
+                this.setState({image: c, textToSpeak: 'c'});
                 break;
             case 'd':
-                this.setState({image: d});
+                this.setState({image: d, textToSpeak: 'd'});
                 break;
             case 'e':
-                this.setState({image: e});
+                this.setState({image: e, textToSpeak: 'e'});
                 break;
             case 'f':
-                this.setState({image: f});
+                this.setState({image: f, textToSpeak: 'f'});
                 break;
             case 'g':
-                this.setState({image: g});
+                this.setState({image: g, textToSpeak: 'g'});
                 break;
             case 'h':
-                this.setState({image: h});
+                this.setState({image: h, textToSpeak: 'h'});
                 break;
             case 'i':
-                this.setState({image: i});
+                this.setState({image: i, textToSpeak: 'i'});
                 break;
             case 'j':
-                this.setState({image: j});
+                this.setState({image: j, textToSpeak: 'j'});
                 break;
             case 'k':
-                this.setState({image: k});
+                this.setState({image: k, textToSpeak: 'k'});
                 break;
             case 'l':
-                this.setState({image: l});
+                this.setState({image: l, textToSpeak: 'l'});
                 break;
             case 'm':
-                this.setState({image: m});
+                this.setState({image: m, textToSpeak: 'm'});
                 break;
             case 'n':
-                this.setState({image: n});
+                this.setState({image: n, textToSpeak: 'n'});
                 break;
             case 'o':
-                this.setState({image: o});
+                this.setState({image: o, textToSpeak: 'o'});
                 break;
             case 'p':
-                this.setState({image: p});
+                this.setState({image: p, textToSpeak: 'p'});
                 break;
             case 'q':
-                this.setState({image: q});
+                this.setState({image: q, textToSpeak: 'q'});
                 break;
             case 'r':
-                this.setState({image: r});
+                this.setState({image: r, textToSpeak: 'r'});
                 break;
             case 's':
-                this.setState({image: s});
+                this.setState({image: s, textToSpeak: 's'});
                 break;
             case 't':
-                this.setState({image: t});
+                this.setState({image: t, textToSpeak: 't'});
                 break;
             case 'u':
-                this.setState({image: u});
+                this.setState({image: u, textToSpeak: 'u'});
                 break;
             case 'v':
-                this.setState({image: v});
+                this.setState({image: v, textToSpeak: 'v'});
                 break;
             case 'w':
-                this.setState({image: w});
+                this.setState({image: w, textToSpeak: 'w'});
                 break;
             case 'x':
-                this.setState({image: x});
+                this.setState({image: x, textToSpeak: 'x'});
                 break;
             case 'y':
-                this.setState({image: y});
+                this.setState({image: y, textToSpeak: 'y'});
                 break;
             case 'z':
-                this.setState({image: z});
+                this.setState({image: z, textToSpeak: 'z'});
                 break;
             default:
                 this.setState({image: ''})
@@ -199,3 +232,19 @@ export default class Translator extends React.Component{
         );
     }
 }
+
+
+const style = {
+    play: {
+      button: {
+        width: '28',
+        height: '28',
+        cursor: 'pointer',
+        pointerEvents: 'none',
+        outline: 'none',
+        backgroundColor: 'yellow',
+        border: 'solid 1px rgba(255,255,255,1)',
+        borderRadius: 6
+      },
+    }
+  };
