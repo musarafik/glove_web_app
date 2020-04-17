@@ -16,3 +16,12 @@
 .lettersButton{
     margin-left: 10%;
 }
+
+.wordButtonArrayContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+.wordButton{
+    width: 15%;
+}

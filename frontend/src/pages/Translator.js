@@ -31,6 +31,18 @@ import x from '../assets/x.png';
 import y from '../assets/y.jpg';
 import z from '../assets/z.png';
 
+// Words for translation
+import monday from '../assets/monday.jpg';
+import tuesday from '../assets/tuesday.jpg';
+import wednesday from '../assets/wednesday.jpg';
+import thursday from '../assets/thursday.jpg';
+import friday from '../assets/friday.jpg';
+import saturday from '../assets/saturday.jpg';
+import sunday from '../assets/sunday.jpg';
+import hello from '../assets/hello.jpg';
+import goodbye from '../assets/goodbye.jpg';
+import nicetomeetyou from '../assets/nicetomeetyou.jpg';
+
 
 const styles = {
     inputContainer:{
@@ -50,7 +62,49 @@ const styles = {
     },
 }
 
-let speechPtr = null; 
+let speechPtr = null;
+
+const letters = {
+    'a': a,
+    'b': b,
+    'c': c,
+    'd': d,
+    'e': e,
+    'f': f,
+    'g': g,
+    'h': h,
+    'i': i,
+    'j': j,
+    'k': k,
+    'l': l,
+    'm': m,
+    'n': n,
+    'o': o,
+    'p': p,
+    'q': q,
+    'r': r,
+    's': s,
+    't': t,
+    'u': u,
+    'v': v,
+    'w': w,
+    'x': x,
+    'y': y,
+    'z': z
+}
+
+const words = {
+    'Monday': monday,
+    'Tuesday': tuesday,
+    'Wednesday': wednesday,
+    'Thursday': thursday,
+    'Friday': friday,
+    'Saturday': saturday,
+    'Sunday': sunday,
+    'Hello': hello,
+    'Goodbye': goodbye,
+    'Nice to meet you': nicetomeetyou
+}
 
 
 export default class Translator extends React.Component{
@@ -68,15 +122,15 @@ export default class Translator extends React.Component{
     componentDidMount = () =>{
         const speech = new Speech();
 
-        if(speech.hasBrowserSupport()){
+        if(speech.hasBrowserSupport()){ // Check if text to speech is available
             console.log("speech translation supported");
-            speech.init().then((data) =>{
+            speech.init().then((data) =>{ // Initialize speech object
                 console.log("Speech is ready, voices are available", data)
             }).catch(e =>{
                 console.log("An error occurred while initializing: ", e)
             })
 
-            speechPtr = speech;
+            speechPtr = speech; // Assign speechPtr speech so we can use it throughout component
         }
         else{
             console.log("Speech translation not supported");
@@ -97,7 +151,7 @@ export default class Translator extends React.Component{
             })
             .then(response => response.json())
             .then(data => {
-                this.handleImage(data);
+                this.handleResponse(data);
                 this.chooseImage();
                 document.getElementById("inputForm").reset();
                 speechPtr.speak({
@@ -111,102 +165,35 @@ export default class Translator extends React.Component{
         }
     }
 
-    handleImage = (data) =>{
+    handleResponse = (data) =>{
         this.setState({image: data['response']});
         this.setState({renderImage: true});
     }
 
     // Choose image to render based off backend response
     chooseImage = () =>{
-        switch(this.state.image){
-            case 'a':
-                this.setState({image: a, textToSpeak: 'a'});
-                break;
-            case 'b':
-                this.setState({image: b, textToSpeak: 'b'});
-                break;
-            case 'c':
-                this.setState({image: c, textToSpeak: 'c'});
-                break;
-            case 'd':
-                this.setState({image: d, textToSpeak: 'd'});
-                break;
-            case 'e':
-                this.setState({image: e, textToSpeak: 'e'});
-                break;
-            case 'f':
-                this.setState({image: f, textToSpeak: 'f'});
-                break;
-            case 'g':
-                this.setState({image: g, textToSpeak: 'g'});
-                break;
-            case 'h':
-                this.setState({image: h, textToSpeak: 'h'});
-                break;
-            case 'i':
-                this.setState({image: i, textToSpeak: 'i'});
-                break;
-            case 'j':
-                this.setState({image: j, textToSpeak: 'j'});
-                break;
-            case 'k':
-                this.setState({image: k, textToSpeak: 'k'});
-                break;
-            case 'l':
-                this.setState({image: l, textToSpeak: 'l'});
-                break;
-            case 'm':
-                this.setState({image: m, textToSpeak: 'm'});
-                break;
-            case 'n':
-                this.setState({image: n, textToSpeak: 'n'});
-                break;
-            case 'o':
-                this.setState({image: o, textToSpeak: 'o'});
-                break;
-            case 'p':
-                this.setState({image: p, textToSpeak: 'p'});
-                break;
-            case 'q':
-                this.setState({image: q, textToSpeak: 'q'});
-                break;
-            case 'r':
-                this.setState({image: r, textToSpeak: 'r'});
-                break;
-            case 's':
-                this.setState({image: s, textToSpeak: 's'});
-                break;
-            case 't':
-                this.setState({image: t, textToSpeak: 't'});
-                break;
-            case 'u':
-                this.setState({image: u, textToSpeak: 'u'});
-                break;
-            case 'v':
-                this.setState({image: v, textToSpeak: 'v'});
-                break;
-            case 'w':
-                this.setState({image: w, textToSpeak: 'w'});
-                break;
-            case 'x':
-                this.setState({image: x, textToSpeak: 'x'});
-                break;
-            case 'y':
-                this.setState({image: y, textToSpeak: 'y'});
-                break;
-            case 'z':
-                this.setState({image: z, textToSpeak: 'z'});
-                break;
-            default:
-                this.setState({image: ''})
-                break;
-        }
+        this.setState({image: letters[this.state.image], textToSpeak: this.state.image});
+    }
+
+    handleWordButton = async (word) =>{
+        await this.setState({image: words[word], textToSpeak: word});
+        this.setState({renderImage: true});
+        speechPtr.speak({
+            text: this.state.textToSpeak,
+        }).then(() =>{
+            console.log("Success!")
+        }).catch(e =>{
+            console.log("An error occurred:", e)
+        })
     }
 
     handleLetterPress = () =>{
         this.setState({renderLetterForm: true});
         if(this.state.renderWordList){
             this.setState({renderWordList: false});
+        }
+        if(this.state.renderImage){
+            this.setState({renderImae: false});
         }
     }
 
@@ -215,9 +202,17 @@ export default class Translator extends React.Component{
         if(this.state.renderLetterForm){
             this.setState({renderLetterForm: false});
         }
+        if(this.state.renderImage){
+            this.setState({renderImage: false});
+        }
     }
 
+
     render(){
+        let wordButtonArray = Object.entries(words).map((element, index) =>{
+            return(<Button key={index} onClick={(word) => this.handleWordButton(element[0])} className="wordButton">{element[0]}</Button>);
+        });
+
         return(
             <div>
                 <div>
@@ -231,7 +226,7 @@ export default class Translator extends React.Component{
                         </Container>
                     </Jumbotron>
                 </div>
-                
+
                 <div className="questionContainer">
                     <p className="lead">Do you want to learn:</p>
                     <div className="choicesContainer">
@@ -268,8 +263,18 @@ export default class Translator extends React.Component{
                 }
 
                 {this.state.renderWordList ? 
-                    <div>
-                        <h1>words</h1>
+                    <div className="wordButtonArrayContainer">
+                        {wordButtonArray}
+
+                        {this.state.renderImage ? 
+                            <img 
+                                alt="sign language equivalent"
+                                src={this.state.image}
+                                style = {styles.image}
+                            />
+                        :
+                            null
+                        }
                     </div>
                 :
                     null
