@@ -52,13 +52,13 @@ const styles = {
     image:{
         height: '300px',
         width: '300px',
-        paddingTop: '10%'
+        paddingTop: '3%'
     },
     pageContainer:{
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        paddingTop: '3%'
+        paddingTop: '3%',
     },
 }
 
@@ -115,7 +115,8 @@ export default class Translator extends React.Component{
             renderLetterForm: false,
             renderWordList: false,
             image: '',
-            textToSpeak: ''
+            textToSpeak: '',
+            wordCollection: []
         }
     }
 
@@ -165,16 +166,20 @@ export default class Translator extends React.Component{
         }
     }
 
+    // Set image to corresponding response from backend and allow it to be rendered
     handleResponse = (data) =>{
         this.setState({image: data['response']});
         this.setState({renderImage: true});
     }
 
     // Choose image to render based off backend response
+    // Looks up the value of image in letters object
+    // Sets what should be spoken by text to speech
     chooseImage = () =>{
         this.setState({image: letters[this.state.image], textToSpeak: this.state.image});
     }
 
+    // When a specific word is pressed, show the image and have text to speech say the word
     handleWordButton = async (word) =>{
         await this.setState({image: words[word], textToSpeak: word});
         this.setState({renderImage: true});
@@ -187,16 +192,18 @@ export default class Translator extends React.Component{
         })
     }
 
+    // Change layout of page to show letter input form when the letter button is clicked
     handleLetterPress = () =>{
         this.setState({renderLetterForm: true});
         if(this.state.renderWordList){
             this.setState({renderWordList: false});
         }
         if(this.state.renderImage){
-            this.setState({renderImae: false});
+            this.setState({renderImage: false});
         }
     }
-
+ 
+    // Change layout of page to show word buttons when the word button is clicked
     handleWordPress = () =>{
         this.setState({renderWordList: true});
         if(this.state.renderLetterForm){
@@ -207,15 +214,12 @@ export default class Translator extends React.Component{
         }
     }
 
-
     render(){
-        let wordButtonArray = Object.entries(words).map((element, index) =>{
-            return(<Button key={index} onClick={(word) => this.handleWordButton(element[0])} className="wordButton">{element[0]}</Button>);
-        });
-
         return(
             <div>
-                <div>
+                {this.state.renderLetterForm || this.state.renderWordList ?
+                    null
+                :
                     <Jumbotron fluid>
                         <Container fluid>
                             <h1 className="display-3">Translator</h1>
@@ -225,7 +229,8 @@ export default class Translator extends React.Component{
                             <p className="lead">Make sure to have your sound on so you can hear each word and letter!</p>
                         </Container>
                     </Jumbotron>
-                </div>
+                }
+                
 
                 <div className="questionContainer">
                     <p className="lead">Do you want to learn:</p>
@@ -240,7 +245,7 @@ export default class Translator extends React.Component{
                     <div style={styles.pageContainer}>
                     <Form onSubmit={this.handleOnSubmit} id="inputForm">
                         <FormGroup style={{paddingTop: '5%'}}>
-                            <Label for="userInput">Enter a letter to see what it looks like in sign language</Label>
+                            <Label className="lead" for="userInput">Enter a letter to see what it looks like in American Sign Language</Label>
                             <div style={styles.inputContainer}>
                                 <Input type="textArea" name="input" id="userInput" />
                                 <Button style={{marginLeft: '1%'}}>Submit</Button>
@@ -263,26 +268,36 @@ export default class Translator extends React.Component{
                 }
 
                 {this.state.renderWordList ? 
-                    <div className="wordButtonArrayContainer">
-                        {wordButtonArray}
+                    <div className="wordContainer">
+                        <p className="lead">Press a button see what the word looks like in American Sign Language</p>
+                        <div className="wordButtonContainer">
+                                <Button  onClick={(word) => this.handleWordButton('Monday')}className="wordButton">Monday</Button>
+                                <Button  onClick={(word) => this.handleWordButton('Tuesday')}className="wordButton">Tuesday</Button>
+                                <Button  onClick={(word) => this.handleWordButton('Wednesday')} className="wordButton">Wednesday</Button>
+                                <Button  onClick={(word) => this.handleWordButton('Thursday')} className="wordButton">Thursday</Button>
+                                <Button  onClick={(word) => this.handleWordButton('Friday')} className="wordButton">Friday</Button>
 
-                        {this.state.renderImage ? 
-                            <img 
-                                alt="sign language equivalent"
-                                src={this.state.image}
-                                style = {styles.image}
-                            />
-                        :
-                            null
-                        }
-                    </div>
+                                <Button  onClick={(word) => this.handleWordButton('Saturday')} className="wordButton">Saturday</Button>
+                                <Button  onClick={(word) => this.handleWordButton('Sunday')} className="wordButton">Sunday</Button>
+                                <Button  onClick={(word) => this.handleWordButton('Hello')} className="wordButton">Hello</Button>
+                                <Button  onClick={(word) => this.handleWordButton('Goodbye')} className="wordButton">Goodbye</Button>
+                                <Button  onClick={(word) => this.handleWordButton('Nice to meet you')} className="wordButton">Nice to meet you</Button>
+                        </div>
+
+                            {this.state.renderImage ? 
+                                <img 
+                                    alt="sign language equivalent"
+                                    src={this.state.image}
+                                    style = {styles.image}
+                                />
+                            :
+                                null
+                            }
+                        </div>
                 :
                     null
                 }
 
-                
-
-                
             </div>
         );
     }

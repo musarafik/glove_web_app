@@ -9,19 +9,32 @@
     align-items: center;
 }
 
-.wordsButton{
-    margin-right: 10%;
-}
-
 .lettersButton{
     margin-left: 10%;
 }
 
-.wordButtonArrayContainer{
+.wordContainer{
+    margin-top: 2%;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
-.wordButton{
-    width: 15%;
+.wordButtonContainer{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr; 
+    column-gap: 2%;
+    row-gap: 6%;
+    width: 100%;
+    padding-bottom: 2%;
+}
+
+.wordsButton{
+    margin-right: 10%;
+}
+
+.buttonGroup{
+    display: flex;
+    
 }
