@@ -142,7 +142,7 @@ export default class Translator extends React.Component{
     handleOnSubmit = (event) =>{
         event.preventDefault();
         if(event.target.userInput.value !== ''){
-            fetch('/translator', { 
+            fetch('http://ec2-18-217-92-92.us-east-2.compute.amazonaws.com/translator', { 
                 method: 'POST',
                 mode: 'cors',
                 headers: {
