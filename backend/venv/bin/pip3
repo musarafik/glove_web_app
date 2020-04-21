@@ -1,4 +1,4 @@
-#!/Users/musarafik/Documents/Academic/Spring2020/364D/glove_web_app/backend/venv/bin/python3
+#!/home/ubuntu/glove_web_app/backend/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
