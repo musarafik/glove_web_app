@@ -231,6 +231,7 @@ function Learn(props){
 
     return(
         <div>
+            <img src="https://glove-images.s3.us-east-2.amazonaws.com/a.png"></img>
             {renderLetterForm || renderWordList ?
                 null
             :
