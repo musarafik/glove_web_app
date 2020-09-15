@@ -2,47 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Form, FormGroup, Label, Input, Button, Jumbotron, Container} from 'reactstrap';
 import Speech from 'speak-tts';
 import './Learn.css';
-
-// Images for translation
-import a from '../assets/a.png';
-import b from '../assets/b.jpg';
-import c from '../assets/c.jpg';
-import d from '../assets/d.jpg';
-import e from '../assets/e.png';
-import f from '../assets/f.jpg';
-import g from '../assets/g.jpg';
-import h from '../assets/h.jpg';
-import i from '../assets/i.png';
-import j from '../assets/j.png';
-import k from '../assets/k.png';
-import l from '../assets/l.jpg';
-import m from '../assets/m.png';
-import n from '../assets/n.png';
-import o from '../assets/o.png';
-import p from '../assets/p.png';
-import q from '../assets/q.png';
-import r from '../assets/r.png';
-import s from '../assets/s.png';
-import t from '../assets/t.png';
-import u from '../assets/u.png';
-import v from '../assets/v.png';
-import w from '../assets/w.png';
-import x from '../assets/x.png';
-import y from '../assets/y.jpg';
-import z from '../assets/z.png';
-
-// Words for translation
-import monday from '../assets/monday.jpg';
-import tuesday from '../assets/tuesday.jpg';
-import wednesday from '../assets/wednesday.jpg';
-import thursday from '../assets/thursday.jpg';
-import friday from '../assets/friday.jpg';
-import saturday from '../assets/saturday.jpg';
-import sunday from '../assets/sunday.jpg';
-import hello from '../assets/hello.jpg';
-import goodbye from '../assets/goodbye.jpg';
-import nicetomeetyou from '../assets/nicetomeetyou.jpg';
-
+import ec2Url from '../Utilities';
 
 const styles = {
     inputContainer:{
@@ -64,57 +24,17 @@ const styles = {
 
 let speechPtr = null;
 
-const letters = {
-    'a': a,
-    'b': b,
-    'c': c,
-    'd': d,
-    'e': e,
-    'f': f,
-    'g': g,
-    'h': h,
-    'i': i,
-    'j': j,
-    'k': k,
-    'l': l,
-    'm': m,
-    'n': n,
-    'o': o,
-    'p': p,
-    'q': q,
-    'r': r,
-    's': s,
-    't': t,
-    'u': u,
-    'v': v,
-    'w': w,
-    'x': x,
-    'y': y,
-    'z': z
-}
-
-const words = {
-    'Monday': monday,
-    'Tuesday': tuesday,
-    'Wednesday': wednesday,
-    'Thursday': thursday,
-    'Friday': friday,
-    'Saturday': saturday,
-    'Sunday': sunday,
-    'Hello': hello,
-    'Goodbye': goodbye,
-    'Nice to meet you': nicetomeetyou
-}
-
 
 function Learn(props){
     const [renderImage, setRenderImage] = useState(false);
     const [renderLetterForm, setRenderLetterForm] = useState(false);
     const [renderWordList, setRenderWordList] = useState(false);
-    const [image, setImage] = useState('');
     const [imagePath, setImagePath] = useState('');
     const [textToSpeak, setTextToSpeak] = useState('');
+    const [words, setWords] = useState({});
+    const [letters, setLetters] = useState({});
 
+    // Set up textToSpeech when page first loads
     useEffect(() => {
         const speech = new Speech();
 
@@ -135,58 +55,26 @@ function Learn(props){
         }
     }, [])
 
-    // Send response to backend in json form with POST request whenever form is submitted
+    // Get image corresponding to letter inputted
     const handleOnSubmit = (event) =>{
         event.preventDefault();
         if(event.target.userInput.value !== ''){
-            fetch('http://ec2-18-217-92-92.us-east-2.compute.amazonaws.com/translator', { 
-                method: 'POST',
-                mode: 'cors',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(event.target.userInput.value)
-            })
-            .then(response => response.json())
-            .then(data => {
-                handleResponse(data);
-                // chooseImage();
-                document.getElementById("inputForm").reset();
-                // speechPtr.speak({
-                //     text: textToSpeak
-                // }).then(() =>{
-                //     console.log("Success!")
-                // }).catch(e =>{
-                //     console.log("An error occurred:", e)
-                // })
-            });
+            setImagePath(letters[event.target.userInput.value]);
+            setTextToSpeak(event.target.userInput.value);
+            setRenderImage(true);
+            document.getElementById("inputForm").reset();
         }
     }
 
-    // Set image to corresponding response from backend and allow it to be rendered
-    const handleResponse = (data) => {
-        setImagePath(data['response']);
-        setImage(letters[imagePath]);
-        setTextToSpeak(imagePath);
+    // When a specific word is pressed, show the image and have text to speech say the word
+    const handleWordButton = (word) =>{
+        setImagePath(words[word]);
+        setTextToSpeak(word);
         setRenderImage(true);
     }
 
-    // Choose image to render based off backend response
-    // Looks up the value of image in letters object
-    // Sets what should be spoken by text to speech
-    // const chooseImage = () =>{
-    //     setImage(letters[imagePath]);
-    //     setTextToSpeak(imagePath);
-    //     // this.setState({image: letters[this.state.image], textToSpeak: this.state.image});
-    // }
-
-    // causes state change to occur immediately so inputs are not lagging with translator
+    // Whenever a new image is rendered, textToSpeech occurs
     useEffect(() => {
-        console.log("goes ehre");
-        // setTextToSpeak(imagePath);
-        // setRenderImage(true);
-        console.log(imagePath);
-        console.log(textToSpeak);
         speechPtr.speak({
             text: textToSpeak
         })
@@ -194,22 +82,24 @@ function Learn(props){
             console.log("Success!")
         })
         .catch(e => {
-            console.log("An error occurred:", e);
+            console.log("An error occurred:", e)
         })
-    }, [image])
 
-    // When a specific word is pressed, show the image and have text to speech say the word
-    const handleWordButton = (word) =>{
-        setImagePath(word);
-        setImage(words[imagePath]);
-        setTextToSpeak(word);
-        setRenderImage(true);
-    }
+    }, [imagePath, textToSpeak])
 
     // Change layout of page to show letter input form when the letter button is clicked
+    // Get letters from server
     const handleShowLetterButtonPress = () =>{
+        if(Object.keys(letters).length === 0){
+            let url = process.env.NODE_ENV === 'production' ? ec2Url + 'letters' : 'http://localhost:5000/letters';
+            fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                setLetters(data);
+            });
+        }
         setRenderLetterForm(true);
-        // this.setState({renderLetterForm: true});
         if(renderWordList){
             setRenderWordList(false);
         }
@@ -219,7 +109,16 @@ function Learn(props){
     }
  
     // Change layout of page to show word buttons when the word button is clicked
-    const handleShowWordButtonPress = () =>{
+    // Get words from server
+    const handleShowWordButtonPress = () => {
+        if(Object.keys(words).length === 0){
+            let url = process.env.NODE_ENV === 'production' ? ec2Url + 'words' : 'http://localhost:5000/words';
+            fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                setWords(data);
+            });
+        }
         setRenderWordList(true);
         if(renderLetterForm){
             setRenderLetterForm(false);
@@ -231,7 +130,6 @@ function Learn(props){
 
     return(
         <div>
-            <img src="https://glove-images.s3.us-east-2.amazonaws.com/a.png"></img>
             {renderLetterForm || renderWordList ?
                 null
             :
@@ -270,7 +168,7 @@ function Learn(props){
                 {renderImage ? 
                     (<img 
                         alt="sign language equivalent"
-                        src = {image}
+                        src = {imagePath}
                         style={styles.image} 
                     />)
                 :
@@ -285,23 +183,23 @@ function Learn(props){
                 <div className="wordContainer">
                     <p className="lead">Press a button see what the word looks like in American Sign Language</p>
                     <div className="wordButtonContainer">
-                            <Button  onClick={(word) => handleWordButton('Monday')}className="wordButton">Monday</Button>
-                            <Button  onClick={(word) => handleWordButton('Tuesday')}className="wordButton">Tuesday</Button>
-                            <Button  onClick={(word) => handleWordButton('Wednesday')} className="wordButton">Wednesday</Button>
-                            <Button  onClick={(word) => handleWordButton('Thursday')} className="wordButton">Thursday</Button>
-                            <Button  onClick={(word) => handleWordButton('Friday')} className="wordButton">Friday</Button>
+                            <Button  onClick={(word) => handleWordButton('monday')}className="wordButton">Monday</Button>
+                            <Button  onClick={(word) => handleWordButton('tuesday')}className="wordButton">Tuesday</Button>
+                            <Button  onClick={(word) => handleWordButton('wednesday')} className="wordButton">Wednesday</Button>
+                            <Button  onClick={(word) => handleWordButton('thursday')} className="wordButton">Thursday</Button>
+                            <Button  onClick={(word) => handleWordButton('friday')} className="wordButton">Friday</Button>
 
-                            <Button  onClick={(word) => handleWordButton('Saturday')} className="wordButton">Saturday</Button>
-                            <Button  onClick={(word) => handleWordButton('Sunday')} className="wordButton">Sunday</Button>
-                            <Button  onClick={(word) => handleWordButton('Hello')} className="wordButton">Hello</Button>
-                            <Button  onClick={(word) => handleWordButton('Goodbye')} className="wordButton">Goodbye</Button>
-                            <Button  onClick={(word) => handleWordButton('Nice to meet you')} className="wordButton">Nice to meet you</Button>
+                            <Button  onClick={(word) => handleWordButton('saturday')} className="wordButton">Saturday</Button>
+                            <Button  onClick={(word) => handleWordButton('sunday')} className="wordButton">Sunday</Button>
+                            <Button  onClick={(word) => handleWordButton('hello')} className="wordButton">Hello</Button>
+                            <Button  onClick={(word) => handleWordButton('goodbye')} className="wordButton">Goodbye</Button>
+                            <Button  onClick={(word) => handleWordButton('nicetomeetyou')} className="wordButton">Nice to meet you</Button>
                     </div>
 
                         {renderImage ? 
                             <img 
                                 alt="sign language equivalent"
-                                src={image}
+                                src={imagePath}
                                 style = {styles.image}
                             />
                         :
