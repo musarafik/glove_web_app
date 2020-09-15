@@ -149,16 +149,11 @@ function Learn(props){
             })
             .then(response => response.json())
             .then(data => {
-                console.log(imagePath);
                 handleResponse(data);
-                console.log(imagePath);
                 chooseImage();
-                // this.handleResponse(data);
-                // this.chooseImage();
                 document.getElementById("inputForm").reset();
                 speechPtr.speak({
                     text: textToSpeak
-                    // text: this.state.textToSpeak,
                 }).then(() =>{
                     console.log("Success!")
                 }).catch(e =>{
@@ -184,21 +179,23 @@ function Learn(props){
         // this.setState({image: letters[this.state.image], textToSpeak: this.state.image});
     }
 
-    // When a specific word is pressed, show the image and have text to speech say the word
-    const handleWordButton = async (word) =>{
-        await setImage(words[word]);
-        await setTextToSpeak(word);
-        setRenderImage(true);
-        // await this.setState({image: words[word], textToSpeak: word});
-        // this.setState({renderImage: true});
+    useEffect(() => {
         speechPtr.speak({
             text: textToSpeak
-            // text: this.state.textToSpeak,
-        }).then(() =>{
-            console.log("Success!")
-        }).catch(e =>{
-            console.log("An error occurred:", e)
         })
+        .then(() => {
+            console.log("Success!")
+        })
+        .catch(e => {
+            console.log("An error occurred:", e);
+        })
+    }, [image])
+
+    // When a specific word is pressed, show the image and have text to speech say the word
+    const handleWordButton = (word) =>{
+        setImage(words[word]);
+        setTextToSpeak(word);
+        setRenderImage(true);
     }
 
     // Change layout of page to show letter input form when the letter button is clicked
@@ -265,7 +262,6 @@ function Learn(props){
                     (<img 
                         alt="sign language equivalent"
                         src = {image}
-                        // src={imagePath} 
                         style={styles.image} 
                     />)
                 :
