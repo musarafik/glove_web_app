@@ -27,7 +27,6 @@ const NavigationBar = () =>(
                     <Nav.Item><Nav.Link href="/">Home</Nav.Link></Nav.Item>
                     <Nav.Item><Nav.Link href="/about">About</Nav.Link></Nav.Item>
                     <Nav.Item><Nav.Link href="/reports">Reports</Nav.Link></Nav.Item>
-                    <Nav.Item><Nav.Link href="/translator">Translator</Nav.Link></Nav.Item>
                     <Nav.Item><Nav.Link href="/learn">Learn</Nav.Link></Nav.Item>
                     <Nav.Item><Nav.Link href="/test">Test</Nav.Link></Nav.Item>
                     <Nav.Item><Nav.Link href="/additionalResources">Additional Resources</Nav.Link></Nav.Item>
