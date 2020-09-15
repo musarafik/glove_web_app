@@ -24,7 +24,6 @@ const styles = {
 
 let speechPtr = null;
 
-
 function Learn(props){
     const [renderImage, setRenderImage] = useState(false);
     const [renderLetterForm, setRenderLetterForm] = useState(false);
@@ -94,10 +93,7 @@ function Learn(props){
             let url = process.env.NODE_ENV === 'production' ? ec2Url + 'letters' : 'http://localhost:5000/letters';
             fetch(url)
             .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                setLetters(data);
-            });
+            .then(data => setLetters(data));
         }
         setRenderLetterForm(true);
         if(renderWordList){
@@ -115,9 +111,7 @@ function Learn(props){
             let url = process.env.NODE_ENV === 'production' ? ec2Url + 'words' : 'http://localhost:5000/words';
             fetch(url)
             .then(response => response.json())
-            .then(data => {
-                setWords(data);
-            });
+            .then(data => setWords(data));
         }
         setRenderWordList(true);
         if(renderLetterForm){
