@@ -9,3 +9,9 @@ cors = CORS(app)
 def return_response():
     frontend_response = {'response': request.json.lower()}
     return frontend_response
+
+
+@app.route('/words', methods=['GET'])
+def return_words():
+    response = {'response': 'test'}
+    return response
