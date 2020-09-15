@@ -15,13 +15,6 @@ words = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'su
 def hello():
     return "Hello World!"
 
-# Take letter from frontend, convert to lowercase then return to frontend
-@app.route('/translator', methods=['POST'])
-def return_response():
-    frontend_response = {'response': request.json.lower()}
-    return frontend_response
-
-
 @app.route('/words', methods=['GET'])
 def get_words():
     wordPaths = {}
@@ -36,6 +29,22 @@ def get_letters():
     for letter in letters:
         letterPaths[letter] = s3_bucket + letter + '.png'
     response = letterPaths
+    return response
+
+@app.route('/all', methods=['GET'])
+def get_all():
+    allPaths = {}
+    allSigns = []
+    for letter in letters: 
+        allSigns.append(letter)
+        allPaths[letter] = s3_bucket + letter + '.png'
+    for word in words:
+        allSigns.append(word)
+        allPaths[word] = s3_bucket + word + '.png'
+    response = {
+        "allPaths": allPaths,
+        "allSigns": allSigns
+    }
     return response
 
 if __name__ == "__main__":
