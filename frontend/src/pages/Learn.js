@@ -150,15 +150,15 @@ function Learn(props){
             .then(response => response.json())
             .then(data => {
                 handleResponse(data);
-                chooseImage();
+                // chooseImage();
                 document.getElementById("inputForm").reset();
-                speechPtr.speak({
-                    text: textToSpeak
-                }).then(() =>{
-                    console.log("Success!")
-                }).catch(e =>{
-                    console.log("An error occurred:", e)
-                })
+                // speechPtr.speak({
+                //     text: textToSpeak
+                // }).then(() =>{
+                //     console.log("Success!")
+                // }).catch(e =>{
+                //     console.log("An error occurred:", e)
+                // })
             });
         }
     }
@@ -166,20 +166,27 @@ function Learn(props){
     // Set image to corresponding response from backend and allow it to be rendered
     const handleResponse = (data) => {
         setImagePath(data['response']);
+        setImage(letters[imagePath]);
+        setTextToSpeak(imagePath);
         setRenderImage(true);
     }
 
     // Choose image to render based off backend response
     // Looks up the value of image in letters object
     // Sets what should be spoken by text to speech
-    const chooseImage = () =>{
-        setImage(letters[imagePath]);
-        console.log(image);
-        setTextToSpeak(imagePath);
-        // this.setState({image: letters[this.state.image], textToSpeak: this.state.image});
-    }
+    // const chooseImage = () =>{
+    //     setImage(letters[imagePath]);
+    //     setTextToSpeak(imagePath);
+    //     // this.setState({image: letters[this.state.image], textToSpeak: this.state.image});
+    // }
 
+    // causes state change to occur immediately so inputs are not lagging with translator
     useEffect(() => {
+        console.log("goes ehre");
+        // setTextToSpeak(imagePath);
+        // setRenderImage(true);
+        console.log(imagePath);
+        console.log(textToSpeak);
         speechPtr.speak({
             text: textToSpeak
         })
@@ -193,7 +200,8 @@ function Learn(props){
 
     // When a specific word is pressed, show the image and have text to speech say the word
     const handleWordButton = (word) =>{
-        setImage(words[word]);
+        setImagePath(word);
+        setImage(words[imagePath]);
         setTextToSpeak(word);
         setRenderImage(true);
     }
