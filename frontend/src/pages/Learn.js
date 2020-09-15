@@ -149,7 +149,9 @@ function Learn(props){
             })
             .then(response => response.json())
             .then(data => {
+                console.log(imagePath);
                 handleResponse(data);
+                console.log(imagePath);
                 chooseImage();
                 // this.handleResponse(data);
                 // this.chooseImage();
@@ -184,7 +186,7 @@ function Learn(props){
 
     // When a specific word is pressed, show the image and have text to speech say the word
     const handleWordButton = async (word) =>{
-        // await setImage(words[word]);
+        await setImage(words[word]);
         await setTextToSpeak(word);
         setRenderImage(true);
         // await this.setState({image: words[word], textToSpeak: word});
@@ -200,7 +202,7 @@ function Learn(props){
     }
 
     // Change layout of page to show letter input form when the letter button is clicked
-    const handleLetterPress = () =>{
+    const handleShowLetterButtonPress = () =>{
         setRenderLetterForm(true);
         // this.setState({renderLetterForm: true});
         if(renderWordList){
@@ -212,7 +214,7 @@ function Learn(props){
     }
  
     // Change layout of page to show word buttons when the word button is clicked
-    const handleWordPress = () =>{
+    const handleShowWordButtonPress = () =>{
         setRenderWordList(true);
         if(renderLetterForm){
             setRenderLetterForm(false);
@@ -229,7 +231,7 @@ function Learn(props){
             :
                 <Jumbotron fluid>
                     <Container fluid>
-                        <h1 className="display-3">Translator</h1>
+                        <h1 className="display-3">Teach Yourself!</h1>
                         <p className="lead">Want to learn some American Sign Language?</p>
                         <p className="lead">Well you're at the right place!</p>
                         <p className="lead">Choose between words and letters to see how they're signed.</p>
@@ -238,13 +240,12 @@ function Learn(props){
                 </Jumbotron>
             }
             
-
             <div className="questionContainer">
                 <p className="lead">Do you want to learn:</p>
                 <div className="choicesContainer">
-                    <Button className="wordsButton" onClick={handleWordPress}>Words</Button> 
+                    <Button className="wordsButton" onClick={handleShowWordButtonPress}>Words</Button> 
                     <p style={{paddingTop: '5%'}} className="lead">or</p> 
-                    <Button onClick={handleLetterPress}className="lettersButton">Letters</Button>
+                    <Button onClick={handleShowLetterButtonPress}className="lettersButton">Letters</Button>
                 </div>
             </div>
             
