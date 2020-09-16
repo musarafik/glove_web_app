@@ -6,6 +6,7 @@ const AdditionalResources = () =>(
         <ul>
             <li><a href="https://www.nidcd.nih.gov/health/american-sign-language">National Institute on Deafness and Other Communication Disorders (NIDCD)</a></li>
             <li><a href="https://www.nad.org/resources/american-sign-language/">National Association of the Deaf</a></li>
+            <li><a href="https://youglish.com/pronounce/tone/signlanguage">How to convey tone</a></li>
         </ul>
     </div>
 )
