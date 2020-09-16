@@ -11,6 +11,8 @@ function Test(props){
     const [imagePath, setImagePath] = useState('');
     const [renderImage, setRenderImage] = useState(false);
     const [textToSpeak, setTextToSpeak] = useState('');
+    const [english, setEnglish] = useState('');
+    const [renderEnglish, setRenderEnglish] = useState(false);
 
     // min, max included
     const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
@@ -46,12 +48,18 @@ function Test(props){
         }
     }, [allPaths])
 
-    const getRandomSign = () => {
+    const getRandomSign = () => { // 1. press button and get english that user must sign
+                                  // 2. then after a delay image of sign is shown
+                                  // TODO: add in feedback, make delay work with glove
         var randomNum = getRandomNumber(0, Object.keys(allSigns).length - 1);
         var sign = allSigns[randomNum];
+        setEnglish(sign);
+        setRenderEnglish(true);
         setImagePath(allPaths[sign]);
         setTextToSpeak(sign);
-        setRenderImage(true);
+        setTimeout(function(){setRenderImage(true);}, 3000);
+        setTimeout(function(){}, 3000);
+        setRenderImage(false);
     }
 
     useEffect(() => {
@@ -80,6 +88,12 @@ function Test(props){
         <div className="questionContainer">
             <Button onClick={getRandomSign}>Get a random sign</Button>
         </div>
+
+        {renderEnglish ? 
+            <h1>{english}</h1>
+        :
+            null
+        }
 
         {renderImage ? 
             <img
