@@ -2,7 +2,7 @@ import React from 'react';
 
 const NoMatch  = () =>(
     <div>
-        <h2>error</h2>
+        <h1>error 404</h1>
     </div>
 )
 
