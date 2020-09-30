@@ -68,5 +68,5 @@ def raspberry_pi(data):
 
 if __name__ == "__main__":
     # socketio.run(app, debug=True)
-    socketio.run(app)
-    # app.run()
+   socketio.run(app)
+  # app.run()
