@@ -4,8 +4,8 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 cors = CORS(app)
-socketio = SocketIO(app, cors_allowed_origins="*")
-# socketio = SocketIO(app, cors_allowed_origins="*", logger=True)
+# socketio = SocketIO(app, cors_allowed_origins="*")
+socketio = SocketIO(app, cors_allowed_origins="*", logger=True)
 
 s3_bucket = 'https://glove-images.s3.us-east-2.amazonaws.com/'
 
@@ -68,5 +68,5 @@ def raspberry_pi(data):
 
 if __name__ == "__main__":
     # socketio.run(app, debug=True)
-    socketio.run(app)
-    # app.run()
+   socketio.run(app)
+  # app.run()
