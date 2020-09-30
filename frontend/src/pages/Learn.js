@@ -90,7 +90,7 @@ function Learn(props){
     // Get letters from server
     const handleShowLetterButtonPress = () =>{
         if(Object.keys(letters).length === 0){
-            let url = process.env.NODE_ENV === 'production' ? ec2Url + 'letters' : 'http://localhost:5000/letters';
+            let url = ec2Url + 'letters';
             fetch(url)
             .then(response => response.json())
             .then(data => setLetters(data));
@@ -108,7 +108,7 @@ function Learn(props){
     // Get words from server
     const handleShowWordButtonPress = () => {
         if(Object.keys(words).length === 0){
-            let url = process.env.NODE_ENV === 'production' ? ec2Url + 'words' : 'http://localhost:5000/words';
+            let url = ec2Url + 'words';
             fetch(url)
             .then(response => response.json())
             .then(data => setWords(data));
