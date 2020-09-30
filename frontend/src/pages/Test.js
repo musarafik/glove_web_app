@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import {Button, Jumbotron, Container} from 'reactstrap';
 import ec2Url from '../Utilities';
 import Speech from 'speak-tts';
+// import socketIOClient from "socket.io-client";
+import socket from '../Socket';
 
 let speechPtr = null;
 
@@ -13,11 +15,13 @@ function Test(props){
     const [textToSpeak, setTextToSpeak] = useState('');
     const [english, setEnglish] = useState('');
     const [renderEnglish, setRenderEnglish] = useState(false);
+    const [socketResponse, setSocketResponse] = useState('');
 
     // min, max included
     const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
     useEffect(() => {
+        // get S3 paths for images from backend
         if(Object.keys(allPaths).length === 0){
             let url = process.env.NODE_ENV === 'production' ? ec2Url + 'all' : 'http://localhost:5000/all';
             fetch(url)
@@ -46,6 +50,8 @@ function Test(props){
         else{
             console.log("Speech translation not supported");
         }
+
+        socket.on("raspberry pi response", (data) => console.log(data));
     }, [allPaths])
 
     const getRandomSign = () => { // 1. press button and get english that user must sign
@@ -60,6 +66,8 @@ function Test(props){
         setTimeout(function(){setRenderImage(true);}, 3000);
         setTimeout(function(){}, 3000);
         setRenderImage(false);
+        
+        socket.emit("send_message", "sending message to server");
     }
 
     useEffect(() => {

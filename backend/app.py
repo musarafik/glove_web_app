@@ -1,8 +1,10 @@
 from flask import Flask, request
+from flask_socketio import SocketIO
 from flask_cors import CORS
 
 app = Flask(__name__)
 cors = CORS(app)
+socketio = SocketIO(app, cors_allowed_origins="*", logger=True)
 
 s3_bucket = 'https://glove-images.s3.us-east-2.amazonaws.com/'
 
@@ -47,5 +49,22 @@ def get_all():
     }
     return response
 
+#socket io stuff below
+@socketio.on("connect")
+def handle_connect():
+    print("Client connected")
+
+@socketio.on("send_message")
+def message_received(data):
+    print(data)
+
+
+# skeleton of interface for raspberry pi to communicate with website
+@socketio.on("raspberry pi")
+def raspberry_pi(data):
+    print(data)
+    socketio.emit("raspberry pi response", {"response" : data})
+
 if __name__ == "__main__":
-    app.run()
+    socketio.run(app, debug=True)
+    # app.run()
