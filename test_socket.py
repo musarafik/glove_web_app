@@ -22,9 +22,9 @@ def disconnect():
     print('disconnected from server')
 
 # use this when deployed on AWS
-# sio.connect(ec2Url)
+sio.connect(ec2Url)
 
 
 # use this for localhost
-sio.connect('http://localhost:5000')
+#sio.connect('http://localhost:5000')
 sio.wait()

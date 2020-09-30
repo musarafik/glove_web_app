@@ -15,7 +15,6 @@ function Test(props){
     const [textToSpeak, setTextToSpeak] = useState('');
     const [english, setEnglish] = useState('');
     const [renderEnglish, setRenderEnglish] = useState(false);
-    const [socketResponse, setSocketResponse] = useState('');
 
     // min, max included
     const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
