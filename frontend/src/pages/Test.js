@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import {Button, Jumbotron, Container} from 'reactstrap';
 import ec2Url from '../Utilities';
 import Speech from 'speak-tts';
-// import socketIOClient from "socket.io-client";
 import socket from '../Socket';
 
 let speechPtr = null;
@@ -22,7 +21,7 @@ function Test(props){
     useEffect(() => {
         // get S3 paths for images from backend
         if(Object.keys(allPaths).length === 0){
-            let url = process.env.NODE_ENV === 'production' ? ec2Url + 'all' : 'http://localhost:5000/all';
+            let url = ec2Url + 'all';
             fetch(url)
             .then(response => response.json())
             .then(data => {
