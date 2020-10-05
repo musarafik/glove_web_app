@@ -4,8 +4,9 @@ import Table from 'react-bootstrap/Table'
 // export const About  = () =>(
 const About = () =>(
     <div>
-        <h2>About Us</h2>
-        <div></div>
+    <div class="jumbotron">
+    <h2>About Us</h2>
+    <div>&nbsp;</div>
         <Table striped bordered hover variant="dark">
             <thead>
                 <tr>
@@ -59,6 +60,7 @@ const About = () =>(
                 </tr>
             </tbody>
             </Table>
+        </div>
     </div>
 )
 

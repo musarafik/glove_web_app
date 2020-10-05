@@ -2,13 +2,19 @@ import React from 'react';
 
 const Home  = () =>(
     <div>
+      <div class="jumbotron">
         <h1>Team I4: Sign Language Translator Glove</h1>
         <img src={require('../assets/gl.png')} height="100" width="100" alt="logo"></img> 
-        <h3>Our Goal...</h3>
-        <p>To design a glove capable of translating sign language in real time. We are designing this glove to help people learn sign language by creating an environment where users can test their sign language wherever they can use electronics.</p>
-        <h3>The Design Problem</h3>
-        <p>The goal of this project is to create a portable glove that accurately translates sign language and have this translation available in real-time through a website. This glove will help people learn sign language by creating an environment where users can practice their signing almost anywhere and receive accurate feedback in real-time. Due to the approximately 466 million people in the world with hearing disabilities, it is paramount that people learn sign language to be able to communicate with this large portion of the population. Currently, there is a lack of supplemental services and tools to help people learn sign language, and we believe our glove can help satisfy this need.</p>
-    
+      </div>
+        <div class="jumbotron">
+          <h2>Our Goal...</h2>
+          <p>To design a glove capable of translating sign language in real time. We are designing this glove to help people learn sign language by creating an environment where users can test their sign language wherever they can use electronics.</p>
+        
+          <h2>The Design Problem</h2>
+          <p>The goal of this project is to create a portable glove that accurately translates sign language and have this translation available in real-time through a website. This glove will help people learn sign language by creating an environment where users can practice their signing almost anywhere and receive accurate feedback in real-time. Due to the approximately 466 million people in the world with hearing disabilities, it is paramount that people learn sign language to be able to communicate with this large portion of the population. Currently, there is a lack of supplemental services and tools to help people learn sign language, and we believe our glove can help satisfy this need.</p>
+        </div>
+        
+        
         <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gridGap: 20 }}>
           <div>
             <p style={{fontWeight: 'bold'}}> Our Connections</p>
@@ -21,8 +27,8 @@ const Home  = () =>(
           <p></p>
         </div>
 
-        <div>
-            <h3>Specifications</h3>
+        <div class="jumbotron">
+            <h2>Specifications</h2>
             <p>In order to measure the success of our glove serving as such a tool, we have laid out the following parameters for the project’s success: </p>
             <ul>
                 <li>The algorithm must be able to accurately translate user input from the glove.</li>
@@ -33,8 +39,8 @@ const Home  = () =>(
             </ul>
         </div>
         <p></p>
-        <div>
-            <h3>Design Solution</h3>
+        <div class="jumbotron">
+            <h2>Design Solution</h2>
             <p>The project is divided into three subsystems - the glove, Raspberry Pi Zero and website. The glove is composed of various sensors that take in data from the user’s gestures. Then, data from the glove is processed in the Raspberry Pi Zero running a support vector machine (SVM) algorithm to determine the sign. Finally, the translation determined by the algorithm is outputted to the website where the user can see the result of their signing. Figure 1 below demonstrates the three subsystems and flow of data through each component.</p>
             <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
                 <img src={require('../assets/blockd.png')} alt=""/>
@@ -59,8 +65,8 @@ const Home  = () =>(
           <p></p>
         </div>
         <p></p>
-        <div>
-            <h3>Alternate Designs</h3>
+        <div class="jumbotron">
+            <h2>Alternate Designs</h2>
             <p>We have considered alternate designs for the machine learning algorithm and website. In terms of the algorithm, we have also tested a linear regression algorithm to see its performance on sample data. Linear regression is a simpler algorithm to implement, but we found it to be less accurate than the SVM algorithm. As a result, we have decided to implement the SVM algorithm in our overall glove design. In regards to the website, we have considered having a single page that translates input from the glove, rather than having a learning and testing section. However, we decided to progress with the later choice because it is more inline with our purpose of creating an educational tool. </p>
         </div>
     </div>

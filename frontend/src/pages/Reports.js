@@ -2,8 +2,9 @@ import React from 'react';
 
 // export const Reports  = () =>(
 const Reports = () =>(
-    <div>
+    <div class="jumbotron">
         <h2>Senior Design Project Reports</h2>
+        <div>&nbsp;</div>
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gridGap: 20 }}>
             <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
