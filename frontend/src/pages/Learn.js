@@ -3,6 +3,7 @@ import {Form, FormGroup, Label, Input, Button, Jumbotron, Container} from 'react
 import Speech from 'speak-tts';
 import './Learn.css';
 import ec2Url from '../Utilities';
+import socket from '../Socket';
 
 const styles = {
     inputContainer:{
@@ -32,6 +33,8 @@ function Learn(props){
     const [textToSpeak, setTextToSpeak] = useState('');
     const [words, setWords] = useState({});
     const [letters, setLetters] = useState({});
+    const [feedback, setFeedback] = useState('');
+    const [renderFeedback, setRenderFeedback] = useState(false);
 
     // Set up textToSpeech when page first loads
     useEffect(() => {
@@ -52,15 +55,20 @@ function Learn(props){
         else{
             console.log("Speech translation not supported");
         }
+
+        socket.on("raspberry pi response", (data) => console.log(data));
     }, [])
 
     // Get image corresponding to letter inputted
     const handleOnSubmit = (event) =>{
         event.preventDefault();
         if(event.target.userInput.value !== ''){
-            setImagePath(letters[event.target.userInput.value]);
+            var input = event.target.userInput.value.toLowerCase();
+            setImagePath(letters[input]);
             setTextToSpeak(event.target.userInput.value);
             setRenderImage(true);
+            setRenderFeedback(true);
+            setFeedback("Incorrect");
             document.getElementById("inputForm").reset();
         }
     }
@@ -153,11 +161,25 @@ function Learn(props){
                     <FormGroup style={{paddingTop: '5%'}}>
                         <Label className="lead" for="userInput">Enter a letter to see what it looks like in American Sign Language</Label>
                         <div style={styles.inputContainer}>
-                            <Input type="textArea" name="input" id="userInput" />
+                            <Input 
+                                maxLength="1" 
+                                type="textArea" 
+                                name="input" 
+                                id="userInput"
+                            />
                             <Button style={{marginLeft: '1%'}}>Submit</Button>
                         </div>
                     </FormGroup>
                 </Form>
+
+                {renderFeedback ?
+                        feedback == "Correct" ? 
+                            <h1 style={{color: "green"}}>Correct</h1>
+                        :
+                            <h1 style={{color: "red"}}>Incorrect</h1>
+                    :
+                        null
+                }
                 
                 {renderImage ? 
                     (<img 
@@ -190,16 +212,26 @@ function Learn(props){
                             <Button  onClick={(word) => handleWordButton('nicetomeetyou')} className="wordButton">Nice to meet you</Button>
                     </div>
 
-                        {renderImage ? 
-                            <img 
-                                alt="sign language equivalent"
-                                src={imagePath}
-                                style = {styles.image}
-                            />
+                    {renderFeedback ?
+                        feedback == "Correct" ? 
+                            <h1 style={{color: "green"}}>Correct</h1>
                         :
-                            null
-                        }
-                    </div>
+                            <h1 style={{color: "red"}}>Incorrect</h1>
+                    :
+                        null
+                    }
+
+                    {renderImage ? 
+                        <img
+                            style={{height: 200, width: 200}} 
+                            alt="sign language equivalent"
+                            src={imagePath}
+                            style = {styles.image}
+                        />
+                    :
+                        null
+                    }
+                </div>
             :
                 null
             }
