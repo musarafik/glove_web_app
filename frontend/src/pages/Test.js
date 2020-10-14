@@ -3,6 +3,7 @@ import {Button, Jumbotron, Container} from 'reactstrap';
 import ec2Url from '../Utilities';
 import Speech from 'speak-tts';
 import socket from '../Socket';
+import './Test.css';
 
 let speechPtr = null;
 
@@ -14,6 +15,8 @@ function Test(props){
     const [textToSpeak, setTextToSpeak] = useState('');
     const [english, setEnglish] = useState('');
     const [renderEnglish, setRenderEnglish] = useState(false);
+    const [feedback, setFeedback] = useState('');
+    const [renderFeedback, setRenderFeedback] = useState(false);
 
     // min, max included
     const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
@@ -64,6 +67,8 @@ function Test(props){
         setTimeout(function(){setRenderImage(true);}, 3000);
         setTimeout(function(){}, 3000);
         setRenderImage(false);
+        setRenderFeedback(true);
+        setFeedback("Incorrect");
         
         socket.emit("send_message", "sending message to server");
     }
@@ -95,20 +100,32 @@ function Test(props){
             <Button onClick={getRandomSign}>Get a random sign</Button>
         </div>
 
-        {renderEnglish ? 
-            <h1>{english}</h1>
-        :
-            null
-        }
+        <div className="feedbackContainer">
+            {renderEnglish ? 
+                <h1>{english}</h1>
+            :
+                null
+            }
 
-        {renderImage ? 
-            <img
-                alt="sign language equivalent" 
-                src={imagePath} 
-            />
-        :
-            null
-        }
+            {renderFeedback ? 
+                feedback == "Correct" ? 
+                    <h1 style={{color: "green"}}>Correct</h1>
+                :
+                    <h1 style={{color: "red"}}>Incorrect</h1>
+            :   
+                null 
+            }
+
+            {renderImage ? 
+                <img
+                    style={{height: 200, width: 200}}
+                    alt="sign language equivalent" 
+                    src={imagePath} 
+                />
+            :
+                null
+            }
+        </div>
     </div>
 
     );
