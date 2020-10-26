@@ -4,28 +4,135 @@ import board
 import adafruit_mcp3xxx.mcp3008 as MCP
 from adafruit_mcp3xxx.analog_in import AnalogIn
 import time
+import json
+from __future__ import print_function
+import qwiic_icm20948
+import sys
+
+## IMPORTANT SET-UP NOTE: ##
+# MCP5_P0: left thumb, MCP5_P1: left index ...
+# MCP5_P5: left thumb tip, MCP5_P6: left index tip, MCP5_P7: left middle tip
+# MCP6_P0: left btwn index/middle, MCP6_P1: left btwn middle/ring
+# MCP6_P2: right thumb, MCP6_P3: right index ...
+# MCP6_P7: right thumb tip, MCP13_P0: right index tip, MCP13_P1: right middle tip
+# MCP13_P2: right btwn index/middle, MCP13_P3: right btwn middle/ring
+
+
+# INITIALIZE MCPs #
 spi = busio.SPI(clock=board.SCK, MISO = board.MISO, MOSI = board.MOSI)
-cs = digitalio.DigitalInOut(board.D5)
-mcp = MCP.MCP3008(spi, cs)
 
-finger1 = AnalogIn(mcp, MCP.P0)
-finger2 = AnalogIn(mcp, MCP.P1)
-finger3 = AnalogIn(mcp, MCP.P2)
-finger4 = AnalogIn(mcp, MCP.P3)
-finger5 = AnalogIn(mcp, MCP.P4)
+cs5 = digitalio.DigitalInOut(board.D5)
+cs6 = digitalio.DigitalInOut(board.D6)
+cs13 = digitalio.DigitalInOut(board.D13)
 
-print('Reading values on MCP3008, press Ctrl-C to quit')
-print('| {0:>4} | {1:>4} | {2:>4} | {3:>4} | {4:>4} |'.format(*range(5)))
-print('-' * 57)
-out = open("sensorout.txt", "w")
+mcp5 = MCP.MCP3008(spi, cs5)
+mcp6 = MCP.MCP3008(spi, cs6)
+mcp13 = MCP.MCP3008(spi, cs13)
+
+# MCP connected to D5 #
+mcp5_p0 = AnalogIn(mcp5, MCP.P0)
+mcp5_p1 = AnalogIn(mcp5, MCP.P1)
+mcp5_p2 = AnalogIn(mcp5, MCP.P2)
+mcp5_p3 = AnalogIn(mcp5, MCP.P3)
+mcp5_p4 = AnalogIn(mcp5, MCP.P4)
+mcp5_p5 = AnalogIn(mcp5, MCP.P5)
+mcp5_p6 = AnalogIn(mcp5, MCP.P6)
+mcp5_p7 = AnalogIn(mcp5, MCP.P7)
+
+# MCP connected to D6 #
+mcp6_p0 = AnalogIn(mcp6, MCP.P0)
+mcp6_p1 = AnalogIn(mcp6, MCP.P1)
+mcp6_p2 = AnalogIn(mcp6, MCP.P2)
+mcp6_p3 = AnalogIn(mcp6, MCP.P3)
+mcp6_p4 = AnalogIn(mcp6, MCP.P4)
+mcp6_p5 = AnalogIn(mcp6, MCP.P5)
+mcp6_p6 = AnalogIn(mcp6, MCP.P6)
+mcp6_p7 = AnalogIn(mcp6, MCP.P7)
+
+# MCP connected to D13 #
+mcp13_p0 = AnalogIn(mcp13, MCP.P0)
+mcp13_p1 = AnalogIn(mcp13, MCP.P1)
+mcp13_p2 = AnalogIn(mcp13, MCP.P2)
+mcp13_p3 = AnalogIn(mcp13, MCP.P3)
+mcp13_p4 = AnalogIn(mcp13, MCP.P4)
+mcp13_p5 = AnalogIn(mcp13, MCP.P5)
+mcp13_p6 = AnalogIn(mcp13, MCP.P6)
+mcp13_p7 = AnalogIn(mcp13, MCP.P7)
+
+
+# INITIALIZE IMU(s) #
+IMU_1 = qwiic_icm20948.QwiicIcm20948()
+
+if IMU_1.connected == False:
+	print("The Qwiic ICM20948 device isn't connected to the system. Please check your connection", \
+		file=sys.stderr)
+	return
+
+IMU_1.begin()
+
+#TODO figure out how to read from both IMUs. look into the setup py from the IMU library
+
+
+# print training data to JSON file #
+sensor_data = {}
+sensor_data['MCP5'] = [] 
+sensor_data['MCP6'] = []
+sensor_data['MCP13'] = []
+# set up like 'P0': 'value'
+sensor_data['IMU_1'] = []
+sensor_data['IMU_2'] = []
+
+#TODO need to find range of each sensor output, so we can scale between 0-100
+
 while True:
-	values = [0]*5
-	values[0] = finger1.voltage / 1024.0 * 100000 / (1 - finger1.voltage / 1024.0)
-	values[1] = finger2.voltage / 1024.0 * 100000 / (1 - finger2.voltage / 1024.0)
-	values[2] = finger3.voltage / 1024.0 * 100000 / (1 - finger3.voltage / 1024.0)
-	values[3] = finger4.voltage / 1024.0 * 100000 / (1 - finger4.voltage / 1024.0)
-	values[4] = finger5.voltage / 1024.0 * 100000 / (1 - finger5.voltage / 1024.0)
+	sensor_data['MCP5'].append({
+		'P0': (mcp5_p0.voltage / 1024.0 * 100000 / (1 - mcp5_p0.voltage / 1024.0)),
+		'P1': (mcp5_p1.voltage),
+		'P2': (mcp5_p2.voltage),
+		'P3': (mcp5_p3.voltage),
+		'P4': (mcp5_p4.voltage),
+		'P5': (mcp5_p5.voltage),
+		'P6': (mcp5_p6.voltage),
+		'P7': (mcp5_p7.voltage)
+		})
 
-	print('| {0:>4} | {1:>4} | {2:>4} | {3:>4} | {4:>4} |'.format(*values))
-	time.sleep(0.5)
-	out.write(str(values[0]) + ", " + str(values[1]) + ", " + str(values[2]) + ", " + str(values[3]) + ", " + str(values[4]) + "\n")
+	sensor_data['MCP6'].append({
+		'P0': (mcp6_p0.voltage),
+		'P1': (mcp6_p1.voltage),
+		'P2': (mcp6_p2.voltage),
+		'P3': (mcp6_p3.voltage),
+		'P4': (mcp6_p4.voltage),
+		'P5': (mcp6_p5.voltage),
+		'P6': (mcp6_p6.voltage),
+		'P7': (mcp6_p7.voltage)
+		})
+
+	sensor_data['MCP13'].append({
+		'P0': (mcp13_p0.voltage),
+		'P1': (mcp13_p1.voltage),
+		'P2': (mcp13_p2.voltage),
+		'P3': (mcp13_p3.voltage),
+		'P4': -1, # ** -1 = NOT connected to anything
+		'P5': -1,
+		'P6': -1,
+		'P7': -1
+		})
+
+	if IMU_1.dataReady():
+		IMU_1.getAgmt()
+		# currently will write six decimal places to json file
+		sensor_data['IMU_1'].append({
+			'ax': ('{: 06d}'.format(IMU_1.axRaw)),
+			'ay': ('{: 06d}'.format(IMU_1.ayRaw)),
+			'az': ('{: 06d}'.format(IMU_1.azRaw)),
+			'gx': ('{: 06d}'.format(IMU_1.gxRaw)),
+			'gy': ('{: 06d}'.format(IMU_1.gyRaw)),
+			'gz': ('{: 06d}'.format(IMU_1.gzRaw))
+			})
+	# uncomment and set up like ^^ once we figure out how to read from both IMUs
+	#if IMU_2.dataReady():
+	with open('sensor_data.json', 'w') as output_json:
+		output_json.write(sensor_data)
+	time.sleep(0.5) # change later 
+
+print('done reading from sensors')
