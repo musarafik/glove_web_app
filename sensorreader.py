@@ -1,3 +1,4 @@
+from __future__ import print_function
 import busio
 import digitalio
 import board
@@ -5,7 +6,6 @@ import adafruit_mcp3xxx.mcp3008 as MCP
 from adafruit_mcp3xxx.analog_in import AnalogIn
 import time
 import json
-from __future__ import print_function
 import qwiic_icm20948
 import sys
 
@@ -66,7 +66,6 @@ IMU_1 = qwiic_icm20948.QwiicIcm20948()
 if IMU_1.connected == False:
 	print("The Qwiic ICM20948 device isn't connected to the system. Please check your connection", \
 		file=sys.stderr)
-	return
 
 IMU_1.begin()
 
@@ -132,7 +131,7 @@ while True:
 	# uncomment and set up like ^^ once we figure out how to read from both IMUs
 	#if IMU_2.dataReady():
 	with open('sensor_data.json', 'w') as output_json:
-		output_json.write(sensor_data)
-	time.sleep(0.5) # change later 
+		json.dump(sensor_data, output_json)
+	time.sleep(2) # change later 
 
 print('done reading from sensors')
