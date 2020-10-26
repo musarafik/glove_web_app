@@ -9,7 +9,7 @@ import digitalio
 import board
 import adafruit_mcp3xxx.mcp3008 as MCP
 from adafruit_mcp3xxx.analog_in import AnalogIn
-import json
+import csv
 from __future__ import print_function
 import qwiic_icm20948
 import sys
@@ -206,8 +206,9 @@ while True:
 
     # TODO: add data to sensor_data_array, inner arrays currently have nothing being written to them
     sensor_data_array = [sensordata_mcp5, sensordata_mcp6, sensordata_mcp13, sensordata_IMU_1]
-    with open('sensor_data.json', 'w') as output_json:
-        output_json.write(sensor_data)
+    with open('sensor_data.csv', 'w', newline='') as csvfile:
+        wr = csv.writer(csvfile)
+        wr.writerow(sensor_data)
     time.sleep(0.5) # change later 
 
     ## DONE writing a set of sensor data to json file "sensor_data.json" ##
