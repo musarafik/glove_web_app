@@ -8,15 +8,16 @@ import './Test.css';
 let speechPtr = null;
 
 function Test(props){
-    const [allPaths, setAllPaths] = useState({});
+    const [allPaths, setAllPaths] = useState({}); 
     const [allSigns, setAllSigns] = useState([]);
     const [imagePath, setImagePath] = useState('');
     const [renderImage, setRenderImage] = useState(false);
     const [textToSpeak, setTextToSpeak] = useState('');
-    const [english, setEnglish] = useState('');
-    const [renderEnglish, setRenderEnglish] = useState(false);
+    const [target, setTarget] = useState('');
+    const [renderTarget, setRenderTarget] = useState(false);
     const [feedback, setFeedback] = useState('');
     const [renderFeedback, setRenderFeedback] = useState(false);
+    const [prediction, setPrediction] = useState('');
 
     // min, max included
     const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
@@ -34,6 +35,7 @@ function Test(props){
             })
         }
 
+        // Set up text to speech
         const speech = new Speech();
 
         if(speech.hasBrowserSupport()){ // Check if text to speech is available
@@ -52,27 +54,52 @@ function Test(props){
             console.log("Speech translation not supported");
         }
 
-        socket.on("raspberry pi response", (data) => console.log(data));
+        // Listen for predictions from Raspberry Pi
+        socket.on("raspberry pi response", (data) => {
+            const raspPred = data["response"]["response"];
+            setPrediction(raspPred.toLowerCase());
+        });
     }, [allPaths])
 
-    const getRandomSign = () => { // 1. press button and get english that user must sign
-                                  // 2. then after a delay image of sign is shown
-                                  // TODO: add in feedback, make delay work with glove
-        var randomNum = getRandomNumber(0, Object.keys(allSigns).length - 1);
-        var sign = allSigns[randomNum];
-        setEnglish(sign);
-        setRenderEnglish(true);
-        setImagePath(allPaths[sign]);
-        setTextToSpeak(sign);
-        setTimeout(function(){setRenderImage(true);}, 3000);
-        setTimeout(function(){}, 3000);
-        setRenderImage(false);
-        setRenderFeedback(true);
-        setFeedback("Incorrect");
-        
-        socket.emit("send_message", "sending message to server");
+    const handleButtonClick = () => { 
+        var sign = getRandomSign();
+        showTarget(sign);    
     }
 
+    // Get a random target sign for the user to make
+    // Returns the English text 
+    const getRandomSign = () => {
+        var randomNum = getRandomNumber(0, Object.keys(allSigns).length - 1);
+        return allSigns[randomNum];
+    }
+
+    // Display the target sign the user needs to make
+    const showTarget = (sign) => {
+        setTarget(sign);
+        setRenderTarget(true);
+    }
+
+    // Whenever target word changes this is called
+    useEffect(() => {
+        if(target != ''){
+            setImagePath(allPaths[target]);
+            setTextToSpeak(target);
+            setTimeout(function(){setRenderImage(true);}, 1000);
+            setRenderImage(false);
+            if(prediction !== ''){
+                setTimeout(function(){setRenderFeedback(true);}, 1000);
+                if(prediction === target){
+                    setFeedback("Correct");
+                }
+                else{
+                    setFeedback("Incorrect");
+                }
+                setRenderFeedback(false);
+            }  
+        }
+    }, [target])
+
+    // Do text to speech after the sign that needs to be spoken is set
     useEffect(() => {
         speechPtr.speak({
             text: textToSpeak
@@ -97,12 +124,12 @@ function Test(props){
         </Jumbotron>
  
         <div className="questionContainer">
-            <Button onClick={getRandomSign}>Get a random sign</Button>
+            <Button onClick={handleButtonClick}>Get a random sign</Button>
         </div>
 
         <div className="feedbackContainer">
-            {renderEnglish ? 
-                <h1>{english}</h1>
+            {renderTarget ? 
+                <h1>{target}</h1>
             :
                 null
             }
