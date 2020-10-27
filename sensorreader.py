@@ -174,6 +174,9 @@ while True:
 	print(accel_y_2)
 	print(accel_z_2)
 
+	print('\n\n reading from bus')
+	print(bus.read_byte_data(imu_address_1, 45))
+
 	with open('sensor_data.json', 'w') as output_json:
 		json.dump(sensor_data, output_json)
 	time.sleep(2) # change later 
