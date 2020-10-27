@@ -158,6 +158,7 @@ while True:
 		#'gy': ('{: 06d}'.format(IMU_1.gyRaw)),
 		#'gz': ('{: 06d}'.format(IMU_1.gzRaw))
 		})
+	print('\n\n printing imu values ')
 	print(accel_x_1)
 	print(accel_y_1)
 	print(accel_z_1)
