@@ -148,19 +148,31 @@ while True:
 		'P7': -1
 		})
 
-	if IMU_1.dataReady():
-		IMU_1.getAgmt()
-		# currently will write six decimal places to json file
-		sensor_data['IMU_1'].append({
-			'ax': ('{: 06d}'.format(IMU_1.axRaw)),
-			'ay': ('{: 06d}'.format(IMU_1.ayRaw)),
-			'az': ('{: 06d}'.format(IMU_1.azRaw)),
-			'gx': ('{: 06d}'.format(IMU_1.gxRaw)),
-			'gy': ('{: 06d}'.format(IMU_1.gyRaw)),
-			'gz': ('{: 06d}'.format(IMU_1.gzRaw))
-			})
-	# uncomment and set up like ^^ once we figure out how to read from both IMUs
-	#if IMU_2.dataReady():
+
+	# currently will write six decimal places to json file
+	sensor_data['IMU_1'].append({
+		'ax': ('{: 06d}'.format(accel_x_1)),
+		'ay': ('{: 06d}'.format(accel_y_1)),
+		'az': ('{: 06d}'.format(accel_z_1))
+		#'gx': ('{: 06d}'.format(IMU_1.gxRaw)),
+		#'gy': ('{: 06d}'.format(IMU_1.gyRaw)),
+		#'gz': ('{: 06d}'.format(IMU_1.gzRaw))
+		})
+	print(accel_x_1)
+	print(accel_y_1)
+	print(accel_z_1)
+	sensor_data['IMU_2'].append({
+		'ax': ('{: 06d}'.format(accel_x_2)),
+		'ay': ('{: 06d}'.format(accel_y_2)),
+		'az': ('{: 06d}'.format(accel_z_2))
+		#'gx': ('{: 06d}'.format(IMU_1.gxRaw)),
+		#'gy': ('{: 06d}'.format(IMU_1.gyRaw)),
+		#'gz': ('{: 06d}'.format(IMU_1.gzRaw))
+		})
+	print(accel_x_2)
+	print(accel_y_2)
+	print(accel_z_2)
+
 	with open('sensor_data.json', 'w') as output_json:
 		json.dump(sensor_data, output_json)
 	time.sleep(2) # change later 
