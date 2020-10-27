@@ -140,6 +140,7 @@ IMU_1.begin()
 
 # print training data to JSON file #
 sensor_data = {}
+sensor_data['SIGN'] = []
 sensor_data['MCP5'] = [] 
 sensor_data['MCP6'] = []
 sensor_data['MCP13'] = []
@@ -151,58 +152,68 @@ sensor_data['IMU_2'] = []
 
 while True:
     #2 
+    sensor_reading_counter = 0
+    sign = input("Type in the letter/phrase that will be signed:")
+    sensor_data['SIGN'].append(sign)
 
-    # array for real time:
-    sensordata_mcp5 = []
-    sensor_data['MCP5'].append({
-        'P0': (mcp5_p0.voltage / 1024.0 * 100000 / (1 - mcp5_p0.voltage / 1024.0)),
-        'P1': (mcp5_p1.voltage),
-        'P2': (mcp5_p2.voltage),
-        'P3': (mcp5_p3.voltage),
-        'P4': (mcp5_p4.voltage),
-        'P5': (mcp5_p5.voltage),
-        'P6': (mcp5_p6.voltage),
-        'P7': (mcp5_p7.voltage)
-        })
-
-    sensordata_mcp6 = []
-    sensor_data['MCP6'].append({
-        'P0': (mcp6_p0.voltage),
-        'P1': (mcp6_p1.voltage),
-        'P2': (mcp6_p2.voltage),
-        'P3': (mcp6_p3.voltage),
-        'P4': (mcp6_p4.voltage),
-        'P5': (mcp6_p5.voltage),
-        'P6': (mcp6_p6.voltage),
-        'P7': (mcp6_p7.voltage)
-        })
-
-    sensordata_mcp13 = []
-    sensor_data['MCP13'].append({
-        'P0': (mcp13_p0.voltage),
-        'P1': (mcp13_p1.voltage),
-        'P2': (mcp13_p2.voltage),
-        'P3': (mcp13_p3.voltage),
-        'P4': -1, # ** -1 = NOT connected to anything
-        'P5': -1,
-        'P6': -1,
-        'P7': -1
-        })
-
-    sensordata_IMU_1 = []
-    if IMU_1.dataReady():
-        IMU_1.getAgmt()
-        # currently will write six decimal places to json file
-        sensor_data['IMU_1'].append({
-            'ax': ('{: 06d}'.format(IMU_1.axRaw)),
-            'ay': ('{: 06d}'.format(IMU_1.ayRaw)),
-            'az': ('{: 06d}'.format(IMU_1.azRaw)),
-            'gx': ('{: 06d}'.format(IMU_1.gxRaw)),
-            'gy': ('{: 06d}'.format(IMU_1.gyRaw)),
-            'gz': ('{: 06d}'.format(IMU_1.gzRaw))
+    while(sensor_reading_counter < 5)
+        # array for real time:
+        sensordata_mcp5 = []
+        sensor_data['MCP5'].append({
+            'reading '+str(sensor_reading_counter+1): {
+                'P0': (mcp5_p0.voltage / 1024.0 * 100000 / (1 - mcp5_p0.voltage / 1024.0)),
+                'P1': (mcp5_p1.voltage),
+                'P2': (mcp5_p2.voltage),
+                'P3': (mcp5_p3.voltage),
+                'P4': (mcp5_p4.voltage),
+                'P5': (mcp5_p5.voltage),
+                'P6': (mcp5_p6.voltage),
+                'P7': (mcp5_p7.voltage)
+                }
             })
-    # TODO: uncomment and set up like ^^ once we figure out how to read from both IMUs
-    #if IMU_2.dataReady():
+
+        sensordata_mcp6 = []
+        sensor_data['MCP6'].append({
+            'reading '+str(sensor_reading_counter+1): {
+                'P0': (mcp6_p0.voltage),
+                'P1': (mcp6_p1.voltage),
+                'P2': (mcp6_p2.voltage),
+                'P3': (mcp6_p3.voltage),
+                'P4': (mcp6_p4.voltage),
+                'P5': (mcp6_p5.voltage),
+                'P6': (mcp6_p6.voltage),
+                'P7': (mcp6_p7.voltage)
+                }
+            })
+
+        sensordata_mcp13 = []
+        sensor_data['MCP13'].append({
+            'reading '+str(sensor_reading_counter+1): {
+                'P0': (mcp13_p0.voltage),
+                'P1': (mcp13_p1.voltage),
+                'P2': (mcp13_p2.voltage),
+                'P3': (mcp13_p3.voltage),
+                'P4': -1, # ** -1 = NOT connected to anything
+                'P5': -1,
+                'P6': -1,
+                'P7': -1
+                }
+            })
+
+        sensordata_IMU_1 = []
+        if IMU_1.dataReady():
+            IMU_1.getAgmt()
+            # currently will write six decimal places to json file
+            sensor_data['IMU_1'].append({
+                'ax': ('{: 06d}'.format(IMU_1.axRaw)),
+                'ay': ('{: 06d}'.format(IMU_1.ayRaw)),
+                'az': ('{: 06d}'.format(IMU_1.azRaw)),
+                'gx': ('{: 06d}'.format(IMU_1.gxRaw)),
+                'gy': ('{: 06d}'.format(IMU_1.gyRaw)),
+                'gz': ('{: 06d}'.format(IMU_1.gzRaw))
+                })
+        sensor_reading_counter -= 1 
+
 
     # TODO: add data to sensor_data_array, inner arrays currently have nothing being written to them
     sensor_data_array = [sensordata_mcp5, sensordata_mcp6, sensordata_mcp13, sensordata_IMU_1]
