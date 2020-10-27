@@ -1,4 +1,5 @@
 from __future__ import print_function
+from smbus import SMBus
 import busio
 import digitalio
 import board
@@ -28,6 +29,36 @@ cs13 = digitalio.DigitalInOut(board.D13)
 mcp5 = MCP.MCP3008(spi, cs5)
 mcp6 = MCP.MCP3008(spi, cs6)
 mcp13 = MCP.MCP3008(spi, cs13)
+
+# INITIALIZE IMUs #
+channel = 1
+imu_address_1 = 0x69
+imu_address_2 = 0x68
+bus = SMBus(channel)
+
+# IMU READINGS # 
+accel_x_high_1 = bus.read_byte_data(imu_address_1, 45)
+accel_x_low_1 = bus.read_byte_data(imu_address_1, 46)
+accel_y_high_1 = bus.read_byte_data(imu_address_1, 47)
+accel_y_low_1 = bus.read_byte_data(imu_address_1, 48)
+accel_z_high_1 = bus.read_byte_data(imu_address_1, 49)
+accel_z_low_1 = bus.read_byte_data(imu_address_1, 50)
+
+accel_x_high_2 = bus.read_byte_data(imu_address_2, 45)
+accel_x_low_2 = bus.read_byte_data(imu_address_2, 46)
+accel_y_high_2 = bus.read_byte_data(imu_address_2, 47)
+accel_y_low_2 = bus.read_byte_data(imu_address_2, 48)
+accel_z_high_2 = bus.read_byte_data(imu_address_2, 49)
+accel_z_low_2 = bus.read_byte_data(imu_address_2, 50)
+
+# COMBING IMU READING BYTES #
+accel_x_1 = accel_x_high_1 * 256 + accel_x_low_1
+accel_y_1 = accel_y_high_1 * 256 + accel_y_low_1
+accel_z_1 = accel_z_high_1 * 256 + accel_z_low_1
+
+accel_x_2 = accel_x_high_2 * 256 + accel_x_low_2
+accel_y_2 = accel_y_high_2 * 256 + accel_y_low_2
+accel_z_2 = accel_z_high_2 * 256 + accel_z_low_2
 
 # MCP connected to D5 #
 mcp5_p0 = AnalogIn(mcp5, MCP.P0)
@@ -61,13 +92,13 @@ mcp13_p7 = AnalogIn(mcp13, MCP.P7)
 
 
 # INITIALIZE IMU(s) #
-IMU_1 = qwiic_icm20948.QwiicIcm20948()
+# IMU_1 = qwiic_icm20948.QwiicIcm20948()
 
-if IMU_1.connected == False:
-	print("The Qwiic ICM20948 device isn't connected to the system. Please check your connection", \
-		file=sys.stderr)
+# if IMU_1.connected == False:
+# 	print("The Qwiic ICM20948 device isn't connected to the system. Please check your connection", \
+# 		file=sys.stderr)
 
-IMU_1.begin()
+# IMU_1.begin()
 
 #TODO figure out how to read from both IMUs. look into the setup py from the IMU library
 
