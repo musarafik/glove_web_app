@@ -176,6 +176,7 @@ while True:
 
 	print('\n\n reading from bus')
 	print(bus.read_byte_data(imu_address_1, 45))
+	print(bus.read_byte_data(imu_address_1, 46))
 
 	with open('sensor_data.json', 'w') as output_json:
 		json.dump(sensor_data, output_json)
