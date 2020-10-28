@@ -45,9 +45,9 @@ def disconnect():
     print("Disconnected from server")
 
 # use this to connect to AWS server
-# sio.connect(ec2Url)
+sio.connect(ec2Url)
 # use this to connect to localhost server
-sio.connect("http://localhost:5000")
+# sio.connect("http://localhost:5000")
 
 
 #1
