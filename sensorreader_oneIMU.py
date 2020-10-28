@@ -127,21 +127,21 @@ def read_sensors(output_file):
 			
 			sensor_data['MCP5'].append({
 				'reading '+str(sensor_reading_counter+1): {
-	                'P0': (mcp5_p0.voltage / 1024.0 * 100000 / (1 - mcp5_p0.voltage / 1024.0)),
-	                'P1': (mcp5_p1.voltage),
-	                'P2': (mcp5_p2.voltage),
-	                'P3': (mcp5_p3.voltage),
-	                'P4': (mcp5_p4.voltage),
-	                'P5': (mcp5_p5.voltage),
-	                'P6': (mcp5_p6.voltage),
-	                'P7': (mcp5_p7.voltage)
+	                'P0': -1,#(mcp5_p0.voltage / 1024.0 * 100000 / (1 - mcp5_p0.voltage / 1024.0)),
+	                'P1': -1,#(mcp5_p1.voltage),
+	                'P2': -1,#(mcp5_p2.voltage),
+	                'P3': -1,#(mcp5_p3.voltage),
+	                'P4': -1,#(mcp5_p4.voltage),
+	                'P5': -1,#(mcp5_p5.voltage),
+	                'P6': -1,#(mcp5_p6.voltage),
+	                'P7': -1#(mcp5_p7.voltage)
 	                }
 				})
 
 			sensor_data['MCP6'].append({
 				'reading '+str(sensor_reading_counter+1): {
-	                'P0': (mcp6_p0.voltage),
-	                'P1': (mcp6_p1.voltage),
+	                'P0': -1,#(mcp6_p0.voltage),
+	                'P1': -1, #(mcp6_p1.voltage),
 	                'P2': (mcp6_p2.voltage),
 	                'P3': (mcp6_p3.voltage),
 	                'P4': (mcp6_p4.voltage),
