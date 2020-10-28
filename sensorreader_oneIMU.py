@@ -116,8 +116,9 @@ sensor_data['IMU_2'] = []
 def read_sensors(output_file):
 	while True:
 		sensor_reading_counter = 0
-		sign = input("Type in the letter/phrase that will be signed:")
+		sign = input("Type in the letter/phrase that will be signed, STOP if done:")
 		if sign == 'STOP':
+			json.dump(sensor_data, output_file)
 			break
 		print(sign)
 		sensor_data['SIGN'].append(sign)
@@ -180,8 +181,6 @@ def read_sensors(output_file):
 			sensor_reading_counter += 1
 			time.sleep(1) # time between each reading 
 
-		# done reading set of readings, update json #
-		json.dump(sensor_data, output_file)
 
 	print('done reading from sensors')
 
