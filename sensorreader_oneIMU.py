@@ -181,7 +181,7 @@ def read_sensors(output_file):
 			time.sleep(1) # time between each reading 
 
 		# done reading set of readings, update json #
-		json.dump(sensor_data, outputfile)
+		json.dump(sensor_data, output_file)
 
 	print('done reading from sensors')
 
