@@ -1,4 +1,5 @@
 from __future__ import print_function
+from smbus import SMBus
 import busio
 import digitalio
 import board
@@ -28,6 +29,36 @@ cs13 = digitalio.DigitalInOut(board.D13)
 mcp5 = MCP.MCP3008(spi, cs5)
 mcp6 = MCP.MCP3008(spi, cs6)
 mcp13 = MCP.MCP3008(spi, cs13)
+
+# INITIALIZE IMUs #
+channel = 1
+imu_address_1 = 0x69
+imu_address_2 = 0x68
+bus = SMBus(channel)
+
+# IMU READINGS # 
+accel_x_high_1 = bus.read_byte_data(imu_address_1, 45)
+accel_x_low_1 = bus.read_byte_data(imu_address_1, 46)
+accel_y_high_1 = bus.read_byte_data(imu_address_1, 47)
+accel_y_low_1 = bus.read_byte_data(imu_address_1, 48)
+accel_z_high_1 = bus.read_byte_data(imu_address_1, 49)
+accel_z_low_1 = bus.read_byte_data(imu_address_1, 50)
+
+accel_x_high_2 = bus.read_byte_data(imu_address_2, 45)
+accel_x_low_2 = bus.read_byte_data(imu_address_2, 46)
+accel_y_high_2 = bus.read_byte_data(imu_address_2, 47)
+accel_y_low_2 = bus.read_byte_data(imu_address_2, 48)
+accel_z_high_2 = bus.read_byte_data(imu_address_2, 49)
+accel_z_low_2 = bus.read_byte_data(imu_address_2, 50)
+
+# COMBING IMU READING BYTES #
+accel_x_1 = accel_x_high_1 * 256 + accel_x_low_1
+accel_y_1 = accel_y_high_1 * 256 + accel_y_low_1
+accel_z_1 = accel_z_high_1 * 256 + accel_z_low_1
+
+accel_x_2 = accel_x_high_2 * 256 + accel_x_low_2
+accel_y_2 = accel_y_high_2 * 256 + accel_y_low_2
+accel_z_2 = accel_z_high_2 * 256 + accel_z_low_2
 
 # MCP connected to D5 #
 mcp5_p0 = AnalogIn(mcp5, MCP.P0)
@@ -61,13 +92,13 @@ mcp13_p7 = AnalogIn(mcp13, MCP.P7)
 
 
 # INITIALIZE IMU(s) #
-IMU_1 = qwiic_icm20948.QwiicIcm20948()
+# IMU_1 = qwiic_icm20948.QwiicIcm20948()
 
-if IMU_1.connected == False:
-	print("The Qwiic ICM20948 device isn't connected to the system. Please check your connection", \
-		file=sys.stderr)
+# if IMU_1.connected == False:
+# 	print("The Qwiic ICM20948 device isn't connected to the system. Please check your connection", \
+# 		file=sys.stderr)
 
-IMU_1.begin()
+# IMU_1.begin()
 
 #TODO figure out how to read from both IMUs. look into the setup py from the IMU library
 
@@ -117,19 +148,36 @@ while True:
 		'P7': -1
 		})
 
-	if IMU_1.dataReady():
-		IMU_1.getAgmt()
-		# currently will write six decimal places to json file
-		sensor_data['IMU_1'].append({
-			'ax': ('{: 06d}'.format(IMU_1.axRaw)),
-			'ay': ('{: 06d}'.format(IMU_1.ayRaw)),
-			'az': ('{: 06d}'.format(IMU_1.azRaw)),
-			'gx': ('{: 06d}'.format(IMU_1.gxRaw)),
-			'gy': ('{: 06d}'.format(IMU_1.gyRaw)),
-			'gz': ('{: 06d}'.format(IMU_1.gzRaw))
-			})
-	# uncomment and set up like ^^ once we figure out how to read from both IMUs
-	#if IMU_2.dataReady():
+
+	# currently will write six decimal places to json file
+	sensor_data['IMU_1'].append({
+		'ax': ('{: 06d}'.format(accel_x_1)),
+		'ay': ('{: 06d}'.format(accel_y_1)),
+		'az': ('{: 06d}'.format(accel_z_1))
+		#'gx': ('{: 06d}'.format(IMU_1.gxRaw)),
+		#'gy': ('{: 06d}'.format(IMU_1.gyRaw)),
+		#'gz': ('{: 06d}'.format(IMU_1.gzRaw))
+		})
+	print('\n\n printing imu values ')
+	print(accel_x_1)
+	print(accel_y_1)
+	print(accel_z_1)
+	sensor_data['IMU_2'].append({
+		'ax': ('{: 06d}'.format(accel_x_2)),
+		'ay': ('{: 06d}'.format(accel_y_2)),
+		'az': ('{: 06d}'.format(accel_z_2))
+		#'gx': ('{: 06d}'.format(IMU_1.gxRaw)),
+		#'gy': ('{: 06d}'.format(IMU_1.gyRaw)),
+		#'gz': ('{: 06d}'.format(IMU_1.gzRaw))
+		})
+	print(accel_x_2)
+	print(accel_y_2)
+	print(accel_z_2)
+
+	print('\n\n reading from bus')
+	print(bus.read_byte_data(imu_address_1, 45))
+	print(bus.read_byte_data(imu_address_1, 46))
+
 	with open('sensor_data.json', 'w') as output_json:
 		json.dump(sensor_data, output_json)
 	time.sleep(2) # change later 
