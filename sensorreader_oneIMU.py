@@ -118,7 +118,7 @@ def read_sensors(output_file):
 		sensor_reading_counter = 0
 		sign = input("Type in the letter/phrase that will be signed, STOP if done:")
 		if sign == 'STOP':
-			json.dump(sensor_data, output_file)
+			json.dump(sensor_data, output_file, indent=1)
 			break
 		print(sign)
 		sensor_data['SIGN'].append(sign)
