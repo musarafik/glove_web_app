@@ -165,8 +165,8 @@ def read_sensors(output_file):
 				})
 
 			# currently will write six decimal places to json file
-			if IMU.dataReady():
-				IMU.getAgmt()
+			if IMU_1.dataReady():
+				IMU_1.getAgmt()
 				sensor_data['IMU_1'].append({
 					'reading '+str(sensor_reading_counter+1): {
 						'ax': ('{: 06d}'.format(IMU_1.axRaw)),
