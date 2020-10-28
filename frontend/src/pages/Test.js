@@ -81,7 +81,7 @@ function Test(props){
 
     // Whenever target word changes this is called
     useEffect(() => {
-        if(target != ''){
+        if(target !== ''){
             setImagePath(allPaths[target]);
             setTextToSpeak(target);
             setTimeout(function(){setRenderImage(true);}, 1000);
@@ -135,7 +135,7 @@ function Test(props){
             }
 
             {renderFeedback ? 
-                feedback == "Correct" ? 
+                feedback === "Correct" ? 
                     <h1 style={{color: "green"}}>Correct</h1>
                 :
                     <h1 style={{color: "red"}}>Incorrect</h1>

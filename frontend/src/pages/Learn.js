@@ -11,8 +11,8 @@ const styles = {
         flexDirection: 'row',
     },
     image:{
-        height: '300px',
-        width: '300px',
+        height: '200px',
+        width: '200px',
         paddingTop: '3%'
     },
     pageContainer:{
@@ -35,6 +35,9 @@ function Learn(props){
     const [letters, setLetters] = useState({});
     const [feedback, setFeedback] = useState('');
     const [renderFeedback, setRenderFeedback] = useState(false);
+    const [prediction, setPrediction] = useState('');
+    const [target, setTarget] = useState('');
+    const [showFeedbackAgain, setShowFeedbackAgain] = useState(0);
 
     // Set up textToSpeech when page first loads
     useEffect(() => {
@@ -56,28 +59,63 @@ function Learn(props){
             console.log("Speech translation not supported");
         }
 
-        socket.on("raspberry pi response", (data) => console.log(data));
+        socket.on("raspberry pi response", (data) => {
+            const raspPred = data["response"]["response"];
+            setPrediction(raspPred.toLowerCase());
+            setShowFeedbackAgain(temp => temp + 1);
+        });
+
     }, [])
+
+    const comparePredictionWithTarget = () => {
+        if(prediction === target){
+            setFeedback("Correct");
+        }
+        else{
+            setFeedback("Incorrect");
+        }
+        var oldPage = renderLetterForm;
+        if(renderLetterForm === oldPage){
+            setRenderFeedback(true);
+            setTimeout(function(){setRenderFeedback(false);}, 2000);
+        }
+
+
+    }
+
+    useEffect(() => {
+        if(target !==''){
+            comparePredictionWithTarget();
+        }
+    }, [target, prediction, showFeedbackAgain])
+
+    const showLetter = (letter) => {
+        setImagePath(letters[letter]);
+        setTextToSpeak(letter);
+        setRenderImage(true);
+    }
 
     // Get image corresponding to letter inputted
     const handleOnSubmit = (event) =>{
         event.preventDefault();
         if(event.target.userInput.value !== ''){
             var input = event.target.userInput.value.toLowerCase();
-            setImagePath(letters[input]);
-            setTextToSpeak(event.target.userInput.value);
-            setRenderImage(true);
-            setRenderFeedback(true);
-            setFeedback("Incorrect");
+            showLetter(input);
+            setTarget(input);
             document.getElementById("inputForm").reset();
         }
     }
 
-    // When a specific word is pressed, show the image and have text to speech say the word
-    const handleWordButton = (word) =>{
+    const showWord = (word) => {
         setImagePath(words[word]);
         setTextToSpeak(word);
         setRenderImage(true);
+    }
+
+    // When a specific word is pressed, show the image and have text to speech say the word
+    const handleWordButton = (word) =>{
+        showWord(word);
+        setTarget(word);
     }
 
     // Whenever a new image is rendered, textToSpeech occurs
@@ -110,6 +148,9 @@ function Learn(props){
         if(renderImage){
             setRenderImage(false);
         }
+        if(renderFeedback){
+            setRenderFeedback(false);
+        }
     }
  
     // Change layout of page to show word buttons when the word button is clicked
@@ -127,6 +168,9 @@ function Learn(props){
         }
         if(renderImage){
             setRenderImage(false);
+        }
+        if(renderFeedback){
+            setRenderFeedback(false);
         }
     }
 
@@ -173,7 +217,7 @@ function Learn(props){
                 </Form>
 
                 {renderFeedback ?
-                        feedback == "Correct" ? 
+                        feedback === "Correct" ? 
                             <h1 style={{color: "green"}}>Correct</h1>
                         :
                             <h1 style={{color: "red"}}>Incorrect</h1>
@@ -213,7 +257,7 @@ function Learn(props){
                     </div>
 
                     {renderFeedback ?
-                        feedback == "Correct" ? 
+                        feedback === "Correct" ? 
                             <h1 style={{color: "green"}}>Correct</h1>
                         :
                             <h1 style={{color: "red"}}>Incorrect</h1>
@@ -223,7 +267,6 @@ function Learn(props){
 
                     {renderImage ? 
                         <img
-                            style={{height: 200, width: 200}} 
                             alt="sign language equivalent"
                             src={imagePath}
                             style = {styles.image}
