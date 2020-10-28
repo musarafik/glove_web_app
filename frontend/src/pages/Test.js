@@ -58,6 +58,7 @@ function Test(props){
         socket.on("raspberry pi response", (data) => {
             const raspPred = data["response"]["response"];
             setPrediction(raspPred.toLowerCase());
+            console.log(raspPred);
         });
     }, [allPaths])
 

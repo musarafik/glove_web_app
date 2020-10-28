@@ -63,6 +63,7 @@ function Learn(props){
             const raspPred = data["response"]["response"];
             setPrediction(raspPred.toLowerCase());
             setShowFeedbackAgain(temp => temp + 1);
+            console.log(raspPred);
         });
 
     }, [])
