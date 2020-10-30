@@ -4,6 +4,7 @@ import pickle
 from joblib import dump, load
 import numpy as np
 import time
+import random
 # import busio
 # import digitalio
 # import board
@@ -45,9 +46,9 @@ def disconnect():
     print("Disconnected from server")
 
 # use this to connect to AWS server
-sio.connect(ec2Url)
+# sio.connect(ec2Url)
 # use this to connect to localhost server
-# sio.connect("http://localhost:5000")
+sio.connect("http://localhost:5000")
 
 
 #1
@@ -218,15 +219,26 @@ while True:
    # data = np.array([thumb,index,middle,ring,pinky,accel,indexForce,midForce,thumbForce])
 
 
-    data = np.array([26.7,44.0,36.5,53.1,47.9,1,1,1,0]) # sample data, returns ['A'] from predict
+    dataA = np.array([26.7,44.0,36.5,53.1,47.9,1,1,1,0]) # sample data, returns ['A'] from predict
+    dataB = np.array([38.3, 26.6, 30.8, 30.3, 26.5, 1, 0, 1, 1])
+    dataC = np.array([35, 46, 37, 46, 44.3,	1, 0, 1, 0])
+    dataD = np.array([35, 26.6, 36.5, 53.1, 47.9, 1, 0, 0, 1])
+    dataE = np.array([35, 46, 30.8,	30.3, 26.5,	1, 1, 1, 0])
 
+    dataA = dataA.reshape(1,-1)  # This is needed or else the predict(data) gets mad at you for using a 1d Array
+    dataB = dataB.reshape(1,-1)
+    dataC = dataC.reshape(1,-1)
+    dataD = dataD.reshape(1,-1)
+    dataE = dataE.reshape(1,-1)
 
-    data = data.reshape(1,-1)  # This is needed or else the predict(data) gets mad at you for using a 1d Array
-   
+    dataArray = [dataA, dataB, dataC, dataD, dataE]
+
+    randNum = random.randint(0, 4)
+
     # 3. 
     svc = SVC(kernel="linear", C=1, gamma = 1) # probably don't need this line
     svc = load("filename.joblib")
-    prediction = svc.predict(data) # probably need to do some transformation on data before calling predict
+    prediction = svc.predict(dataArray[randNum]) # probably need to do some transformation on data before calling predict
     prediction = prediction[0][0]
 
     # For testing the algorithm from inputs locally
