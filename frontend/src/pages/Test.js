@@ -80,13 +80,10 @@ function Test(props){
         setRenderTarget(true);
     }
 
-    // Whenever target word changes this is called
+    // When prediction changes call this
+    // Compare prediction with the target and set feedback to Correct if they are the same, otherwise Incorrect
     useEffect(() => {
-        if(target !== ''){
-            setImagePath(allPaths[target]);
-            setTextToSpeak(target);
-            setTimeout(function(){setRenderImage(true);}, 1000);
-            setRenderImage(false);
+        if(prediction != ''){
             if(prediction !== ''){
                 setTimeout(function(){setRenderFeedback(true);}, 1000);
                 if(prediction === target){
@@ -97,6 +94,16 @@ function Test(props){
                 }
                 setRenderFeedback(false);
             }  
+        }
+    }, [prediction])
+
+    // Whenever target word changes this is called to show how the sign is formed
+    useEffect(() => {
+        if(target !== ''){
+            setImagePath(allPaths[target]);
+            setTextToSpeak(target);
+            setTimeout(function(){setRenderImage(true);}, 1000);
+            setRenderImage(false);
         }
     }, [target])
 
