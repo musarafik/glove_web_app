@@ -127,6 +127,7 @@ def read_sensors(output_file):
 			print(sensor_reading_counter)
 			
 			sensor_data['MCP5'].append({
+				'sign': sign,
 				'reading '+str(sensor_reading_counter+1): {
 	                'P0': -1,#(mcp5_p0.voltage / 1024.0 * 100000 / (1 - mcp5_p0.voltage / 1024.0)),
 	                'P1': -1,#(mcp5_p1.voltage),
@@ -140,6 +141,7 @@ def read_sensors(output_file):
 				})
 
 			sensor_data['MCP6'].append({
+				'sign': sign,
 				'reading '+str(sensor_reading_counter+1): {
 	                'P0': -1,#(mcp6_p0.voltage),
 	                'P1': -1, #(mcp6_p1.voltage),
@@ -153,6 +155,7 @@ def read_sensors(output_file):
 				})
 
 			sensor_data['MCP13'].append({
+				'sign': sign,
 				'reading '+str(sensor_reading_counter+1): {
 	                'P0': (mcp13_p0.voltage),
 	                'P1': (mcp13_p1.voltage),
@@ -169,6 +172,7 @@ def read_sensors(output_file):
 			if IMU_1.dataReady():
 				IMU_1.getAgmt()
 				sensor_data['IMU_1'].append({
+					'sign': sign,
 					'reading '+str(sensor_reading_counter+1): {
 						'ax': ('{: 06d}'.format(IMU_1.axRaw)),
 						'ay': ('{: 06d}'.format(IMU_1.ayRaw)),
