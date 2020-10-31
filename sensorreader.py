@@ -108,81 +108,102 @@ mcp13_p7 = AnalogIn(mcp13, MCP.P7)
 
 # print training data to JSON file #
 sensor_data = {}
+sensor_data['SIGN'] = []
 sensor_data['MCP5'] = [] 
 sensor_data['MCP6'] = []
 sensor_data['MCP13'] = []
 # set up like 'P0': 'value'
-sensor_data['IMU_1'] = []
-sensor_data['IMU_2'] = []
+sensor_data['IMU'] = []
 
 #TODO need to find range of each sensor output, so we can scale between 0-100
 
-while True:
-	sensor_data['MCP5'].append({
-		'P0': (mcp5_p0.voltage / 1024.0 * 100000 / (1 - mcp5_p0.voltage / 1024.0)),
-		'P1': (mcp5_p1.voltage),
-		'P2': (mcp5_p2.voltage),
-		'P3': (mcp5_p3.voltage),
-		'P4': (mcp5_p4.voltage),
-		'P5': (mcp5_p5.voltage),
-		'P6': (mcp5_p6.voltage),
-		'P7': (mcp5_p7.voltage)
-		})
+def read_sensors(output_file):
+	while True:
+		sensor_reading_counter = 0
+		sign = input("Type in the letter/phrase that will be signed, STOP if done:")
+		if sign == 'STOP':
+			json.dump(sensor_data, output_file, indent=1)
+			break
+		print(sign)
+		sensor_data['SIGN'].append(sign)
 
-	sensor_data['MCP6'].append({
-		'P0': (mcp6_p0.voltage),
-		'P1': (mcp6_p1.voltage),
-		'P2': (mcp6_p2.voltage),
-		'P3': (mcp6_p3.voltage),
-		'P4': (mcp6_p4.voltage),
-		'P5': (mcp6_p5.voltage),
-		'P6': (mcp6_p6.voltage),
-		'P7': (mcp6_p7.voltage)
-		})
+		while(sensor_reading_counter < 5):
+			print(sensor_reading_counter)
+			
+			sensor_data['MCP5'].append({
+				'sign': sign,
+				'reading '+str(sensor_reading_counter+1): {
+	                'P0': (mcp5_p0.voltage),
+	                'P1': (mcp5_p1.voltage),
+	                'P2': (mcp5_p2.voltage),
+	                'P3': (mcp5_p3.voltage),
+	                'P4': (mcp5_p4.voltage),
+	                'P5': (mcp5_p5.voltage),
+	                'P6': (mcp5_p6.voltage),
+	                'P7': (mcp5_p7.voltage)
+	                }
+				})
 
-	sensor_data['MCP13'].append({
-		'P0': (mcp13_p0.voltage),
-		'P1': (mcp13_p1.voltage),
-		'P2': (mcp13_p2.voltage),
-		'P3': (mcp13_p3.voltage),
-		'P4': -1, # ** -1 = NOT connected to anything
-		'P5': -1,
-		'P6': -1,
-		'P7': -1
-		})
+			sensor_data['MCP6'].append({
+				'sign': sign,
+				'reading '+str(sensor_reading_counter+1): {
+	                'P0': (mcp6_p0.voltage),
+	                'P1': (mcp6_p1.voltage),
+	                'P2': (mcp6_p2.voltage),
+	                'P3': (mcp6_p3.voltage),
+	                'P4': (mcp6_p4.voltage),
+	                'P5': (mcp6_p5.voltage),
+	                'P6': (mcp6_p6.voltage),
+	                'P7': (mcp6_p7.voltage)
+	                }
+				})
+
+			sensor_data['MCP13'].append({
+				'sign': sign,
+				'reading '+str(sensor_reading_counter+1): {
+	                'P0': (mcp13_p0.voltage),
+	                'P1': (mcp13_p1.voltage),
+	                'P2': (mcp13_p2.voltage),
+	                'P3': (mcp13_p3.voltage),
+	                'P4': -1, # ** -1 = NOT connected to anything
+	                'P5': -1,
+	                'P6': -1,
+	                'P7': -1
+	                }
+				})
+
+			# currently will write six decimal places to json file
+			if IMU_1.dataReady():
+				IMU_1.getAgmt()
+				sensor_data['IMU'].append({
+					'sign': sign,
+					'reading '+str(sensor_reading_counter+1): {
+						'ax1': ('{: 06d}'.format(accel_x_1)),
+						'ay1': ('{: 06d}'.format(accel_y_1)),
+						'az1': ('{: 06d}'.format(accel_z_1)),
+						'ax2': ('{: 06d}'.format(accel_x_2)),
+						'ay2': ('{: 06d}'.format(accel_y_2)),
+						'az2': ('{: 06d}'.format(accel_z_2)),
+						'nc1': -1,
+						'nc2': -1
+						}
+					})
+			sensor_reading_counter += 1
+			time.sleep(1) # time between each reading 
 
 
-	# currently will write six decimal places to json file
-	sensor_data['IMU_1'].append({
-		'ax': ('{: 06d}'.format(accel_x_1)),
-		'ay': ('{: 06d}'.format(accel_y_1)),
-		'az': ('{: 06d}'.format(accel_z_1))
-		#'gx': ('{: 06d}'.format(IMU_1.gxRaw)),
-		#'gy': ('{: 06d}'.format(IMU_1.gyRaw)),
-		#'gz': ('{: 06d}'.format(IMU_1.gzRaw))
-		})
-	print('\n\n printing imu values ')
-	print(accel_x_1)
-	print(accel_y_1)
-	print(accel_z_1)
-	sensor_data['IMU_2'].append({
-		'ax': ('{: 06d}'.format(accel_x_2)),
-		'ay': ('{: 06d}'.format(accel_y_2)),
-		'az': ('{: 06d}'.format(accel_z_2))
-		#'gx': ('{: 06d}'.format(IMU_1.gxRaw)),
-		#'gy': ('{: 06d}'.format(IMU_1.gyRaw)),
-		#'gz': ('{: 06d}'.format(IMU_1.gzRaw))
-		})
-	print(accel_x_2)
-	print(accel_y_2)
-	print(accel_z_2)
+	print('done reading from sensors')
 
-	print('\n\n reading from bus')
-	print(bus.read_byte_data(imu_address_1, 45))
-	print(bus.read_byte_data(imu_address_1, 46))
+if __name__ == '__main__':
+	whichfile = input("lucas or morgan:")
+	print(whichfile + ", writing to json file ending in your name\n")
+	if whichfile == 'lucas':
+		output_lucas = open('sensor_data_lucas.json', 'w')
+		read_sensors(output_lucas)
+	elif whichfile == 'morgan':
+		output_morgan = open('sensor_data_morgan.json', 'w')
+		read_sensors(output_morgan)
+	else:
+		print("did not type write name")
 
-	with open('sensor_data.json', 'w') as output_json:
-		json.dump(sensor_data, output_json)
-	time.sleep(2) # change later 
 
-print('done reading from sensors')
