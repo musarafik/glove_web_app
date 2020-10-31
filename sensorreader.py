@@ -35,21 +35,24 @@ channel = 1
 imu_address_1 = 0x69
 imu_address_2 = 0x68
 bus = SMBus(channel)
+bus.write_byte_data(imu_address_1, 0x06, 0x01)
+bus.write_byte_data(imu_address_2, 0x06, 0x01)
+time.sleep(0.5)
 
 # IMU READINGS # 
-accel_x_high_1 = bus.read_byte_data(imu_address_1, 45)
-accel_x_low_1 = bus.read_byte_data(imu_address_1, 46)
-accel_y_high_1 = bus.read_byte_data(imu_address_1, 47)
-accel_y_low_1 = bus.read_byte_data(imu_address_1, 48)
-accel_z_high_1 = bus.read_byte_data(imu_address_1, 49)
-accel_z_low_1 = bus.read_byte_data(imu_address_1, 50)
+accel_x_high_1 = bus.read_byte_data(imu_address_1, 0x2D)
+accel_x_low_1 = bus.read_byte_data(imu_address_1, 0x2E)
+accel_y_high_1 = bus.read_byte_data(imu_address_1, 0x2F)
+accel_y_low_1 = bus.read_byte_data(imu_address_1, 0x30)
+accel_z_high_1 = bus.read_byte_data(imu_address_1, 0x31)
+accel_z_low_1 = bus.read_byte_data(imu_address_1, 0x32)
 
-accel_x_high_2 = bus.read_byte_data(imu_address_2, 45)
-accel_x_low_2 = bus.read_byte_data(imu_address_2, 46)
-accel_y_high_2 = bus.read_byte_data(imu_address_2, 47)
-accel_y_low_2 = bus.read_byte_data(imu_address_2, 48)
-accel_z_high_2 = bus.read_byte_data(imu_address_2, 49)
-accel_z_low_2 = bus.read_byte_data(imu_address_2, 50)
+accel_x_high_2 = bus.read_byte_data(imu_address_2, 0x2D)
+accel_x_low_2 = bus.read_byte_data(imu_address_2, 0x2E)
+accel_y_high_2 = bus.read_byte_data(imu_address_2, 0x2F)
+accel_y_low_2 = bus.read_byte_data(imu_address_2, 0x30)
+accel_z_high_2 = bus.read_byte_data(imu_address_2, 0x31)
+accel_z_low_2 = bus.read_byte_data(imu_address_2, 0x32)
 
 # COMBING IMU READING BYTES #
 accel_x_1 = accel_x_high_1 * 256 + accel_x_low_1
