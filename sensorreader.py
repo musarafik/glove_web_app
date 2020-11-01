@@ -173,21 +173,20 @@ def read_sensors(output_file):
 				})
 
 			# currently will write six decimal places to json file
-			if IMU_1.dataReady():
-				IMU_1.getAgmt()
-				sensor_data['IMU'].append({
-					'sign': sign,
-					'reading '+str(sensor_reading_counter+1): {
-						'ax1': ('{: 06d}'.format(accel_x_1)),
-						'ay1': ('{: 06d}'.format(accel_y_1)),
-						'az1': ('{: 06d}'.format(accel_z_1)),
-						'ax2': ('{: 06d}'.format(accel_x_2)),
-						'ay2': ('{: 06d}'.format(accel_y_2)),
-						'az2': ('{: 06d}'.format(accel_z_2)),
-						'nc1': -1,
-						'nc2': -1
-						}
-					})
+
+			sensor_data['IMU'].append({
+				'sign': sign,
+				'reading '+str(sensor_reading_counter+1): {
+					'ax1': ('{: 06d}'.format(accel_x_1)),
+					'ay1': ('{: 06d}'.format(accel_y_1)),
+					'az1': ('{: 06d}'.format(accel_z_1)),
+					'ax2': ('{: 06d}'.format(accel_x_2)),
+					'ay2': ('{: 06d}'.format(accel_y_2)),
+					'az2': ('{: 06d}'.format(accel_z_2)),
+					'nc1': -1,
+					'nc2': -1
+					}
+				})
 			sensor_reading_counter += 1
 			time.sleep(1) # time between each reading 
 
