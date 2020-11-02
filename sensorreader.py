@@ -127,69 +127,76 @@ def read_sensors(output_file):
 		print(sign)
 		sensor_data['SIGN'].append(sign)
 
-		while(sensor_reading_counter < 5):
-			print(sensor_reading_counter)
-			
-			sensor_data['MCP5'].append({
-				'sign': sign,
-				'reading '+str(sensor_reading_counter+1): {
-	                'P0': (mcp5_p0.voltage),
-	                'P1': (mcp5_p1.voltage),
-	                'P2': (mcp5_p2.voltage),
-	                'P3': (mcp5_p3.voltage),
-	                'P4': (mcp5_p4.voltage),
-	                'P5': (mcp5_p5.voltage),
-	                'P6': (mcp5_p6.voltage),
-	                'P7': (mcp5_p7.voltage)
-	                }
-				})
+		set_num = input("Type in how many sets you want to do:")
+		readings_num = input("Type in how many readings per set you want to take:")
 
-			sensor_data['MCP6'].append({
-				'sign': sign,
-				'reading '+str(sensor_reading_counter+1): {
-	                'P0': (mcp6_p0.voltage),
-	                'P1': (mcp6_p1.voltage),
-	                'P2': (mcp6_p2.voltage),
-	                'P3': (mcp6_p3.voltage),
-	                'P4': (mcp6_p4.voltage),
-	                'P5': (mcp6_p5.voltage),
-	                'P6': (mcp6_p6.voltage),
-	                'P7': (mcp6_p7.voltage)
-	                }
-				})
+		print('\n\nThere will be a 3 second break between each set\n\n')
 
-			sensor_data['MCP13'].append({
-				'sign': sign,
-				'reading '+str(sensor_reading_counter+1): {
-	                'P0': (mcp13_p0.voltage),
-	                'P1': (mcp13_p1.voltage),
-	                'P2': (mcp13_p2.voltage),
-	                'P3': (mcp13_p3.voltage),
-	                'P4': -1, # ** -1 = NOT connected to anything
-	                'P5': -1,
-	                'P6': -1,
-	                'P7': -1
-	                }
-				})
+		while(set_num > 0)
+			while(sensor_reading_counter < readings_num):
+				print(sensor_reading_counter)
+				
+				sensor_data['MCP5'].append({
+					'sign': sign,
+					'reading '+str(sensor_reading_counter+1): {
+		                'P0': (mcp5_p0.voltage),
+		                'P1': (mcp5_p1.voltage),
+		                'P2': (mcp5_p2.voltage),
+		                'P3': (mcp5_p3.voltage),
+		                'P4': (mcp5_p4.voltage),
+		                'P5': (mcp5_p5.voltage),
+		                'P6': (mcp5_p6.voltage),
+		                'P7': (mcp5_p7.voltage)
+		                }
+					})
 
-			# currently will write six decimal places to json file
+				sensor_data['MCP6'].append({
+					'sign': sign,
+					'reading '+str(sensor_reading_counter+1): {
+		                'P0': (mcp6_p0.voltage),
+		                'P1': (mcp6_p1.voltage),
+		                'P2': (mcp6_p2.voltage),
+		                'P3': (mcp6_p3.voltage),
+		                'P4': (mcp6_p4.voltage),
+		                'P5': (mcp6_p5.voltage),
+		                'P6': (mcp6_p6.voltage),
+		                'P7': (mcp6_p7.voltage)
+		                }
+					})
 
-			sensor_data['IMU'].append({
-				'sign': sign,
-				'reading '+str(sensor_reading_counter+1): {
-					'ax1': ('{: 06d}'.format(accel_x_1)),
-					'ay1': ('{: 06d}'.format(accel_y_1)),
-					'az1': ('{: 06d}'.format(accel_z_1)),
-					'ax2': ('{: 06d}'.format(accel_x_2)),
-					'ay2': ('{: 06d}'.format(accel_y_2)),
-					'az2': ('{: 06d}'.format(accel_z_2)),
-					'nc1': -1,
-					'nc2': -1
-					}
-				})
-			sensor_reading_counter += 1
-			time.sleep(1) # time between each reading 
+				sensor_data['MCP13'].append({
+					'sign': sign,
+					'reading '+str(sensor_reading_counter+1): {
+		                'P0': (mcp13_p0.voltage),
+		                'P1': (mcp13_p1.voltage),
+		                'P2': (mcp13_p2.voltage),
+		                'P3': (mcp13_p3.voltage),
+		                'P4': -1, # ** -1 = NOT connected to anything
+		                'P5': -1,
+		                'P6': -1,
+		                'P7': -1
+		                }
+					})
 
+				# currently will write six decimal places to json file
+
+				sensor_data['IMU'].append({
+					'sign': sign,
+					'reading '+str(sensor_reading_counter+1): {
+						'ax1': ('{: 06d}'.format(accel_x_1)),
+						'ay1': ('{: 06d}'.format(accel_y_1)),
+						'az1': ('{: 06d}'.format(accel_z_1)),
+						'ax2': ('{: 06d}'.format(accel_x_2)),
+						'ay2': ('{: 06d}'.format(accel_y_2)),
+						'az2': ('{: 06d}'.format(accel_z_2)),
+						'nc1': -1,
+						'nc2': -1
+						}
+					})
+				sensor_reading_counter += 1
+				time.sleep(1) # time between each reading 
+			set_num -= 1;
+			time.sleep(3)
 
 	print('done reading from sensors')
 
