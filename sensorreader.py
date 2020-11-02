@@ -38,30 +38,22 @@ bus = SMBus(channel)
 bus.write_byte_data(imu_address_1, 0x06, 0x01)
 bus.write_byte_data(imu_address_2, 0x06, 0x01)
 time.sleep(0.5)
+accel_x_1 = -1
+accel_y_1 = -1
+accel_z_1 = -1
 
-# IMU READINGS # 
-accel_x_high_1 = bus.read_byte_data(imu_address_1, 0x2D)
-accel_x_low_1 = bus.read_byte_data(imu_address_1, 0x2E)
-accel_y_high_1 = bus.read_byte_data(imu_address_1, 0x2F)
-accel_y_low_1 = bus.read_byte_data(imu_address_1, 0x30)
-accel_z_high_1 = bus.read_byte_data(imu_address_1, 0x31)
-accel_z_low_1 = bus.read_byte_data(imu_address_1, 0x32)
+accel_x_2 = -1
+accel_y_2 = -1
+accel_z_2 = -1
 
-accel_x_high_2 = bus.read_byte_data(imu_address_2, 0x2D)
-accel_x_low_2 = bus.read_byte_data(imu_address_2, 0x2E)
-accel_y_high_2 = bus.read_byte_data(imu_address_2, 0x2F)
-accel_y_low_2 = bus.read_byte_data(imu_address_2, 0x30)
-accel_z_high_2 = bus.read_byte_data(imu_address_2, 0x31)
-accel_z_low_2 = bus.read_byte_data(imu_address_2, 0x32)
+gyro_x_1 = -1
+gyro_y_1 = -1
+gyro_z_1 = -1
 
-# COMBING IMU READING BYTES #
-accel_x_1 = accel_x_high_1 * 256 + accel_x_low_1
-accel_y_1 = accel_y_high_1 * 256 + accel_y_low_1
-accel_z_1 = accel_z_high_1 * 256 + accel_z_low_1
+gyro_x_2 = -1
+gyro_y_2 = -1
+gyro_z_2 = -1
 
-accel_x_2 = accel_x_high_2 * 256 + accel_x_low_2
-accel_y_2 = accel_y_high_2 * 256 + accel_y_low_2
-accel_z_2 = accel_z_high_2 * 256 + accel_z_low_2
 
 # MCP connected to D5 #
 mcp5_p0 = AnalogIn(mcp5, MCP.P0)
@@ -94,16 +86,69 @@ mcp13_p6 = AnalogIn(mcp13, MCP.P6)
 mcp13_p7 = AnalogIn(mcp13, MCP.P7)
 
 
-# INITIALIZE IMU(s) #
-# IMU_1 = qwiic_icm20948.QwiicIcm20948()
+# GET IMU VALUES #
+def get_IMU_values():
+	global accel_x_1
+	global accel_y_1
+	global accel_z_1
+	global accel_x_2
+	global accel_y_2
+	global accel_z_2
 
-# if IMU_1.connected == False:
-# 	print("The Qwiic ICM20948 device isn't connected to the system. Please check your connection", \
-# 		file=sys.stderr)
+	global gyro_x_1
+	global gyro_y_1
+	global gyro_z_1
+	global gyro_x_2
+	global gyro_y_2
+	global gyro_z_2
 
-# IMU_1.begin()
+	# IMU READINGS # 
+	accel_x_high_1 = bus.read_byte_data(imu_address_1, 0x2D)
+	accel_x_low_1 = bus.read_byte_data(imu_address_1, 0x2E)
+	accel_y_high_1 = bus.read_byte_data(imu_address_1, 0x2F)
+	accel_y_low_1 = bus.read_byte_data(imu_address_1, 0x30)
+	accel_z_high_1 = bus.read_byte_data(imu_address_1, 0x31)
+	accel_z_low_1 = bus.read_byte_data(imu_address_1, 0x32)
 
-#TODO figure out how to read from both IMUs. look into the setup py from the IMU library
+	accel_x_high_2 = bus.read_byte_data(imu_address_2, 0x2D)
+	accel_x_low_2 = bus.read_byte_data(imu_address_2, 0x2E)
+	accel_y_high_2 = bus.read_byte_data(imu_address_2, 0x2F)
+	accel_y_low_2 = bus.read_byte_data(imu_address_2, 0x30)
+	accel_z_high_2 = bus.read_byte_data(imu_address_2, 0x31)
+	accel_z_low_2 = bus.read_byte_data(imu_address_2, 0x32)
+
+	gyro_x_high_1 = bus.read_byte_data(imu_address_1, 0x33)
+	gyro_x_low_1 = bus.read_byte_data(imu_address_1, 0x34)
+	gyro_y_high_1 = bus.read_byte_data(imu_address_1, 0x35)
+	gyro_y_low_1 = bus.read_byte_data(imu_address_1, 0x36)
+	gyro_z_high_1 = bus.read_byte_data(imu_address_1, 0x37)
+	gyro_z_low_1 = bus.read_byte_data(imu_address_1, 0x38)
+
+	gyro_x_high_2 = bus.read_byte_data(imu_address_2, 0x33)
+	gyro_x_low_2 = bus.read_byte_data(imu_address_2, 0x34)
+	gyro_y_high_2 = bus.read_byte_data(imu_address_2, 0x35)
+	gyro_y_low_2 = bus.read_byte_data(imu_address_2, 0x36)
+	gyro_z_high_2 = bus.read_byte_data(imu_address_2, 0x37)
+	gyro_z_low_2 = bus.read_byte_data(imu_address_2, 0x38)
+
+
+	# COMBING IMU READING BYTES #
+	accel_x_1 = accel_x_high_1 * 256 + accel_x_low_1
+	accel_y_1 = accel_y_high_1 * 256 + accel_y_low_1
+	accel_z_1 = accel_z_high_1 * 256 + accel_z_low_1
+
+	accel_x_2 = accel_x_high_2 * 256 + accel_x_low_2
+	accel_y_2 = accel_y_high_2 * 256 + accel_y_low_2
+	accel_z_2 = accel_z_high_2 * 256 + accel_z_low_2
+
+	gyro_x_1 = gyro_x_high_1 * 256 + gyro_x_low_1
+	gyro_y_1 = gyro_y_high_1 * 256 + gyro_y_low_1
+	gyro_z_1 = gyro_z_high_1 * 256 + gyro_z_low_1
+
+	gyro_x_2 = gyro_x_high_2 * 256 + gyro_x_low_2
+	gyro_y_2 = gyro_y_high_2 * 256 + gyro_y_low_2
+	gyro_z_2 = gyro_z_high_2 * 256 + gyro_z_low_2
+
 
 
 # print training data to JSON file #
@@ -113,9 +158,8 @@ sensor_data['MCP5'] = []
 sensor_data['MCP6'] = []
 sensor_data['MCP13'] = []
 # set up like 'P0': 'value'
-sensor_data['IMU'] = []
-
-#TODO need to find range of each sensor output, so we can scale between 0-100
+sensor_data['IMU_acc'] = []
+sensor_data['IMU_gy'] = []
 
 def read_sensors(output_file):
 	while True:
@@ -130,10 +174,9 @@ def read_sensors(output_file):
 
 		while(set_num > 0):
 			sensor_reading_counter = 0
-			while(sensor_reading_counter < 2):
+			while(sensor_reading_counter < 5):
 				print(sensor_reading_counter)
-				print(accel_x_high_1 = bus.read_byte_data(imu_address_1, 0x2D))
-				print(accel_x_low_1 = bus.read_byte_data(imu_address_1, 0x2E))
+
 				sensor_data['MCP5'].append({
 					'sign': sign,
 					'reading '+str(sensor_reading_counter+1): {
@@ -176,17 +219,32 @@ def read_sensors(output_file):
 		                }
 					})
 
-				# currently will write six decimal places to json file
-
-				sensor_data['IMU'].append({
+				# REFRESH IMU VALUES #
+				get_IMU_values()
+				# writing 6 decimals to json file
+				sensor_data['IMU_acc'].append({
 					'sign': sign,
 					'reading '+str(sensor_reading_counter+1): {
-						'ax1': ('{: 06d}'.format(accel_x_1)),
-						'ay1': ('{: 06d}'.format(accel_y_1)),
-						'az1': ('{: 06d}'.format(accel_z_1)),
-						'ax2': ('{: 06d}'.format(accel_x_2)),
-						'ay2': ('{: 06d}'.format(accel_y_2)),
-						'az2': ('{: 06d}'.format(accel_z_2)),
+						'ax1': int(('{: 06d}'.format(accel_x_1))),
+						'ay1': int(('{: 06d}'.format(accel_y_1))),
+						'az1': int(('{: 06d}'.format(accel_z_1))),
+						'ax2': int(('{: 06d}'.format(accel_x_2))),
+						'ay2': int(('{: 06d}'.format(accel_y_2))),
+						'az2': int(('{: 06d}'.format(accel_z_2))),
+						'nc1': -1,
+						'nc2': -1
+						}
+					})
+
+				sensor_data['IMU_gy'].append({
+					'sign': sign,
+					'reading '+str(sensor_reading_counter+1): {
+						'gx1': int(('{: 06d}'.format(gyro_x_1))),
+						'gy1': int(('{: 06d}'.format(gyro_y_1))),
+						'gz1': int(('{: 06d}'.format(gyro_z_1))),
+						'gx2': int(('{: 06d}'.format(gyro_x_2))),
+						'gy2': int(('{: 06d}'.format(gyro_y_2))),
+						'gz2': int(('{: 06d}'.format(gyro_z_2))),
 						'nc1': -1,
 						'nc2': -1
 						}
@@ -194,7 +252,7 @@ def read_sensors(output_file):
 				sensor_reading_counter += 1
 				time.sleep(1) # time between each reading 
 			set_num -= 1
-			time.sleep(1.5)
+			time.sleep(1)
 
 
 	print('done reading from sensors')
