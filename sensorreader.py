@@ -127,7 +127,7 @@ def read_sensors(output_file):
 		print(sign)
 		sensor_data['SIGN'].append(sign)
 
-		set_num = input("Type in how many sets of readings you want to take:")
+		set_num = int(input("Type in how many sets of readings you want to take:"))
 
 		while(set_num > 0):
 			while(sensor_reading_counter < 2):
