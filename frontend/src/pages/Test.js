@@ -83,18 +83,16 @@ function Test(props){
     // When prediction changes call this
     // Compare prediction with the target and set feedback to Correct if they are the same, otherwise Incorrect
     useEffect(() => {
-        if(prediction != ''){
-            if(prediction !== ''){
-                setTimeout(function(){setRenderFeedback(true);}, 1000);
-                if(prediction === target){
-                    setFeedback("Correct");
-                }
-                else{
-                    setFeedback("Incorrect");
-                }
-                setRenderFeedback(false);
-            }  
-        }
+        if(prediction !== '' && target !== ''){
+            setTimeout(function(){setRenderFeedback(true);}, 1000);
+            if(prediction === target){
+                setFeedback("Correct");
+            }
+            else{
+                setFeedback("Incorrect");
+            }
+            setRenderFeedback(false);
+        }  
     }, [prediction])
 
     // Whenever target word changes this is called to show how the sign is formed

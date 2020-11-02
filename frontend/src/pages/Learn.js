@@ -37,7 +37,6 @@ function Learn(props){
     const [renderFeedback, setRenderFeedback] = useState(false);
     const [prediction, setPrediction] = useState('');
     const [target, setTarget] = useState('');
-    const [showFeedbackAgain, setShowFeedbackAgain] = useState(0);
 
     // Set up textToSpeech when page first loads
     useEffect(() => {
@@ -62,33 +61,23 @@ function Learn(props){
         socket.on("raspberry pi response", (data) => {
             const raspPred = data["response"]["response"];
             setPrediction(raspPred.toLowerCase());
-            setShowFeedbackAgain(temp => temp + 1);
             console.log(raspPred);
         });
 
     }, [])
 
-    const comparePredictionWithTarget = () => {
-        if(prediction === target){
-            setFeedback("Correct");
-        }
-        else{
-            setFeedback("Incorrect");
-        }
-        var oldPage = renderLetterForm;
-        if(renderLetterForm === oldPage){
-            setRenderFeedback(true);
-            setTimeout(function(){setRenderFeedback(false);}, 2000);
-        }
-
-
-    }
-
     useEffect(() => {
-        if(target !==''){
-            comparePredictionWithTarget();
+        if(prediction !== '' && target !== ''){
+            setTimeout(function(){setRenderFeedback(true);}, 1000);
+            if(prediction === target){
+                setFeedback("Correct");
+            }
+            else{
+                setFeedback("Incorrect");
+            }
+            setRenderFeedback(false);
         }
-    }, [target, prediction, showFeedbackAgain])
+    }, [prediction])
 
     const showLetter = (letter) => {
         setImagePath(letters[letter]);
@@ -142,6 +131,7 @@ function Learn(props){
             .then(response => response.json())
             .then(data => setLetters(data));
         }
+        setTarget('');
         setRenderLetterForm(true);
         if(renderWordList){
             setRenderWordList(false);
@@ -164,6 +154,7 @@ function Learn(props){
             .then(data => setWords(data));
         }
         setRenderWordList(true);
+        setTarget('');
         if(renderLetterForm){
             setRenderLetterForm(false);
         }
