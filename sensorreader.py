@@ -193,7 +193,7 @@ def read_sensors(output_file):
 				sensor_reading_counter += 1
 				time.sleep(1) # time between each reading 
 			set_num -= 1
-			time.sleep(3)
+			time.sleep(1.5)
 
 
 	print('done reading from sensors')
