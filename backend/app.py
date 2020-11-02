@@ -12,7 +12,7 @@ s3_bucket = 'https://glove-images.s3.us-east-2.amazonaws.com/'
 letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
-words = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday', 'hello', 'goodbye', 'nicetomeetyou']
+words = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday', 'hello', 'goodbye', 'nicetomeetyou', 'thanks']
 
 @app.route('/')
 def hello():

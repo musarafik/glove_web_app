@@ -235,17 +235,19 @@ function Learn(props){
                 <div className="wordContainer">
                     <p className="lead">Press a button see what the word looks like in American Sign Language</p>
                     <div className="wordButtonContainer">
-                            <Button  onClick={(word) => handleWordButton('monday')}className="wordButton">Monday</Button>
-                            <Button  onClick={(word) => handleWordButton('tuesday')}className="wordButton">Tuesday</Button>
-                            <Button  onClick={(word) => handleWordButton('wednesday')} className="wordButton">Wednesday</Button>
-                            <Button  onClick={(word) => handleWordButton('thursday')} className="wordButton">Thursday</Button>
-                            <Button  onClick={(word) => handleWordButton('friday')} className="wordButton">Friday</Button>
+                            {/* <Button  onClick={(word) => handleWordButton('monday')}className="wordButton">Monday</Button> */}
+                            {/* <Button  onClick={(word) => handleWordButton('tuesday')}className="wordButton">Tuesday</Button> */}
+                            {/* <Button  onClick={(word) => handleWordButton('wednesday')} className="wordButton">Wednesday</Button> */}
+                            {/* <Button  onClick={(word) => handleWordButton('thursday')} className="wordButton">Thursday</Button> */}
+                            {/* <Button  onClick={(word) => handleWordButton('friday')} className="wordButton">Friday</Button> */}
 
-                            <Button  onClick={(word) => handleWordButton('saturday')} className="wordButton">Saturday</Button>
-                            <Button  onClick={(word) => handleWordButton('sunday')} className="wordButton">Sunday</Button>
-                            <Button  onClick={(word) => handleWordButton('hello')} className="wordButton">Hello</Button>
-                            <Button  onClick={(word) => handleWordButton('goodbye')} className="wordButton">Goodbye</Button>
-                            <Button  onClick={(word) => handleWordButton('nicetomeetyou')} className="wordButton">Nice to meet you</Button>
+                            {/* <Button  onClick={(word) => handleWordButton('saturday')} className="wordButton">Saturday</Button> */}
+                            <Button onClick={(word) => handleWordButton('sunday')} className="wordButton">Sunday</Button>
+                            <Button onClick={(word) => handleWordButton('hello')} className="wordButton">Hello</Button>
+
+                            <Button onClick={(word) => handleWordButton('thanks')} className="wordButton">Thanks</Button>
+                            {/* <Button  onClick={(word) => handleWordButton('goodbye')} className="wordButton">Goodbye</Button> */}
+                            {/* <Button  onClick={(word) => handleWordButton('nicetomeetyou')} className="wordButton">Nice to meet you</Button> */}
                     </div>
 
                     {renderFeedback ?
