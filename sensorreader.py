@@ -38,30 +38,68 @@ bus = SMBus(channel)
 bus.write_byte_data(imu_address_1, 0x06, 0x01)
 bus.write_byte_data(imu_address_2, 0x06, 0x01)
 time.sleep(0.5)
+accel_x_1 = -1
+accel_y_1 = -1
+accel_z_1 = -1
 
-# IMU READINGS # 
-accel_x_high_1 = bus.read_byte_data(imu_address_1, 0x2D)
-accel_x_low_1 = bus.read_byte_data(imu_address_1, 0x2E)
-accel_y_high_1 = bus.read_byte_data(imu_address_1, 0x2F)
-accel_y_low_1 = bus.read_byte_data(imu_address_1, 0x30)
-accel_z_high_1 = bus.read_byte_data(imu_address_1, 0x31)
-accel_z_low_1 = bus.read_byte_data(imu_address_1, 0x32)
+accel_x_2 = -1
+accel_y_2 = -1
+accel_z_2 = -1
 
-accel_x_high_2 = bus.read_byte_data(imu_address_2, 0x2D)
-accel_x_low_2 = bus.read_byte_data(imu_address_2, 0x2E)
-accel_y_high_2 = bus.read_byte_data(imu_address_2, 0x2F)
-accel_y_low_2 = bus.read_byte_data(imu_address_2, 0x30)
-accel_z_high_2 = bus.read_byte_data(imu_address_2, 0x31)
-accel_z_low_2 = bus.read_byte_data(imu_address_2, 0x32)
+gyro_x_1 = -1
+gyro_y_1 = -1
+gyro_z_1 = -1
 
-# COMBING IMU READING BYTES #
-accel_x_1 = accel_x_high_1 * 256 + accel_x_low_1
-accel_y_1 = accel_y_high_1 * 256 + accel_y_low_1
-accel_z_1 = accel_z_high_1 * 256 + accel_z_low_1
+gyro_x_2 = -1
+gyro_y_2 = -1
+gyro_z_2 = -1
 
-accel_x_2 = accel_x_high_2 * 256 + accel_x_low_2
-accel_y_2 = accel_y_high_2 * 256 + accel_y_low_2
-accel_z_2 = accel_z_high_2 * 256 + accel_z_low_2
+def get_IMU_values():
+	# IMU READINGS # 
+	accel_x_high_1 = bus.read_byte_data(imu_address_1, 0x2D)
+	accel_x_low_1 = bus.read_byte_data(imu_address_1, 0x2E)
+	accel_y_high_1 = bus.read_byte_data(imu_address_1, 0x2F)
+	accel_y_low_1 = bus.read_byte_data(imu_address_1, 0x30)
+	accel_z_high_1 = bus.read_byte_data(imu_address_1, 0x31)
+	accel_z_low_1 = bus.read_byte_data(imu_address_1, 0x32)
+
+	accel_x_high_2 = bus.read_byte_data(imu_address_2, 0x2D)
+	accel_x_low_2 = bus.read_byte_data(imu_address_2, 0x2E)
+	accel_y_high_2 = bus.read_byte_data(imu_address_2, 0x2F)
+	accel_y_low_2 = bus.read_byte_data(imu_address_2, 0x30)
+	accel_z_high_2 = bus.read_byte_data(imu_address_2, 0x31)
+	accel_z_low_2 = bus.read_byte_data(imu_address_2, 0x32)
+
+	gyro_x_high_1 = bus.read_byte_data(imu_address_1, 0x33)
+	gyro_x_low_1 = bus.read_byte_data(imu_address_1, 0x34)
+	gyro_y_high_1 = bus.read_byte_data(imu_address_1, 0x35)
+	gyro_y_low_1 = bus.read_byte_data(imu_address_1, 0x36)
+	gyro_z_high_1 = bus.read_byte_data(imu_address_1, 0x37)
+	gyro_z_low_1 = bus.read_byte_data(imu_address_1, 0x38)
+
+	gyro_x_high_2 = bus.read_byte_data(imu_address_2, 0x33)
+	gyro_x_low_2 = bus.read_byte_data(imu_address_2, 0x34)
+	gyro_y_high_2 = bus.read_byte_data(imu_address_2, 0x35)
+	gyro_y_low_2 = bus.read_byte_data(imu_address_2, 0x36)
+	gyro_z_high_2 = bus.read_byte_data(imu_address_2, 0x37)
+	gyro_z_low_2 = bus.read_byte_data(imu_address_2, 0x38)
+
+	# COMBING IMU READING BYTES #
+	global accel_x_1 = accel_x_high_1 * 256 + accel_x_low_1
+	global accel_y_1 = accel_y_high_1 * 256 + accel_y_low_1
+	global accel_z_1 = accel_z_high_1 * 256 + accel_z_low_1
+
+	global accel_x_2 = accel_x_high_2 * 256 + accel_x_low_2
+	global accel_y_2 = accel_y_high_2 * 256 + accel_y_low_2
+	global accel_z_2 = accel_z_high_2 * 256 + accel_z_low_2
+
+	global gyro_x_1 = gyro_x_high_1 * 256 + gyro_x_low_1
+	global gyro_y_1 = gyro_y_high_1 * 256 + gyro_y_low_1
+	global gyro_z_1 = gyro_z_high_1 * 256 + gyro_z_low_1
+
+	global gyro_x_2 = gyro_x_high_2 * 256 + gyro_x_low_2
+	global gyro_y_2 = gyro_y_high_2 * 256 + gyro_y_low_2
+	global gyro_z_2 = gyro_z_high_2 * 256 + gyro_z_low_2
 
 # MCP connected to D5 #
 mcp5_p0 = AnalogIn(mcp5, MCP.P0)
@@ -131,6 +169,7 @@ def read_sensors(output_file):
 		while(set_num > 0):
 			sensor_reading_counter = 0
 			while(sensor_reading_counter < 2):
+				get_IMU_values()
 				print(sensor_reading_counter)
 				print(bus.read_byte_data(imu_address_1, 0x2D))
 				print(bus.read_byte_data(imu_address_1, 0x2E))
