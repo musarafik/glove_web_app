@@ -132,8 +132,9 @@ def read_sensors(output_file):
 			sensor_reading_counter = 0
 			while(sensor_reading_counter < 2):
 				print(sensor_reading_counter)
-				
-				sensor_data['MCP5'].append({
+                                print(accel_x_high_1 = bus.read_byte_data(imu_address_1, 0x2D))
+                                print(accel_x_low_1 = bus.read_byte_data(imu_address_1, 0x2E))
+                                sensor_data['MCP5'].append({
 					'sign': sign,
 					'reading '+str(sensor_reading_counter+1): {
 		                'P0': (mcp5_p0.voltage),
