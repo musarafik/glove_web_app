@@ -127,13 +127,10 @@ def read_sensors(output_file):
 		print(sign)
 		sensor_data['SIGN'].append(sign)
 
-		set_num = input("Type in how many sets you want to do:")
-		readings_num = input("Type in how many readings per set you want to take:")
+		set_num = input("Type in how many sets of readings you want to take:")
 
-		print('\n\nThere will be a 3 second break between each set\n\n')
-
-		while(set_num > 0)
-			while(sensor_reading_counter < readings_num):
+		while(set_num > 0):
+			while(sensor_reading_counter < 2):
 				print(sensor_reading_counter)
 				
 				sensor_data['MCP5'].append({
@@ -195,8 +192,9 @@ def read_sensors(output_file):
 					})
 				sensor_reading_counter += 1
 				time.sleep(1) # time between each reading 
-			set_num -= 1;
+			set_num -= 1
 			time.sleep(3)
+
 
 	print('done reading from sensors')
 
