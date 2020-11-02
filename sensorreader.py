@@ -225,12 +225,12 @@ def read_sensors(output_file):
 				sensor_data['IMU_acc'].append({
 					'sign': sign,
 					'reading '+str(sensor_reading_counter+1): {
-						'ax1': ('{: 06d}'.format(accel_x_1)),
-						'ay1': ('{: 06d}'.format(accel_y_1)),
-						'az1': ('{: 06d}'.format(accel_z_1)),
-						'ax2': ('{: 06d}'.format(accel_x_2)),
-						'ay2': ('{: 06d}'.format(accel_y_2)),
-						'az2': ('{: 06d}'.format(accel_z_2)),
+						'ax1': int(('{: 06d}'.format(accel_x_1))),
+						'ay1': int(('{: 06d}'.format(accel_y_1))),
+						'az1': int(('{: 06d}'.format(accel_z_1))),
+						'ax2': int(('{: 06d}'.format(accel_x_2))),
+						'ay2': int(('{: 06d}'.format(accel_y_2))),
+						'az2': int(('{: 06d}'.format(accel_z_2))),
 						'nc1': -1,
 						'nc2': -1
 						}
@@ -239,12 +239,12 @@ def read_sensors(output_file):
 				sensor_data['IMU_gy'].append({
 					'sign': sign,
 					'reading '+str(sensor_reading_counter+1): {
-						'gx1': ('{: 06d}'.format(gyro_x_1)),
-						'gy1': ('{: 06d}'.format(gyro_y_1)),
-						'gz1': ('{: 06d}'.format(gyro_z_1)),
-						'gx2': ('{: 06d}'.format(gyro_x_2)),
-						'gy2': ('{: 06d}'.format(gyro_y_2)),
-						'gz2': ('{: 06d}'.format(gyro_z_2)),
+						'gx1': int(('{: 06d}'.format(gyro_x_1))),
+						'gy1': int(('{: 06d}'.format(gyro_y_1))),
+						'gz1': int(('{: 06d}'.format(gyro_z_1))),
+						'gx2': int(('{: 06d}'.format(gyro_x_2))),
+						'gy2': int(('{: 06d}'.format(gyro_y_2))),
+						'gz2': int(('{: 06d}'.format(gyro_z_2))),
 						'nc1': -1,
 						'nc2': -1
 						}
