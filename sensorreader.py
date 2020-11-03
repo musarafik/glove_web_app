@@ -174,7 +174,7 @@ def read_sensors(output_file):
 
 		while(set_num > 0):
 			sensor_reading_counter = 0
-                        time.sleep(1)
+			time.sleep(1)
 			while(sensor_reading_counter < 5):
 				print(sensor_reading_counter)
 
@@ -253,7 +253,7 @@ def read_sensors(output_file):
 				sensor_reading_counter += 1
 				time.sleep(1) # time between each reading 
 			set_num -= 1
-		#	time.sleep(1)
+			#time.sleep(1)
 
 
 	print('done reading from sensors')
