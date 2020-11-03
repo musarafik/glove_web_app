@@ -246,8 +246,8 @@ def read_sensors(output_file):
 						'gx2': int(('{: 06d}'.format(gyro_x_2))),
 						'gy2': int(('{: 06d}'.format(gyro_y_2))),
 						'gz2': int(('{: 06d}'.format(gyro_z_2))),
-						'nc1': -1,
-						'nc2': -1
+						'mc1': -1,
+						'mc2': -1
 						}
 					})
 				sensor_reading_counter += 1
