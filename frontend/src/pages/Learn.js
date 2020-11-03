@@ -153,8 +153,8 @@ function Learn(props){
             .then(response => response.json())
             .then(data => setWords(data));
         }
-        setRenderWordList(true);
         setTarget('');
+        setRenderWordList(true);
         if(renderLetterForm){
             setRenderLetterForm(false);
         }
