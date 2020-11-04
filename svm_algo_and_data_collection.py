@@ -405,12 +405,12 @@ while True:
         sensorarray.append(sensor_data['IMU_acc'][x]['nc2'])
 
     for x in range(5):
-        sensorarray.append(sensor_data['IMU_gy'][x]['ax1'])
-        sensorarray.append(sensor_data['IMU_gy'][x]['ay1'])
-        sensorarray.append(sensor_data['IMU_gy'][x]['az1'])
-        sensorarray.append(sensor_data['IMU_gy'][x]['ax2'])
-        sensorarray.append(sensor_data['IMU_gy'][x]['ay2'])
-        sensorarray.append(sensor_data['IMU_gy'][x]['az2'])
+        sensorarray.append(sensor_data['IMU_gy'][x]['gx1'])
+        sensorarray.append(sensor_data['IMU_gy'][x]['gy1'])
+        sensorarray.append(sensor_data['IMU_gy'][x]['gz1'])
+        sensorarray.append(sensor_data['IMU_gy'][x]['gx2'])
+        sensorarray.append(sensor_data['IMU_gy'][x]['gy2'])
+        sensorarray.append(sensor_data['IMU_gy'][x]['gz2'])
         sensorarray.append(sensor_data['IMU_gy'][x]['mc1'])
         sensorarray.append(sensor_data['IMU_gy'][x]['mc2'])
     #sensor_data_array = reformatToArray(sensor_data)
