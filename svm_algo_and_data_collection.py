@@ -300,34 +300,34 @@ while True:
         # read from mcp5
         sensor_data['MCP5'].append({
             'reading': str(sensor_reading_counter+1),
-            'P0': (mcp5_p0.voltage),
-            'P1': (mcp5_p1.voltage),
-            'P2': (mcp5_p2.voltage),
-            'P3': (mcp5_p3.voltage),
-            'P4': (mcp5_p4.voltage),
-            'P5': (mcp5_p5.voltage),
-            'P6': (mcp5_p6.voltage),
-            'P7': (mcp5_p7.voltage)  
+            'P0': float("{:.2f}".format(mcp5_p0.voltage)),
+            'P1': float("{:.2f}".format(mcp5_p1.voltage)),
+            'P2': float("{:.2f}".format(mcp5_p2.voltage)),
+            'P3': float("{:.2f}".format(mcp5_p3.voltage)),
+            'P4': float("{:.2f}".format(mcp5_p4.voltage)),
+            'P5': float("{:.2f}".format(mcp5_p5.voltage)),
+            'P6': float("{:.2f}".format(mcp5_p6.voltage)),
+            'P7': float("{:.2f}".format(mcp5_p7.voltage))  
             })
 
         sensor_data['MCP6'].append({
             'reading':str(sensor_reading_counter+1),
-            'P0': (mcp6_p0.voltage),
-            'P1': (mcp6_p1.voltage),
-            'P2': (mcp6_p2.voltage),
-            'P3': (mcp6_p3.voltage),
-            'P4': (mcp6_p4.voltage),
-            'P5': (mcp6_p5.voltage),
-            'P6': (mcp6_p6.voltage),
-            'P7': (mcp6_p7.voltage)
+            'P0': float("{:.2f}".format(mcp6_p0.voltage)),
+            'P1': float("{:.2f}".format(mcp6_p1.voltage)),
+            'P2': float("{:.2f}".format(mcp6_p2.voltage)),
+            'P3': float("{:.2f}".format(mcp6_p3.voltage)),
+            'P4': float("{:.2f}".format(mcp6_p4.voltage)),
+            'P5': float("{:.2f}".format(mcp6_p5.voltage)),
+            'P6': float("{:.2f}".format(mcp6_p6.voltage)),
+            'P7': float("{:.2f}".format(mcp6_p7.voltage))
             })
 
         sensor_data['MCP13'].append({
             'reading':str(sensor_reading_counter+1),
-            'P0': (mcp13_p0.voltage),
-            'P1': (mcp13_p1.voltage),
-            'P2': (mcp13_p2.voltage),
-            'P3': (mcp13_p3.voltage),
+            'P0': float("{:.2f}".format(mcp13_p0.voltage)),
+            'P1': float("{:.2f}".format(mcp13_p1.voltage)),
+            'P2': float("{:.2f}".format(mcp13_p2.voltage)),
+            'P3': float("{:.2f}".format(mcp13_p3.voltage)),
             'P4': -1, # ** -1 = NOT connected to anything
             'P5': -1,
             'P6': -1,
