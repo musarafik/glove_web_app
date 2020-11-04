@@ -293,6 +293,7 @@ sensor_data['IMU_gy'] = []
 while True:
     #2 
     sensor_reading_counter = 0
+    sensor_data.clear()
     while(sensor_reading_counter < 5):
         # array for real time:
         print(sensor_reading_counter)
@@ -366,6 +367,7 @@ while True:
 
     # translate to array for SVM algo
     sensorarray = []
+    sensorarray.clear()
 
     for x in range(5):
         sensorarray.append(sensor_data['MCP5'][x]['P0'])
