@@ -230,61 +230,61 @@ sensor_data['IMU_acc'] = []
 sensor_data['IMU_gy'] = []
 
 
-def reformatToArray(sensordatalist):
+# def reformatToArray(sensordatalist):
 
-    sensorarray = []
+#     sensorarray = []
 
-    for x in range(5):
-        sensorarray.append(sensordatalist['MCP5']['reading '+str(x+1)]['P0'])
-        sensorarray.append(sensordatalist['MCP5']['reading '+str(x+1)]['P1'])
-        sensorarray.append(sensordatalist['MCP5']['reading '+str(x+1)]['P2'])
-        sensorarray.append(sensordatalist['MCP5']['reading '+str(x+1)]['P3'])
-        sensorarray.append(sensordatalist['MCP5']['reading '+str(x+1)]['P4'])
-        sensorarray.append(sensordatalist['MCP5']['reading '+str(x+1)]['P5'])
-        sensorarray.append(sensordatalist['MCP5']['reading '+str(x+1)]['P6'])
-        sensorarray.append(sensordatalist['MCP5']['reading '+str(x+1)]['P7'])
+#     for x in range(5):
+#         sensorarray.append(sensordatalist['MCP5']['reading '+str(x+1)]['P0'])
+#         sensorarray.append(sensordatalist['MCP5']['reading '+str(x+1)]['P1'])
+#         sensorarray.append(sensordatalist['MCP5']['reading '+str(x+1)]['P2'])
+#         sensorarray.append(sensordatalist['MCP5']['reading '+str(x+1)]['P3'])
+#         sensorarray.append(sensordatalist['MCP5']['reading '+str(x+1)]['P4'])
+#         sensorarray.append(sensordatalist['MCP5']['reading '+str(x+1)]['P5'])
+#         sensorarray.append(sensordatalist['MCP5']['reading '+str(x+1)]['P6'])
+#         sensorarray.append(sensordatalist['MCP5']['reading '+str(x+1)]['P7'])
 
-    for x in range(5):
-        sensorarray.append(sensordatalist['MCP6']['reading '+str(x+1)]['P0'])
-        sensorarray.append(sensordatalist['MCP6']['reading '+str(x+1)]['P1'])
-        sensorarray.append(sensordatalist['MCP6']['reading '+str(x+1)]['P2'])
-        sensorarray.append(sensordatalist['MCP6']['reading '+str(x+1)]['P3'])
-        sensorarray.append(sensordatalist['MCP6']['reading '+str(x+1)]['P4'])
-        sensorarray.append(sensordatalist['MCP6']['reading '+str(x+1)]['P5'])
-        sensorarray.append(sensordatalist['MCP6']['reading '+str(x+1)]['P6'])
-        sensorarray.append(sensordatalist['MCP6']['reading '+str(x+1)]['P7'])
+#     for x in range(5):
+#         sensorarray.append(sensordatalist['MCP6']['reading '+str(x+1)]['P0'])
+#         sensorarray.append(sensordatalist['MCP6']['reading '+str(x+1)]['P1'])
+#         sensorarray.append(sensordatalist['MCP6']['reading '+str(x+1)]['P2'])
+#         sensorarray.append(sensordatalist['MCP6']['reading '+str(x+1)]['P3'])
+#         sensorarray.append(sensordatalist['MCP6']['reading '+str(x+1)]['P4'])
+#         sensorarray.append(sensordatalist['MCP6']['reading '+str(x+1)]['P5'])
+#         sensorarray.append(sensordatalist['MCP6']['reading '+str(x+1)]['P6'])
+#         sensorarray.append(sensordatalist['MCP6']['reading '+str(x+1)]['P7'])
 
-    for x in range(5):
-        sensorarray.append(sensordatalist['MCP13']['reading '+str(x+1)]['P0'])
-        sensorarray.append(sensordatalist['MCP13']['reading '+str(x+1)]['P1'])
-        sensorarray.append(sensordatalist['MCP13']['reading '+str(x+1)]['P2'])
-        sensorarray.append(sensordatalist['MCP13']['reading '+str(x+1)]['P3'])
-        sensorarray.append(sensordatalist['MCP13']['reading '+str(x+1)]['P4'])
-        sensorarray.append(sensordatalist['MCP13']['reading '+str(x+1)]['P5'])
-        sensorarray.append(sensordatalist['MCP13']['reading '+str(x+1)]['P6'])
-        sensorarray.append(sensordatalist['MCP13']['reading '+str(x+1)]['P7'])
+#     for x in range(5):
+#         sensorarray.append(sensordatalist['MCP13']['reading '+str(x+1)]['P0'])
+#         sensorarray.append(sensordatalist['MCP13']['reading '+str(x+1)]['P1'])
+#         sensorarray.append(sensordatalist['MCP13']['reading '+str(x+1)]['P2'])
+#         sensorarray.append(sensordatalist['MCP13']['reading '+str(x+1)]['P3'])
+#         sensorarray.append(sensordatalist['MCP13']['reading '+str(x+1)]['P4'])
+#         sensorarray.append(sensordatalist['MCP13']['reading '+str(x+1)]['P5'])
+#         sensorarray.append(sensordatalist['MCP13']['reading '+str(x+1)]['P6'])
+#         sensorarray.append(sensordatalist['MCP13']['reading '+str(x+1)]['P7'])
 
-    for x in range(5):
-        sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['ax1'])
-        sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['ay1'])
-        sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['az1'])
-        sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['ax2'])
-        sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['ay2'])
-        sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['az2'])
-        sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['nc1'])
-        sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['nc2'])
+#     for x in range(5):
+#         sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['ax1'])
+#         sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['ay1'])
+#         sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['az1'])
+#         sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['ax2'])
+#         sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['ay2'])
+#         sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['az2'])
+#         sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['nc1'])
+#         sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['nc2'])
 
-    for x in range(5):
-        sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['ax1'])
-        sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['ay1'])
-        sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['az1'])
-        sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['ax2'])
-        sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['ay2'])
-        sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['az2'])
-        sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['mc1'])
-        sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['mc2'])
+#     for x in range(5):
+#         sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['ax1'])
+#         sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['ay1'])
+#         sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['az1'])
+#         sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['ax2'])
+#         sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['ay2'])
+#         sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['az2'])
+#         sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['mc1'])
+#         sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['mc2'])
 
-    return sensorarray
+#     return sensorarray
     
 
 
@@ -297,6 +297,7 @@ while True:
         # array for real time:
         print(sensor_reading_counter)
 
+        # read from mcp5
         sensor_data['MCP5'].append({
             'reading '+str(sensor_reading_counter+1): {
                 'P0': (mcp5_p0.voltage),
@@ -369,7 +370,55 @@ while True:
     # done reading 5 readings
 
     # translate to array for SVM algo
-    sensor_data_array = reformatToArray(sensor_data)
+    sensorarray = []
+
+    for x in range(5):
+        sensorarray.append(sensordatalist['MCP5']['reading '+str(x+1)]['P0'])
+        sensorarray.append(sensordatalist['MCP5']['reading '+str(x+1)]['P1'])
+        sensorarray.append(sensordatalist['MCP5']['reading '+str(x+1)]['P2'])
+        sensorarray.append(sensordatalist['MCP5']['reading '+str(x+1)]['P3'])
+        sensorarray.append(sensordatalist['MCP5']['reading '+str(x+1)]['P4'])
+        sensorarray.append(sensordatalist['MCP5']['reading '+str(x+1)]['P5'])
+        sensorarray.append(sensordatalist['MCP5']['reading '+str(x+1)]['P6'])
+        sensorarray.append(sensordatalist['MCP5']['reading '+str(x+1)]['P7'])
+    for x in range(5):
+        sensorarray.append(sensordatalist['MCP6']['reading '+str(x+1)]['P0'])
+        sensorarray.append(sensordatalist['MCP6']['reading '+str(x+1)]['P1'])
+        sensorarray.append(sensordatalist['MCP6']['reading '+str(x+1)]['P2'])
+        sensorarray.append(sensordatalist['MCP6']['reading '+str(x+1)]['P3'])
+        sensorarray.append(sensordatalist['MCP6']['reading '+str(x+1)]['P4'])
+        sensorarray.append(sensordatalist['MCP6']['reading '+str(x+1)]['P5'])
+        sensorarray.append(sensordatalist['MCP6']['reading '+str(x+1)]['P6'])
+        sensorarray.append(sensordatalist['MCP6']['reading '+str(x+1)]['P7'])
+    for x in range(5):
+        sensorarray.append(sensordatalist['MCP13']['reading '+str(x+1)]['P0'])
+        sensorarray.append(sensordatalist['MCP13']['reading '+str(x+1)]['P1'])
+        sensorarray.append(sensordatalist['MCP13']['reading '+str(x+1)]['P2'])
+        sensorarray.append(sensordatalist['MCP13']['reading '+str(x+1)]['P3'])
+        sensorarray.append(sensordatalist['MCP13']['reading '+str(x+1)]['P4'])
+        sensorarray.append(sensordatalist['MCP13']['reading '+str(x+1)]['P5'])
+        sensorarray.append(sensordatalist['MCP13']['reading '+str(x+1)]['P6'])
+        sensorarray.append(sensordatalist['MCP13']['reading '+str(x+1)]['P7'])
+    for x in range(5):
+        sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['ax1'])
+        sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['ay1'])
+        sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['az1'])
+        sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['ax2'])
+        sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['ay2'])
+        sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['az2'])
+        sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['nc1'])
+        sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['nc2'])
+
+    for x in range(5):
+        sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['ax1'])
+        sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['ay1'])
+        sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['az1'])
+        sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['ax2'])
+        sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['ay2'])
+        sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['az2'])
+        sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['mc1'])
+        sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['mc2'])
+    #sensor_data_array = reformatToArray(sensor_data)
     
     #data = np.array([thumb,index,middle,ring,pinky,accel,indexForce,midForce,thumbForce])
     #data = np.array([26.7,44.0,36.5,53.1,47.9,1,1,1,0]) # sample data, returns ['A'] from predict
