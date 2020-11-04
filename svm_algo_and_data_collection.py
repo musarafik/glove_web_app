@@ -412,7 +412,7 @@ while True:
         sensorarray.append(sensor_data['IMU_gy'][x]['gy2'])
         sensorarray.append(sensor_data['IMU_gy'][x]['gz2'])
         sensorarray.append(sensor_data['IMU_gy'][x]['mc1'])
-        sensorarray.append(sensor_data['IMU_gy'][x]['mc2'])
+        sensorarray.append(sensor_data['IMU_gy'][x]['mc2']) 
     #sensor_data_array = reformatToArray(sensor_data)
     
     #data = np.array([thumb,index,middle,ring,pinky,accel,indexForce,midForce,thumbForce])
