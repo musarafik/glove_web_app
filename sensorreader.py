@@ -175,7 +175,7 @@ def read_sensors(output_file):
 		while(set_num > 0):
 			sensor_reading_counter = 0
 			time.sleep(1)
-			while(sensor_reading_counter < 5):
+			while(sensor_reading_counter < 20):
 				print(sensor_reading_counter)
 
 				sensor_data['MCP5'].append({
@@ -251,7 +251,7 @@ def read_sensors(output_file):
 						}
 					})
 				sensor_reading_counter += 1
-				time.sleep(1) # time between each reading 
+				time.sleep(.25) # time between each reading 
 			set_num -= 1
 			#time.sleep(1)
 

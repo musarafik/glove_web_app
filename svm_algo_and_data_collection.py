@@ -300,7 +300,7 @@ while True:
     sensor_data['IMU_acc'].clear()
     sensor_data['IMU_gy'].clear()
 
-    while(sensor_reading_counter < 5):
+    while(sensor_reading_counter < 20):
         # array for real time:
         print(sensor_reading_counter)
 
@@ -368,7 +368,7 @@ while True:
             'mc2': -1
             })
         sensor_reading_counter += 1
-        time.sleep(1) # time between each reading 
+        time.sleep(.25) # time between each reading 
     # done reading 5 readings
 
     # translate to array for SVM algo
