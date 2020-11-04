@@ -423,7 +423,7 @@ while True:
    
     # 3. 
     svc = SVC(kernel="linear", C=1, gamma = 1) # probably don't need this line
-    svc = load("filename.joblib")
+    svc = load("demo.joblib")
     prediction = svc.predict(data) # probably need to do some transformation on data before calling predict
     prediction = prediction[0][0]
 
