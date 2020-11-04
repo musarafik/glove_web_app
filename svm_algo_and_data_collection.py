@@ -293,11 +293,18 @@ sensor_data['IMU_gy'] = []
 while True:
     #2 
     sensor_reading_counter = 0
-    del sensor_data['MCP5']
-    del sensor_data['MCP6']
-    del sensor_data['MCP13']
-    del sensor_data['IMU_acc']
-    del sensor_data['IMU_gy']
+    for v in range(5):
+        sensor_data['MCP5'][v].clear()
+    for v in range(5):
+        sensor_data['MCP6'][v].clear()
+    for v in range(5):
+        sensor_data['MCP13'][v].clear()
+    for v in range(5):
+        sensor_data['IMU_acc'][v].clear()
+    for v in range(5):
+        sensor_data['IMU_gy'][v].clear()
+    
+
 
     while(sensor_reading_counter < 5):
         # array for real time:
