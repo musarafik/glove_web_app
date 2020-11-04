@@ -226,8 +226,8 @@ sensor_data['MCP5'] = []
 sensor_data['MCP6'] = []
 sensor_data['MCP13'] = []
 # set up like 'P0': 'value'
-sensor_data['IMU_1'] = []
-sensor_data['IMU_2'] = []
+sensor_data['IMU_acc'] = []
+sensor_data['IMU_gy'] = []
 
 
 def reformatToArray(sensordatalist):
@@ -265,24 +265,24 @@ def reformatToArray(sensordatalist):
         sensorarray.append(sensordatalist['MCP13']['reading '+str(x+1)]['P7'])
 
     for x in range(5):
-        sensorarray.append(sensordatalist['IMU_1']['reading '+str(x+1)]['ax1'])
-        sensorarray.append(sensordatalist['IMU_1']['reading '+str(x+1)]['ay1'])
-        sensorarray.append(sensordatalist['IMU_1']['reading '+str(x+1)]['az1'])
-        sensorarray.append(sensordatalist['IMU_1']['reading '+str(x+1)]['ax2'])
-        sensorarray.append(sensordatalist['IMU_1']['reading '+str(x+1)]['ay2'])
-        sensorarray.append(sensordatalist['IMU_1']['reading '+str(x+1)]['az2'])
-        sensorarray.append(sensordatalist['IMU_1']['reading '+str(x+1)]['nc1'])
-        sensorarray.append(sensordatalist['IMU_1']['reading '+str(x+1)]['nc2'])
+        sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['ax1'])
+        sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['ay1'])
+        sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['az1'])
+        sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['ax2'])
+        sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['ay2'])
+        sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['az2'])
+        sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['nc1'])
+        sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['nc2'])
 
     for x in range(5):
-        sensorarray.append(sensordatalist['IMU_2']['reading '+str(x+1)]['ax1'])
-        sensorarray.append(sensordatalist['IMU_2']['reading '+str(x+1)]['ay1'])
-        sensorarray.append(sensordatalist['IMU_2']['reading '+str(x+1)]['az1'])
-        sensorarray.append(sensordatalist['IMU_2']['reading '+str(x+1)]['ax2'])
-        sensorarray.append(sensordatalist['IMU_2']['reading '+str(x+1)]['ay2'])
-        sensorarray.append(sensordatalist['IMU_2']['reading '+str(x+1)]['az2'])
-        sensorarray.append(sensordatalist['IMU_2']['reading '+str(x+1)]['mc1'])
-        sensorarray.append(sensordatalist['IMU_2']['reading '+str(x+1)]['mc2'])
+        sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['ax1'])
+        sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['ay1'])
+        sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['az1'])
+        sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['ax2'])
+        sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['ay2'])
+        sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['az2'])
+        sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['mc1'])
+        sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['mc2'])
 
     return sensorarray
     
@@ -293,7 +293,7 @@ def reformatToArray(sensordatalist):
 while True:
     #2 
     sensor_reading_counter = 0
-    while(sensor_reading_counter < 5)
+    while(sensor_reading_counter < 5):
         # array for real time:
         print(sensor_reading_counter)
 
@@ -340,7 +340,6 @@ while True:
         get_IMU_values()
         # writing 6 decimals to json file
         sensor_data['IMU_acc'].append({
-            'sign': sign,
             'reading '+str(sensor_reading_counter+1): {
                 'ax1': int(('{: 06d}'.format(accel_x_1))),
                 'ay1': int(('{: 06d}'.format(accel_y_1))),
@@ -354,7 +353,6 @@ while True:
             })
 
         sensor_data['IMU_gy'].append({
-            'sign': sign,
             'reading '+str(sensor_reading_counter+1): {
                 'gx1': int(('{: 06d}'.format(gyro_x_1))),
                 'gy1': int(('{: 06d}'.format(gyro_y_1))),
