@@ -299,71 +299,66 @@ while True:
 
         # read from mcp5
         sensor_data['MCP5'].append({
-            'reading '+str(sensor_reading_counter+1): {
-                'P0': (mcp5_p0.voltage),
-                'P1': (mcp5_p1.voltage),
-                'P2': (mcp5_p2.voltage),
-                'P3': (mcp5_p3.voltage),
-                'P4': (mcp5_p4.voltage),
-                'P5': (mcp5_p5.voltage),
-                'P6': (mcp5_p6.voltage),
-                'P7': (mcp5_p7.voltage)
-                }
+            'reading': str(sensor_reading_counter+1),
+            'P0': (mcp5_p0.voltage),
+            'P1': (mcp5_p1.voltage),
+            'P2': (mcp5_p2.voltage),
+            'P3': (mcp5_p3.voltage),
+            'P4': (mcp5_p4.voltage),
+            'P5': (mcp5_p5.voltage),
+            'P6': (mcp5_p6.voltage),
+            'P7': (mcp5_p7.voltage)  
             })
 
         sensor_data['MCP6'].append({
-            'reading '+str(sensor_reading_counter+1): {
-                'P0': (mcp6_p0.voltage),
-                'P1': (mcp6_p1.voltage),
-                'P2': (mcp6_p2.voltage),
-                'P3': (mcp6_p3.voltage),
-                'P4': (mcp6_p4.voltage),
-                'P5': (mcp6_p5.voltage),
-                'P6': (mcp6_p6.voltage),
-                'P7': (mcp6_p7.voltage)
-                }
+            'reading':str(sensor_reading_counter+1),
+            'P0': (mcp6_p0.voltage),
+            'P1': (mcp6_p1.voltage),
+            'P2': (mcp6_p2.voltage),
+            'P3': (mcp6_p3.voltage),
+            'P4': (mcp6_p4.voltage),
+            'P5': (mcp6_p5.voltage),
+            'P6': (mcp6_p6.voltage),
+            'P7': (mcp6_p7.voltage)
             })
 
         sensor_data['MCP13'].append({
-            'reading '+str(sensor_reading_counter+1): {
-                'P0': (mcp13_p0.voltage),
-                'P1': (mcp13_p1.voltage),
-                'P2': (mcp13_p2.voltage),
-                'P3': (mcp13_p3.voltage),
-                'P4': -1, # ** -1 = NOT connected to anything
-                'P5': -1,
-                'P6': -1,
-                'P7': -1
-                }
+            'reading':str(sensor_reading_counter+1),
+            'P0': (mcp13_p0.voltage),
+            'P1': (mcp13_p1.voltage),
+            'P2': (mcp13_p2.voltage),
+            'P3': (mcp13_p3.voltage),
+            'P4': -1, # ** -1 = NOT connected to anything
+            'P5': -1,
+            'P6': -1,
+            'P7': -1
             })
 
         # REFRESH IMU VALUES #
         get_IMU_values()
         # writing 6 decimals to json file
         sensor_data['IMU_acc'].append({
-            'reading '+str(sensor_reading_counter+1): {
-                'ax1': int(('{: 06d}'.format(accel_x_1))),
-                'ay1': int(('{: 06d}'.format(accel_y_1))),
-                'az1': int(('{: 06d}'.format(accel_z_1))),
-                'ax2': int(('{: 06d}'.format(accel_x_2))),
-                'ay2': int(('{: 06d}'.format(accel_y_2))),
-                'az2': int(('{: 06d}'.format(accel_z_2))),
-                'nc1': -1,
-                'nc2': -1
-                }
+            'reading': str(sensor_reading_counter+1),
+            'ax1': int(('{: 06d}'.format(accel_x_1))),
+            'ay1': int(('{: 06d}'.format(accel_y_1))),
+            'az1': int(('{: 06d}'.format(accel_z_1))),
+            'ax2': int(('{: 06d}'.format(accel_x_2))),
+            'ay2': int(('{: 06d}'.format(accel_y_2))),
+            'az2': int(('{: 06d}'.format(accel_z_2))),
+            'nc1': -1,
+            'nc2': -1
             })
 
         sensor_data['IMU_gy'].append({
-            'reading '+str(sensor_reading_counter+1): {
-                'gx1': int(('{: 06d}'.format(gyro_x_1))),
-                'gy1': int(('{: 06d}'.format(gyro_y_1))),
-                'gz1': int(('{: 06d}'.format(gyro_z_1))),
-                'gx2': int(('{: 06d}'.format(gyro_x_2))),
-                'gy2': int(('{: 06d}'.format(gyro_y_2))),
-                'gz2': int(('{: 06d}'.format(gyro_z_2))),
-                'mc1': -1,
-                'mc2': -1
-                }
+            'reading': str(sensor_reading_counter+1),
+            'gx1': int(('{: 06d}'.format(gyro_x_1))),
+            'gy1': int(('{: 06d}'.format(gyro_y_1))),
+            'gz1': int(('{: 06d}'.format(gyro_z_1))),
+            'gx2': int(('{: 06d}'.format(gyro_x_2))),
+            'gy2': int(('{: 06d}'.format(gyro_y_2))),
+            'gz2': int(('{: 06d}'.format(gyro_z_2))),
+            'mc1': -1,
+            'mc2': -1
             })
         sensor_reading_counter += 1
         time.sleep(1) # time between each reading 
@@ -373,51 +368,51 @@ while True:
     sensorarray = []
 
     for x in range(5):
-        sensorarray.append(sensor_data['MCP5']['reading '+str(x+1)]['P0'])
-        sensorarray.append(sensor_data['MCP5']['reading '+str(x+1)]['P1'])
-        sensorarray.append(sensor_data['MCP5']['reading '+str(x+1)]['P2'])
-        sensorarray.append(sensor_data['MCP5']['reading '+str(x+1)]['P3'])
-        sensorarray.append(sensor_data['MCP5']['reading '+str(x+1)]['P4'])
-        sensorarray.append(sensor_data['MCP5']['reading '+str(x+1)]['P5'])
-        sensorarray.append(sensor_data['MCP5']['reading '+str(x+1)]['P6'])
-        sensorarray.append(sensor_data['MCP5']['reading '+str(x+1)]['P7'])
+        sensorarray.append(sensor_data['MCP5'][x]['P0'])
+        sensorarray.append(sensor_data['MCP5'][x]['P1'])
+        sensorarray.append(sensor_data['MCP5'][x]['P2'])
+        sensorarray.append(sensor_data['MCP5'][x]['P3'])
+        sensorarray.append(sensor_data['MCP5'][x]['P4'])
+        sensorarray.append(sensor_data['MCP5'][x]['P5'])
+        sensorarray.append(sensor_data['MCP5'][x]['P6'])
+        sensorarray.append(sensor_data['MCP5'][x]['P7'])
     for x in range(5):
-        sensorarray.append(sensor_data['MCP6']['reading '+str(x+1)]['P0'])
-        sensorarray.append(sensor_data['MCP6']['reading '+str(x+1)]['P1'])
-        sensorarray.append(sensor_data['MCP6']['reading '+str(x+1)]['P2'])
-        sensorarray.append(sensor_data['MCP6']['reading '+str(x+1)]['P3'])
-        sensorarray.append(sensor_data['MCP6']['reading '+str(x+1)]['P4'])
-        sensorarray.append(sensor_data['MCP6']['reading '+str(x+1)]['P5'])
-        sensorarray.append(sensor_data['MCP6']['reading '+str(x+1)]['P6'])
-        sensorarray.append(sensor_data['MCP6']['reading '+str(x+1)]['P7'])
+        sensorarray.append(sensor_data['MCP6'][x]['P0'])
+        sensorarray.append(sensor_data['MCP6'][x]['P1'])
+        sensorarray.append(sensor_data['MCP6'][x]['P2'])
+        sensorarray.append(sensor_data['MCP6'][x]['P3'])
+        sensorarray.append(sensor_data['MCP6'][x]['P4'])
+        sensorarray.append(sensor_data['MCP6'][x]['P5'])
+        sensorarray.append(sensor_data['MCP6'][x]['P6'])
+        sensorarray.append(sensor_data['MCP6'][x]['P7'])
     for x in range(5):
-        sensorarray.append(sensor_data['MCP13']['reading '+str(x+1)]['P0'])
-        sensorarray.append(sensor_data['MCP13']['reading '+str(x+1)]['P1'])
-        sensorarray.append(sensor_data['MCP13']['reading '+str(x+1)]['P2'])
-        sensorarray.append(sensor_data['MCP13']['reading '+str(x+1)]['P3'])
-        sensorarray.append(sensor_data['MCP13']['reading '+str(x+1)]['P4'])
-        sensorarray.append(sensor_data['MCP13']['reading '+str(x+1)]['P5'])
-        sensorarray.append(sensor_data['MCP13']['reading '+str(x+1)]['P6'])
-        sensorarray.append(sensor_data['MCP13']['reading '+str(x+1)]['P7'])
+        sensorarray.append(sensor_data['MCP13'][x]['P0'])
+        sensorarray.append(sensor_data['MCP13'][x]['P1'])
+        sensorarray.append(sensor_data['MCP13'][x]['P2'])
+        sensorarray.append(sensor_data['MCP13'][x]['P3'])
+        sensorarray.append(sensor_data['MCP13'][x]['P4'])
+        sensorarray.append(sensor_data['MCP13'][x]['P5'])
+        sensorarray.append(sensor_data['MCP13'][x]['P6'])
+        sensorarray.append(sensor_data['MCP13'][x]['P7'])
     for x in range(5):
-        sensorarray.append(sensor_data['IMU_acc']['reading '+str(x+1)]['ax1'])
-        sensorarray.append(sensor_data['IMU_acc']['reading '+str(x+1)]['ay1'])
-        sensorarray.append(sensor_data['IMU_acc']['reading '+str(x+1)]['az1'])
-        sensorarray.append(sensor_data['IMU_acc']['reading '+str(x+1)]['ax2'])
-        sensorarray.append(sensor_data['IMU_acc']['reading '+str(x+1)]['ay2'])
-        sensorarray.append(sensor_data['IMU_acc']['reading '+str(x+1)]['az2'])
-        sensorarray.append(sensor_data['IMU_acc']['reading '+str(x+1)]['nc1'])
-        sensorarray.append(sensor_data['IMU_acc']['reading '+str(x+1)]['nc2'])
+        sensorarray.append(sensor_data['IMU_acc'][x]['ax1'])
+        sensorarray.append(sensor_data['IMU_acc'][x]['ay1'])
+        sensorarray.append(sensor_data['IMU_acc'][x]['az1'])
+        sensorarray.append(sensor_data['IMU_acc'][x]['ax2'])
+        sensorarray.append(sensor_data['IMU_acc'][x]['ay2'])
+        sensorarray.append(sensor_data['IMU_acc'][x]['az2'])
+        sensorarray.append(sensor_data['IMU_acc'][x]['nc1'])
+        sensorarray.append(sensor_data['IMU_acc'][x]['nc2'])
 
     for x in range(5):
-        sensorarray.append(sensor_data['IMU_gy']['reading '+str(x+1)]['ax1'])
-        sensorarray.append(sensor_data['IMU_gy']['reading '+str(x+1)]['ay1'])
-        sensorarray.append(sensor_data['IMU_gy']['reading '+str(x+1)]['az1'])
-        sensorarray.append(sensor_data['IMU_gy']['reading '+str(x+1)]['ax2'])
-        sensorarray.append(sensor_data['IMU_gy']['reading '+str(x+1)]['ay2'])
-        sensorarray.append(sensor_data['IMU_gy']['reading '+str(x+1)]['az2'])
-        sensorarray.append(sensor_data['IMU_gy']['reading '+str(x+1)]['mc1'])
-        sensorarray.append(sensor_data['IMU_gy']['reading '+str(x+1)]['mc2'])
+        sensorarray.append(sensor_data['IMU_gy'][x]['ax1'])
+        sensorarray.append(sensor_data['IMU_gy'][x]['ay1'])
+        sensorarray.append(sensor_data['IMU_gy'][x]['az1'])
+        sensorarray.append(sensor_data['IMU_gy'][x]['ax2'])
+        sensorarray.append(sensor_data['IMU_gy'][x]['ay2'])
+        sensorarray.append(sensor_data['IMU_gy'][x]['az2'])
+        sensorarray.append(sensor_data['IMU_gy'][x]['mc1'])
+        sensorarray.append(sensor_data['IMU_gy'][x]['mc2'])
     #sensor_data_array = reformatToArray(sensor_data)
     
     #data = np.array([thumb,index,middle,ring,pinky,accel,indexForce,midForce,thumbForce])
