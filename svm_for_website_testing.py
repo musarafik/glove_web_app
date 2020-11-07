@@ -25,7 +25,9 @@ import sys
 
 #4 connection setup so you only have to connect once
 
-ec2Url = "http://ec2-18-217-92-92.us-east-2.compute.amazonaws.com/"
+# ec2Url = "http://ec2-18-217-92-92.us-east-2.compute.amazonaws.com/"
+ec2Url = "http://ec2-52-14-145-8.us-east-2.compute.amazonaws.com:5000/"
+
 
 # Uncomment this block when you confirm that the svm algo is working locally before sending it off to the website
 
@@ -46,9 +48,9 @@ def disconnect():
     print("Disconnected from server")
 
 # use this to connect to AWS server
-# sio.connect(ec2Url)
+sio.connect(ec2Url)
 # use this to connect to localhost server
-sio.connect("http://localhost:5000")
+#sio.connect("http://localhost:5000")
 
 
 #1
@@ -219,29 +221,33 @@ while True:
    # data = np.array([thumb,index,middle,ring,pinky,accel,indexForce,midForce,thumbForce])
 
 
-    dataA = np.array([26.7,44.0,36.5,53.1,47.9,1,1,1,0]) # sample data, returns ['A'] from predict
-    dataB = np.array([38.3, 26.6, 30.8, 30.3, 26.5, 1, 0, 1, 1])
-    dataC = np.array([35, 46, 37, 46, 44.3,	1, 0, 1, 0])
-    dataD = np.array([35, 26.6, 36.5, 53.1, 47.9, 1, 0, 0, 1])
-    dataE = np.array([35, 46, 30.8,	30.3, 26.5,	1, 1, 1, 0])
+    # dataA = np.array([26.7,44.0,36.5,53.1,47.9,1,1,1,0]) # sample data, returns ['A'] from predict
+    # dataB = np.array([38.3, 26.6, 30.8, 30.3, 26.5, 1, 0, 1, 1])
+    # dataC = np.array([35, 46, 37, 46, 44.3,	1, 0, 1, 0])
+    # dataD = np.array([35, 26.6, 36.5, 53.1, 47.9, 1, 0, 0, 1])
+    # dataE = np.array([35, 46, 30.8,	30.3, 26.5,	1, 1, 1, 0])
 
-    dataA = dataA.reshape(1,-1)  # This is needed or else the predict(data) gets mad at you for using a 1d Array
-    dataB = dataB.reshape(1,-1)
-    dataC = dataC.reshape(1,-1)
-    dataD = dataD.reshape(1,-1)
-    dataE = dataE.reshape(1,-1)
+    # dataA = dataA.reshape(1,-1)  # This is needed or else the predict(data) gets mad at you for using a 1d Array
+    # dataB = dataB.reshape(1,-1)
+    # dataC = dataC.reshape(1,-1)
+    # dataD = dataD.reshape(1,-1)
+    # dataE = dataE.reshape(1,-1)
 
-    dataArray = [dataA, dataB, dataC, dataD, dataE]
+    # dataArray = [dataA, dataB, dataC, dataD, dataE]
 
-    randNum = random.randint(0, 4)
+    # randNum = random.randint(0, 4)
 
     # 3. 
-    svc = SVC(kernel="linear", C=1, gamma = 1) # probably don't need this line
-    svc = load("filename.joblib")
-    prediction = svc.predict(dataArray[randNum]) # probably need to do some transformation on data before calling predict
-    prediction = prediction[0][0]
+    # svc = SVC(kernel="linear", C=1, gamma = 1) # probably don't need this line
+    # svc = load("filename.joblib")
+    # prediction = svc.predict(dataArray[randNum]) # probably need to do some transformation on data before calling predict
+    # prediction = prediction[0][0]
 
     # For testing the algorithm from inputs locally
+    # print(prediction)
+    predictions = ["A", "B", "C", "D", "E"]
+    randNum = random.randint(0, 4)
+    prediction = predictions[randNum]
     print(prediction)              
     time.sleep(2)                    
     

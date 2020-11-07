@@ -25,7 +25,7 @@ from smbus import SMBus
 
 #4 connection setup so you only have to connect once
 
-ec2Url = "http://ec2-18-217-92-92.us-east-2.compute.amazonaws.com/"
+ec2Url = "http://ec2-52-14-145-8.us-east-2.compute.amazonaws.com:5000/"
 
 # Uncomment this block when you confirm that the svm algo is working locally before sending it off to the website
 
