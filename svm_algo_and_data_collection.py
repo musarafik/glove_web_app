@@ -230,64 +230,6 @@ sensor_data['IMU_acc'] = []
 sensor_data['IMU_gy'] = []
 
 
-# def reformatToArray(sensordatalist):
-
-#     sensorarray = []
-
-#     for x in range(5):
-#         sensorarray.append(sensordatalist['MCP5']['reading '+str(x+1)]['P0'])
-#         sensorarray.append(sensordatalist['MCP5']['reading '+str(x+1)]['P1'])
-#         sensorarray.append(sensordatalist['MCP5']['reading '+str(x+1)]['P2'])
-#         sensorarray.append(sensordatalist['MCP5']['reading '+str(x+1)]['P3'])
-#         sensorarray.append(sensordatalist['MCP5']['reading '+str(x+1)]['P4'])
-#         sensorarray.append(sensordatalist['MCP5']['reading '+str(x+1)]['P5'])
-#         sensorarray.append(sensordatalist['MCP5']['reading '+str(x+1)]['P6'])
-#         sensorarray.append(sensordatalist['MCP5']['reading '+str(x+1)]['P7'])
-
-#     for x in range(5):
-#         sensorarray.append(sensordatalist['MCP6']['reading '+str(x+1)]['P0'])
-#         sensorarray.append(sensordatalist['MCP6']['reading '+str(x+1)]['P1'])
-#         sensorarray.append(sensordatalist['MCP6']['reading '+str(x+1)]['P2'])
-#         sensorarray.append(sensordatalist['MCP6']['reading '+str(x+1)]['P3'])
-#         sensorarray.append(sensordatalist['MCP6']['reading '+str(x+1)]['P4'])
-#         sensorarray.append(sensordatalist['MCP6']['reading '+str(x+1)]['P5'])
-#         sensorarray.append(sensordatalist['MCP6']['reading '+str(x+1)]['P6'])
-#         sensorarray.append(sensordatalist['MCP6']['reading '+str(x+1)]['P7'])
-
-#     for x in range(5):
-#         sensorarray.append(sensordatalist['MCP13']['reading '+str(x+1)]['P0'])
-#         sensorarray.append(sensordatalist['MCP13']['reading '+str(x+1)]['P1'])
-#         sensorarray.append(sensordatalist['MCP13']['reading '+str(x+1)]['P2'])
-#         sensorarray.append(sensordatalist['MCP13']['reading '+str(x+1)]['P3'])
-#         sensorarray.append(sensordatalist['MCP13']['reading '+str(x+1)]['P4'])
-#         sensorarray.append(sensordatalist['MCP13']['reading '+str(x+1)]['P5'])
-#         sensorarray.append(sensordatalist['MCP13']['reading '+str(x+1)]['P6'])
-#         sensorarray.append(sensordatalist['MCP13']['reading '+str(x+1)]['P7'])
-
-#     for x in range(5):
-#         sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['ax1'])
-#         sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['ay1'])
-#         sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['az1'])
-#         sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['ax2'])
-#         sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['ay2'])
-#         sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['az2'])
-#         sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['nc1'])
-#         sensorarray.append(sensordatalist['IMU_acc']['reading '+str(x+1)]['nc2'])
-
-#     for x in range(5):
-#         sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['ax1'])
-#         sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['ay1'])
-#         sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['az1'])
-#         sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['ax2'])
-#         sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['ay2'])
-#         sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['az2'])
-#         sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['mc1'])
-#         sensorarray.append(sensordatalist['IMU_gy']['reading '+str(x+1)]['mc2'])
-
-#     return sensorarray
-    
-
-
 # TODO: need to find range of each sensor output, so we can scale between 0-100
 
 while True:
