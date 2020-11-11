@@ -317,7 +317,7 @@ while True:
     sensorarray = []
     sensorarray.clear()
 
-    for x in range(5):
+    for x in range(20):
         sensorarray.append(sensor_data['MCP5'][x]['P0'])
         sensorarray.append(sensor_data['MCP5'][x]['P1'])
         sensorarray.append(sensor_data['MCP5'][x]['P2'])
@@ -326,7 +326,7 @@ while True:
         sensorarray.append(sensor_data['MCP5'][x]['P5'])
         sensorarray.append(sensor_data['MCP5'][x]['P6'])
         sensorarray.append(sensor_data['MCP5'][x]['P7'])
-    for x in range(5):
+    for x in range(20):
         sensorarray.append(sensor_data['MCP6'][x]['P0'])
         sensorarray.append(sensor_data['MCP6'][x]['P1'])
         sensorarray.append(sensor_data['MCP6'][x]['P2'])
@@ -335,7 +335,7 @@ while True:
         sensorarray.append(sensor_data['MCP6'][x]['P5'])
         sensorarray.append(sensor_data['MCP6'][x]['P6'])
         sensorarray.append(sensor_data['MCP6'][x]['P7'])
-    for x in range(5):
+    for x in range(20):
         sensorarray.append(sensor_data['MCP13'][x]['P0'])
         sensorarray.append(sensor_data['MCP13'][x]['P1'])
         sensorarray.append(sensor_data['MCP13'][x]['P2'])
@@ -344,7 +344,7 @@ while True:
         sensorarray.append(sensor_data['MCP13'][x]['P5'])
         sensorarray.append(sensor_data['MCP13'][x]['P6'])
         sensorarray.append(sensor_data['MCP13'][x]['P7'])
-    for x in range(5):
+    for x in range(20):
         sensorarray.append(sensor_data['IMU_acc'][x]['ax1'])
         sensorarray.append(sensor_data['IMU_acc'][x]['ay1'])
         sensorarray.append(sensor_data['IMU_acc'][x]['az1'])
@@ -354,7 +354,7 @@ while True:
         sensorarray.append(sensor_data['IMU_acc'][x]['nc1'])
         sensorarray.append(sensor_data['IMU_acc'][x]['nc2'])
 
-    for x in range(5):
+    for x in range(20):
         sensorarray.append(sensor_data['IMU_gy'][x]['gx1'])
         sensorarray.append(sensor_data['IMU_gy'][x]['gy1'])
         sensorarray.append(sensor_data['IMU_gy'][x]['gz1'])
