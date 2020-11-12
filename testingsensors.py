@@ -202,7 +202,7 @@ while True:
 			"MCP6: {}".format(MCP6) + "\n" +
 			"MCP13: {}".format(MCP13) + "\n" +
 			"IMU_acc: {}".format(IMU_acc) + "\n" +
-			"IMU_acc: {}".format(IMU_acc))
+			"IMU_gy: {}".format(IMU_gy) + "\n\n")
 
 		MCP5.clear()
 		MCP6.clear()
