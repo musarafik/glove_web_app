@@ -151,8 +151,8 @@ def get_IMU_values():
 
 
 while True:
-	continues = input("Type any character + ENTER to take 3 readings:")
-	for i in range(3):
+	continues = input("Type any character + ENTER to take 5 readings:")
+	for i in range(10):
 		MCP5 = []
 		MCP6 = []
 		MCP13 = []
@@ -160,28 +160,28 @@ while True:
 		IMU_gy = []
 
 		# read mcp5
-		MCP5.append(float("{:.2f}".format(mcp5_p0.voltage)))
-		MCP5.append(float("{:.2f}".format(mcp5_p1.voltage)))
-		MCP5.append(float("{:.2f}".format(mcp5_p2.voltage)))
-		MCP5.append(float("{:.2f}".format(mcp5_p3.voltage)))
-		MCP5.append(float("{:.2f}".format(mcp5_p4.voltage)))
-		MCP5.append(float("{:.2f}".format(mcp5_p5.voltage)))
-		MCP5.append(float("{:.2f}".format(mcp5_p6.voltage)))
-		MCP5.append(float("{:.2f}".format(mcp5_p7.voltage)))
+		MCP5.append(float("{:.5f}".format(mcp5_p0.voltage)))
+		MCP5.append(float("{:.5f}".format(mcp5_p1.voltage)))
+		MCP5.append(float("{:.5f}".format(mcp5_p2.voltage)))
+		MCP5.append(float("{:.5f}".format(mcp5_p3.voltage)))
+		MCP5.append(float("{:.5f}".format(mcp5_p4.voltage)))
+		MCP5.append(float("{:.5f}".format(mcp5_p5.voltage)))
+		MCP5.append(float("{:.5f}".format(mcp5_p6.voltage)))
+		MCP5.append(float("{:.5f}".format(mcp5_p7.voltage)))
 		# read mcp6
-		MCP6.append(float("{:.2f}".format(mcp6_p0.voltage)))
-		MCP6.append(float("{:.2f}".format(mcp6_p1.voltage)))
-		MCP6.append(float("{:.2f}".format(mcp6_p2.voltage)))
-		MCP6.append(float("{:.2f}".format(mcp6_p3.voltage)))
-		MCP6.append(float("{:.2f}".format(mcp6_p4.voltage)))
-		MCP6.append(float("{:.2f}".format(mcp6_p5.voltage)))
-		MCP6.append(float("{:.2f}".format(mcp6_p6.voltage)))
-		MCP6.append(float("{:.2f}".format(mcp6_p7.voltage)))
+		MCP6.append(float("{:.5f}".format(mcp6_p0.voltage)))
+		MCP6.append(float("{:.5f}".format(mcp6_p1.voltage)))
+		MCP6.append(float("{:.5f}".format(mcp6_p2.voltage)))
+		MCP6.append(float("{:.5f}".format(mcp6_p3.voltage)))
+		MCP6.append(float("{:.5f}".format(mcp6_p4.voltage)))
+		MCP6.append(float("{:.5f}".format(mcp6_p5.voltage)))
+		MCP6.append(float("{:.5f}".format(mcp6_p6.voltage)))
+		MCP6.append(float("{:.5f}".format(mcp6_p7.voltage)))
 		# read mcp13
-		MCP13.append(float("{:.2f}".format(mcp13_p0.voltage)))
-		MCP13.append(float("{:.2f}".format(mcp13_p1.voltage)))
-		MCP13.append(float("{:.2f}".format(mcp13_p2.voltage)))
-		MCP13.append(float("{:.2f}".format(mcp13_p3.voltage)))
+		MCP13.append(float("{:.5f}".format(mcp13_p0.voltage)))
+		MCP13.append(float("{:.5f}".format(mcp13_p1.voltage)))
+		MCP13.append(float("{:.5f}".format(mcp13_p2.voltage)))
+		MCP13.append(float("{:.5f}".format(mcp13_p3.voltage)))
 		# read imu acc
 		get_IMU_values()
 		IMU_acc.append(int(('{: 06d}'.format(accel_x_1))))
@@ -210,5 +210,5 @@ while True:
 		IMU_acc.clear()
 		IMU_gy.clear()
 
-		time.sleep(1)
+		time.sleep(.25)
 print("done")
