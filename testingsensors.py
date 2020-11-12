@@ -151,7 +151,7 @@ def get_IMU_values():
 
 
 while True:
-	continue = input("Type any character + ENTER to take 3 readings:")
+	continues = input("Type any character + ENTER to take 3 readings:")
 	for i in range(3):
 		MCP5 = []
 		MCP6 = []
