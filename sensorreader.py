@@ -251,7 +251,7 @@ def read_sensors(output_file):
 						}
 					})
 				sensor_reading_counter += 1
-				time.sleep(.25) # time between each reading 
+				time.sleep(.15) # time between each reading 
 
 				# print out sensor values
 				
