@@ -249,11 +249,11 @@ while True:
         # read from mcp5
         sensor_data['MCP5'].append({
             'reading': str(sensor_reading_counter+1),
-            'P0': float("{:.2f}".format(mcp5_p0.voltage)),
-            'P1': float("{:.2f}".format(mcp5_p1.voltage)),
-            'P2': float("{:.2f}".format(mcp5_p2.voltage)),
-            'P3': float("{:.2f}".format(mcp5_p3.voltage)),
-            'P4': float("{:.2f}".format(mcp5_p4.voltage)),
+            'P0': float("{:.3f}".format(mcp5_p0.voltage)),
+            'P1': float("{:.3f}".format(mcp5_p1.voltage)),
+            'P2': float("{:.3f}".format(mcp5_p2.voltage)),
+            'P3': float("{:.3f}".format(mcp5_p3.voltage)),
+            'P4': float("{:.3f}".format(mcp5_p4.voltage)),
             'P5': float("{:.2f}".format(mcp5_p5.voltage)),
             'P6': float("{:.2f}".format(mcp5_p6.voltage)),
             'P7': float("{:.2f}".format(mcp5_p7.voltage))  
@@ -263,11 +263,11 @@ while True:
             'reading':str(sensor_reading_counter+1),
             'P0': float("{:.2f}".format(mcp6_p0.voltage)),
             'P1': float("{:.2f}".format(mcp6_p1.voltage)),
-            'P2': float("{:.2f}".format(mcp6_p2.voltage)),
-            'P3': float("{:.2f}".format(mcp6_p3.voltage)),
-            'P4': float("{:.2f}".format(mcp6_p4.voltage)),
-            'P5': float("{:.2f}".format(mcp6_p5.voltage)),
-            'P6': float("{:.2f}".format(mcp6_p6.voltage)),
+            'P2': float("{:.3f}".format(mcp6_p2.voltage)),
+            'P3': float("{:.3f}".format(mcp6_p3.voltage)),
+            'P4': float("{:.3f}".format(mcp6_p4.voltage)),
+            'P5': float("{:.3f}".format(mcp6_p5.voltage)),
+            'P6': float("{:.3f}".format(mcp6_p6.voltage)),
             'P7': float("{:.2f}".format(mcp6_p7.voltage))
             })
 
@@ -310,7 +310,7 @@ while True:
             'mc2': -1
             })
         sensor_reading_counter += 1
-        time.sleep(.25) # time between each reading 
+        time.sleep(.15) # time between each reading 
     # done reading 5 readings
 
     # translate to array for SVM algo
@@ -373,7 +373,7 @@ while True:
    
     # 3. 
     svc = SVC(kernel="linear", C=1, gamma = 1) # probably don't need this line
-    svc = load("demo.joblib")
+    svc = load("test.joblib")
     prediction = svc.predict(data) # probably need to do some transformation on data before calling predict
     prediction = prediction[0][0]
 
