@@ -59,6 +59,7 @@ function Test(props){
             const raspPred = data["response"]["response"];
             setPrediction(raspPred.toLowerCase());
             console.log(raspPred);
+            setTimeout(function(){setPrediction('');}, 1000);
         });
     }, [allPaths])
 

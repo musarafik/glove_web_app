@@ -61,6 +61,8 @@ function Learn(props){
         socket.on("raspberry pi response", (data) => {
             const raspPred = data["response"]["response"];
             setPrediction(raspPred.toLowerCase());
+            setTimeout(function(){setPrediction('');}, 1000);
+
             console.log(raspPred);
         });
 
