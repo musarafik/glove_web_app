@@ -151,6 +151,36 @@ def get_IMU_values():
 
 
 
+## ROUNDING INPUT VALUES ##
+
+# 2+V = straight, 1.9~1.7V = half bent, 1.6-V = fully bent
+def rFlex(d):
+	if d > 2.0:
+		return 2 #straight
+	elif d < 1.6:
+		return 0 #fully bent
+	else:
+		return 1 #half bent
+
+# 0V = no force, 1~1.6 = med force, 1.7+V = full force
+def rForce(d):
+	if d < 1.0:
+		return 0 # no force
+	elif d > 1.7:
+		return 2 # full force
+	else:
+		return 1 # med force
+	
+# convert to signed int and round to closest multiple of 100. 
+def rIMU(d):
+	if d > 32765:
+		d -= 65536
+	d = abs(d-(d%100))
+	
+	return d
+
+
+
 # print training data to JSON file #
 sensor_data = {}
 sensor_data['SIGN'] = []

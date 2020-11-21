@@ -182,6 +182,10 @@ while True:
 		MCP13.append(float("{:.5f}".format(mcp13_p1.voltage)))
 		MCP13.append(float("{:.5f}".format(mcp13_p2.voltage)))
 		MCP13.append(float("{:.5f}".format(mcp13_p3.voltage)))
+		MCP13.append(float("{:.5f}".format(mcp13_p4.voltage)))
+		MCP13.append(float("{:.5f}".format(mcp13_p5.voltage)))
+		MCP13.append(float("{:.5f}".format(mcp13_p6.voltage)))
+		MCP13.append(float("{:.5f}".format(mcp13_p7.voltage)))
 		# read imu acc
 		get_IMU_values()
 	#	IMU_acc.append(int(('{: 06d}'.format(accel_x_1))))
