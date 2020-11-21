@@ -379,7 +379,7 @@ while True:
 
     # For testing the algorithm from inputs locally
     print(prediction)              
-    time.sleep(2)                    
+   # time.sleep(4)                    
     
     # 4.B ---TODO--- uncomment this when you want to use the socket
     

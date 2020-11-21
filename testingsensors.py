@@ -32,10 +32,10 @@ mcp13 = MCP.MCP3008(spi, cs13)
 
 # INITIALIZE IMUs #
 channel = 1
-imu_address_1 = 0x69
+#imu_address_1 = 0x69
 imu_address_2 = 0x68
 bus = SMBus(channel)
-bus.write_byte_data(imu_address_1, 0x06, 0x01)
+#bus.write_byte_data(imu_address_1, 0x06, 0x01)
 bus.write_byte_data(imu_address_2, 0x06, 0x01)
 time.sleep(0.5)
 accel_x_1 = -1
@@ -103,12 +103,12 @@ def get_IMU_values():
 	global gyro_z_2
 
 	# IMU READINGS # 
-	accel_x_high_1 = bus.read_byte_data(imu_address_1, 0x2D)
-	accel_x_low_1 = bus.read_byte_data(imu_address_1, 0x2E)
-	accel_y_high_1 = bus.read_byte_data(imu_address_1, 0x2F)
-	accel_y_low_1 = bus.read_byte_data(imu_address_1, 0x30)
-	accel_z_high_1 = bus.read_byte_data(imu_address_1, 0x31)
-	accel_z_low_1 = bus.read_byte_data(imu_address_1, 0x32)
+#	accel_x_high_1 = bus.read_byte_data(imu_address_1, 0x2D)
+#	accel_x_low_1 = bus.read_byte_data(imu_address_1, 0x2E)
+#	accel_y_high_1 = bus.read_byte_data(imu_address_1, 0x2F)
+#	accel_y_low_1 = bus.read_byte_data(imu_address_1, 0x30)
+#	accel_z_high_1 = bus.read_byte_data(imu_address_1, 0x31)
+#	accel_z_low_1 = bus.read_byte_data(imu_address_1, 0x32)
 
 	accel_x_high_2 = bus.read_byte_data(imu_address_2, 0x2D)
 	accel_x_low_2 = bus.read_byte_data(imu_address_2, 0x2E)
@@ -117,12 +117,12 @@ def get_IMU_values():
 	accel_z_high_2 = bus.read_byte_data(imu_address_2, 0x31)
 	accel_z_low_2 = bus.read_byte_data(imu_address_2, 0x32)
 
-	gyro_x_high_1 = bus.read_byte_data(imu_address_1, 0x33)
-	gyro_x_low_1 = bus.read_byte_data(imu_address_1, 0x34)
-	gyro_y_high_1 = bus.read_byte_data(imu_address_1, 0x35)
-	gyro_y_low_1 = bus.read_byte_data(imu_address_1, 0x36)
-	gyro_z_high_1 = bus.read_byte_data(imu_address_1, 0x37)
-	gyro_z_low_1 = bus.read_byte_data(imu_address_1, 0x38)
+#	gyro_x_high_1 = bus.read_byte_data(imu_address_1, 0x33)
+#	gyro_x_low_1 = bus.read_byte_data(imu_address_1, 0x34)
+#	gyro_y_high_1 = bus.read_byte_data(imu_address_1, 0x35)
+#	gyro_y_low_1 = bus.read_byte_data(imu_address_1, 0x36)
+#	gyro_z_high_1 = bus.read_byte_data(imu_address_1, 0x37)
+#	gyro_z_low_1 = bus.read_byte_data(imu_address_1, 0x38)
 
 	gyro_x_high_2 = bus.read_byte_data(imu_address_2, 0x33)
 	gyro_x_low_2 = bus.read_byte_data(imu_address_2, 0x34)
@@ -133,17 +133,17 @@ def get_IMU_values():
 
 
 	# COMBING IMU READING BYTES #
-	accel_x_1 = accel_x_high_1 * 256 + accel_x_low_1
-	accel_y_1 = accel_y_high_1 * 256 + accel_y_low_1
-	accel_z_1 = accel_z_high_1 * 256 + accel_z_low_1
+#	accel_x_1 = accel_x_high_1 * 256 + accel_x_low_1
+#	accel_y_1 = accel_y_high_1 * 256 + accel_y_low_1
+#	accel_z_1 = accel_z_high_1 * 256 + accel_z_low_1
 
 	accel_x_2 = accel_x_high_2 * 256 + accel_x_low_2
 	accel_y_2 = accel_y_high_2 * 256 + accel_y_low_2
 	accel_z_2 = accel_z_high_2 * 256 + accel_z_low_2
 
-	gyro_x_1 = gyro_x_high_1 * 256 + gyro_x_low_1
-	gyro_y_1 = gyro_y_high_1 * 256 + gyro_y_low_1
-	gyro_z_1 = gyro_z_high_1 * 256 + gyro_z_low_1
+#	gyro_x_1 = gyro_x_high_1 * 256 + gyro_x_low_1
+#	gyro_y_1 = gyro_y_high_1 * 256 + gyro_y_low_1
+#	gyro_z_1 = gyro_z_high_1 * 256 + gyro_z_low_1
 
 	gyro_x_2 = gyro_x_high_2 * 256 + gyro_x_low_2
 	gyro_y_2 = gyro_y_high_2 * 256 + gyro_y_low_2
@@ -184,16 +184,16 @@ while True:
 		MCP13.append(float("{:.5f}".format(mcp13_p3.voltage)))
 		# read imu acc
 		get_IMU_values()
-		IMU_acc.append(int(('{: 06d}'.format(accel_x_1))))
-		IMU_acc.append(int(('{: 06d}'.format(accel_y_1))))
-		IMU_acc.append(int(('{: 06d}'.format(accel_z_1))))
+	#	IMU_acc.append(int(('{: 06d}'.format(accel_x_1))))
+	#	IMU_acc.append(int(('{: 06d}'.format(accel_y_1))))
+	#	IMU_acc.append(int(('{: 06d}'.format(accel_z_1))))
 		IMU_acc.append(int(('{: 06d}'.format(accel_x_2))))
 		IMU_acc.append(int(('{: 06d}'.format(accel_y_2))))
 		IMU_acc.append(int(('{: 06d}'.format(accel_z_2))))
 		# read imu gy
-		IMU_gy.append(int(('{: 06d}'.format(gyro_x_1))))
-		IMU_gy.append(int(('{: 06d}'.format(gyro_y_1))))
-		IMU_gy.append(int(('{: 06d}'.format(gyro_z_1))))
+	#	IMU_gy.append(int(('{: 06d}'.format(gyro_x_1))))
+	#	IMU_gy.append(int(('{: 06d}'.format(gyro_y_1))))
+	#	IMU_gy.append(int(('{: 06d}'.format(gyro_z_1))))
 		IMU_gy.append(int(('{: 06d}'.format(gyro_x_2))))
 		IMU_gy.append(int(('{: 06d}'.format(gyro_y_2))))
 		IMU_gy.append(int(('{: 06d}'.format(gyro_z_2))))
