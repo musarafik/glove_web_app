@@ -211,42 +211,42 @@ def read_sensors(output_file):
 				sensor_data['MCP5'].append({
 					'sign': sign,
 					'reading '+str(sensor_reading_counter+1): {
-		                'P0': float("{:.3f}".format(mcp5_p0.voltage)),
-		                'P1': float("{:.3f}".format(mcp5_p1.voltage)),
-		                'P2': float("{:.3f}".format(mcp5_p2.voltage)),
-		                'P3': float("{:.3f}".format(mcp5_p3.voltage)),
-		                'P4': float("{:.3f}".format(mcp5_p4.voltage)),
-		                'P5': float("{:.2f}".format(mcp5_p5.voltage)),
-		                'P6': float("{:.2f}".format(mcp5_p6.voltage)),
-		                'P7': float("{:.2f}".format(mcp5_p7.voltage))
-		                }
-					})
+		            'P0': rFlex(mcp5_p5.voltage),
+		            'P1': rFlex(mcp5_p6.voltage),
+		            'P2': rFlex(mcp5_p7.voltage),
+		            'P3': rFlex(mcp6_p0.voltage),
+		            'P4': rFlex(mcp6_p1.voltage),
+		            'P5': rForce(mcp13_p1.voltage),
+		            'P6': rForce(mcp13_p2.voltage),
+		            'P7': rForce(mcp13_p3.voltage) 
+		            }
+				})
 
 				sensor_data['MCP6'].append({
 					'sign': sign,
 					'reading '+str(sensor_reading_counter+1): {
-		                'P0': float("{:.2f}".format(mcp6_p0.voltage)),
-		                'P1': float("{:.2f}".format(mcp6_p1.voltage)),
-		                'P2': float("{:.3f}".format(mcp6_p2.voltage)),
-		                'P3': float("{:.3f}".format(mcp6_p3.voltage)),
-		                'P4': float("{:.3f}".format(mcp6_p4.voltage)),
-		                'P5': float("{:.3f}".format(mcp6_p5.voltage)),
-		                'P6': float("{:.3f}".format(mcp6_p6.voltage)),
-		                'P7': float("{:.2f}".format(mcp6_p7.voltage))
+		                'P0': rForce(mcp13_p4.voltage),
+			            'P1': rForce(mcp13_p5.voltage),
+			            'P2': rFlex(mcp5_p0.voltage),
+			            'P3': rFlex(mcp5_p1.voltage),
+			            'P4': rFlex(mcp5_p2.voltage),
+			            'P5': rFlex(mcp5_p3.voltage),
+			            'P6': rFlex(mcp5_p4.voltage),
+			            'P7': rForce(mcp6_p4.voltage)
 		                }
 					})
 
 				sensor_data['MCP13'].append({
 					'sign': sign,
 					'reading '+str(sensor_reading_counter+1): {
-		                'P0': float("{:.2f}".format(mcp13_p0.voltage)),
-		                'P1': float("{:.2f}".format(mcp13_p1.voltage)),
-		                'P2': float("{:.2f}".format(mcp13_p2.voltage)),
-		                'P3': float("{:.2f}".format(mcp13_p3.voltage)),
-		                'P4': -1, # ** -1 = NOT connected to anything
-		                'P5': -1,
-		                'P6': -1,
-		                'P7': -1
+		                'P0': rForce(mcp6_p5.voltage),
+			            'P1': rForce(mcp6_p6.voltage),
+			            'P2': rForce(mcp6_p7.voltage),
+			            'P3': rForce(mcp13_p0.voltage),
+			            'P4': -1, # ** -1 = NOT connected to anything
+			            'P5': -1,
+			            'P6': -1,
+			            'P7': -1
 		                }
 					})
 
@@ -256,12 +256,12 @@ def read_sensors(output_file):
 				sensor_data['IMU_acc'].append({
 					'sign': sign,
 					'reading '+str(sensor_reading_counter+1): {
-						'ax1': int(('{: 06d}'.format(accel_x_1))),
-						'ay1': int(('{: 06d}'.format(accel_y_1))),
-						'az1': int(('{: 06d}'.format(accel_z_1))),
-						'ax2': int(('{: 06d}'.format(accel_x_2))),
-						'ay2': int(('{: 06d}'.format(accel_y_2))),
-						'az2': int(('{: 06d}'.format(accel_z_2))),
+						'ax1': rIMU(int(('{: 06d}'.format(accel_x_1)))),
+						'ay1': rIMU(int(('{: 06d}'.format(accel_y_1)))),
+						'az1': rIMU(int(('{: 06d}'.format(accel_z_1)))),
+						'ax2': rIMU(int(('{: 06d}'.format(accel_x_2)))),
+						'ay2': rIMU(int(('{: 06d}'.format(accel_y_2)))),
+						'az2': rIMU(int(('{: 06d}'.format(accel_z_2)))),
 						'nc1': -1,
 						'nc2': -1
 						}
@@ -270,12 +270,12 @@ def read_sensors(output_file):
 				sensor_data['IMU_gy'].append({
 					'sign': sign,
 					'reading '+str(sensor_reading_counter+1): {
-						'gx1': int(('{: 06d}'.format(gyro_x_1))),
-						'gy1': int(('{: 06d}'.format(gyro_y_1))),
-						'gz1': int(('{: 06d}'.format(gyro_z_1))),
-						'gx2': int(('{: 06d}'.format(gyro_x_2))),
-						'gy2': int(('{: 06d}'.format(gyro_y_2))),
-						'gz2': int(('{: 06d}'.format(gyro_z_2))),
+						'gx1': rIMU(int(('{: 06d}'.format(gyro_x_1)))),
+						'gy1': rIMU(int(('{: 06d}'.format(gyro_y_1)))),
+						'gz1': rIMU(int(('{: 06d}'.format(gyro_z_1)))),
+						'gx2': rIMU(int(('{: 06d}'.format(gyro_x_2)))),
+						'gy2': rIMU(int(('{: 06d}'.format(gyro_y_2)))),
+						'gz2': rIMU(int(('{: 06d}'.format(gyro_z_2)))),
 						'mc1': -1,
 						'mc2': -1
 						}
