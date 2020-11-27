@@ -188,8 +188,19 @@ sensor_data['MCP5'] = []
 sensor_data['MCP6'] = []
 sensor_data['MCP13'] = []
 # set up like 'P0': 'value'
-sensor_data['IMU_acc'] = []
-sensor_data['IMU_gy'] = []
+sensor_data['IMU_acc_x1'] = []
+sensor_data['IMU_acc_x2'] = []
+sensor_data['IMU_acc_y1'] = []
+sensor_data['IMU_acc_y2'] = []
+sensor_data['IMU_acc_z1'] = []
+sensor_data['IMU_acc_z2'] = []
+
+sensor_data['IMU_gy_x1'] = []
+sensor_data['IMU_gy_x2'] = []
+sensor_data['IMU_gy_y1'] = []
+sensor_data['IMU_gy_y2'] = []
+sensor_data['IMU_gy_z1'] = []
+sensor_data['IMU_gy_z2'] = []
 
 def read_sensors(output_file):
 	while True:
