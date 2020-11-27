@@ -152,7 +152,7 @@ def get_IMU_values():
 
 while True:
 	continues = input("Type any character + ENTER to take 5 readings:")
-	for i in range(10):
+	for i in range(int(continues)):
 		MCP5 = []
 		MCP6 = []
 		MCP13 = []
@@ -169,8 +169,8 @@ while True:
 		MCP5.append(float("{:.2f}".format(mcp13_p2.voltage)))
 		MCP5.append(float("{:.2f}".format(mcp13_p3.voltage)))
 		# read mcp6
-		MCP6.append(float("{:.5f}".format(mcp13_p0.voltage)))
-		MCP6.append(float("{:.5f}".format(mcp13_p1.voltage)))
+		MCP6.append(float("{:.5f}".format(mcp13_p4.voltage)))
+		MCP6.append(float("{:.5f}".format(mcp13_p5.voltage)))
 		MCP6.append(float("{:.5f}".format(mcp5_p0.voltage)))
 		MCP6.append(float("{:.5f}".format(mcp5_p1.voltage)))
 		MCP6.append(float("{:.5f}".format(mcp5_p2.voltage)))
