@@ -252,38 +252,85 @@ def read_sensors(output_file):
 
 				# REFRESH IMU VALUES #
 				get_IMU_values()
-				# writing 6 decimals to json file
-				sensor_data['IMU_acc'].append({
+
+				# accelerometer
+				sensor_data['IMU_acc_x1'].append({
 					'sign': sign,
 					'reading '+str(sensor_reading_counter+1): {
-						'ax1': rIMU(int(('{: 06d}'.format(accel_x_1)))),
-						'ay1': rIMU(int(('{: 06d}'.format(accel_y_1)))),
-						'az1': rIMU(int(('{: 06d}'.format(accel_z_1)))),
-						'ax2': rIMU(int(('{: 06d}'.format(accel_x_2)))),
-						'ay2': rIMU(int(('{: 06d}'.format(accel_y_2)))),
-						'az2': rIMU(int(('{: 06d}'.format(accel_z_2)))),
-						'nc1': -1,
-						'nc2': -1
+						'ax1': rIMU(int(('{: 06d}'.format(accel_x_1))))
+						}
+					})
+				sensor_data['IMU_acc_y1'].append({
+					'sign': sign,
+					'reading '+str(sensor_reading_counter+1): {
+						'ay1': rIMU(int(('{: 06d}'.format(accel_y_1))))
+						}
+					})
+				sensor_data['IMU_acc_z1'].append({
+					'sign': sign,
+					'reading '+str(sensor_reading_counter+1): {
+						'az1': rIMU(int(('{: 06d}'.format(accel_z_1))))
+						}
+					})
+				sensor_data['IMU_acc_x2'].append({
+					'sign': sign,
+					'reading '+str(sensor_reading_counter+1): {
+						'ax2': rIMU(int(('{: 06d}'.format(accel_x_2))))
+						}
+					})
+				sensor_data['IMU_acc_y2'].append({
+					'sign': sign,
+					'reading '+str(sensor_reading_counter+1): {
+						'ay2': rIMU(int(('{: 06d}'.format(accel_y_2))))
+						}
+					})
+				sensor_data['IMU_acc_z2'].append({
+					'sign': sign,
+					'reading '+str(sensor_reading_counter+1): {
+						'az2': rIMU(int(('{: 06d}'.format(accel_z_2))))
 						}
 					})
 
-				sensor_data['IMU_gy'].append({
+				# gyroscope values
+				sensor_data['IMU_gy_x1'].append({
 					'sign': sign,
 					'reading '+str(sensor_reading_counter+1): {
-						'gx1': rIMU(int(('{: 06d}'.format(gyro_x_1)))),
-						'gy1': rIMU(int(('{: 06d}'.format(gyro_y_1)))),
-						'gz1': rIMU(int(('{: 06d}'.format(gyro_z_1)))),
-						'gx2': rIMU(int(('{: 06d}'.format(gyro_x_2)))),
-						'gy2': rIMU(int(('{: 06d}'.format(gyro_y_2)))),
-						'gz2': rIMU(int(('{: 06d}'.format(gyro_z_2)))),
-						'mc1': -1,
-						'mc2': -1
+						'gx1': rIMU(int(('{: 06d}'.format(gyro_x_1))))
 						}
 					})
+				sensor_data['IMU_gy_y1'].append({
+					'sign': sign,
+					'reading '+str(sensor_reading_counter+1): {
+						'gy1': rIMU(int(('{: 06d}'.format(gyro_y_1))))
+						}
+					})
+				sensor_data['IMU_gy_z1'].append({
+					'sign': sign,
+					'reading '+str(sensor_reading_counter+1): {
+						'gz1': rIMU(int(('{: 06d}'.format(gyro_z_1))))
+						}
+					})
+				sensor_data['IMU_gy_x2'].append({
+					'sign': sign,
+					'reading '+str(sensor_reading_counter+1): {
+						'gx2': rIMU(int(('{: 06d}'.format(gyro_x_2))))
+						}
+					})
+				sensor_data['IMU_gy_y2'].append({
+					'sign': sign,
+					'reading '+str(sensor_reading_counter+1): {
+						'gy2': rIMU(int(('{: 06d}'.format(gyro_y_2))))
+						}
+					})
+				sensor_data['IMU_gy_z2'].append({
+					'sign': sign,
+					'reading '+str(sensor_reading_counter+1): {
+						'gz2': rIMU(int(('{: 06d}'.format(gyro_z_2))))
+						}
+					})
+
 				sensor_reading_counter += 1
 				time.sleep(.15) # time between each reading 
-
-				# print out sensor values
 				
 			set_num -= 1
 			#time.sleep(1)
