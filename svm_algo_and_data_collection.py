@@ -222,9 +222,9 @@ def get_IMU_values():
 # 2+V = straight, 1.9~1.7V = half bent, 1.6-V = fully bent
 def rFlex(d):
 	if d > 2.0:
-		return 2 #straight
+		return 3 #straight
 	elif (d <= 2.0) and (d >=1.8):
-		return 1.5 #more than half bent
+		return 2 #more than half bent
 	elif (d > 1.6) and (d < 1.8):
 		return 1 #half bent
 	else:
@@ -232,12 +232,14 @@ def rFlex(d):
 
 # 0V = no force, 1~1.6 = med force, 1.7+V = full force
 def rForce(d):
-	if d < 1.0:
+	if d < 0.4:
 		return 0 # no force
+	elif (d < 1.0) and (d >=0.4):
+		return 1 # small force
 	elif d > 1.7:
-		return 2 # full force
+		return 3 # full force
 	else:
-		return 1 # med force
+		return 2 # med force
 	
 # convert to signed int and round to closest multiple of 100. 
 def rIMU(d):

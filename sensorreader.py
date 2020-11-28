@@ -166,12 +166,14 @@ def rFlex(d):
 
 # 0V = no force, 1~1.6 = med force, 1.7+V = full force
 def rForce(d):
-	if d < 1.0:
+	if d < 0.4:
 		return 0 # no force
+	elif (d < 1.0) and (d >=0.4):
+		return 1 # small force
 	elif d > 1.7:
-		return 2 # full force
+		return 3 # full force
 	else:
-		return 1 # med force
+		return 2 # med force
 	
 # convert to signed int and round to closest multiple of 100. 
 def rIMU(d):
