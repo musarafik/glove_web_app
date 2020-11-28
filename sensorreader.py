@@ -218,6 +218,7 @@ def read_sensors(output_file):
 		set_num = int(input("Type in how many sets of readings you want to take:"))
 
 		while(set_num > 0):
+			print(set_num)
 			sensor_reading_counter = 0
 			time.sleep(1)
 			while(sensor_reading_counter < 20):
@@ -345,7 +346,7 @@ def read_sensors(output_file):
 					})
 
 				sensor_reading_counter += 1
-				time.sleep(.15) # time between each reading 
+				time.sleep(.1) # time between each reading 
 				
 			set_num -= 1
 			#time.sleep(1)
