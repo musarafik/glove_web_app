@@ -265,8 +265,6 @@ def read_sensors(output_file):
 			            'P7': -1
 		                }
 					})
-				print(rForce(mcp6_p7.voltage))
-				print(rForce(mcp13_p0.voltage))
 
 				# REFRESH IMU VALUES #
 				get_IMU_values()
