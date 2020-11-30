@@ -283,8 +283,18 @@ while True:
     sensor_data['MCP5'].clear()
     sensor_data['MCP6'].clear()
     sensor_data['MCP13'].clear()
-    sensor_data['IMU_acc'].clear()
-    sensor_data['IMU_gy'].clear()
+    sensor_data['IMU_acc_x1'].clear()
+    sensor_data['IMU_acc_x2'].clear()
+    sensor_data['IMU_acc_y1'].clear()
+    sensor_data['IMU_acc_y2'].clear()
+    sensor_data['IMU_acc_z1'].clear()
+    sensor_data['IMU_acc_z2'].clear()
+    sensor_data['IMU_gy_x1'].clear()
+    sensor_data['IMU_gy_x2'].clear()
+    sensor_data['IMU_gy_y1'].clear()
+    sensor_data['IMU_gy_y2'].clear()
+    sensor_data['IMU_gy_z1'].clear()
+    sensor_data['IMU_gy_z2'].clear()
 
     while(sensor_reading_counter < 20):
         # array for real time:
