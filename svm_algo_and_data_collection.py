@@ -222,9 +222,9 @@ def get_IMU_values():
 # 2+V = straight, 1.9~1.7V = half bent, 1.6-V = fully bent
 def rFlex(d):
 	if d > 2.0:
-		return 3 #straight
+		return 2 #straight
 	elif (d <= 2.0) and (d >=1.8):
-		return 2 #more than half bent
+		return 1.5 #more than half bent
 	elif (d > 1.6) and (d < 1.8):
 		return 1 #half bent
 	else:
@@ -330,25 +330,51 @@ while True:
         # REFRESH IMU VALUES #
         get_IMU_values()
         # writing 6 decimals to json file
-        sensor_data['IMU_acc'].append({
+        sensor_data['IMU_acc_x1'].append({
             'reading': str(sensor_reading_counter+1),
-            'ax1': rIMU(int(('{: 06d}'.format(accel_x_1)))),
-            'ay1': rIMU(int(('{: 06d}'.format(accel_y_1)))),
-            'az1': rIMU(int(('{: 06d}'.format(accel_z_1)))),
-            'ax2': rIMU(int(('{: 06d}'.format(accel_x_2)))),
-            'ay2': rIMU(int(('{: 06d}'.format(accel_y_2)))),
+            'ax1': rIMU(int(('{: 06d}'.format(accel_x_1))))
+            })
+        sensor_data['IMU_acc_y1'].append({
+            'reading': str(sensor_reading_counter+1),
+            'ay1': rIMU(int(('{: 06d}'.format(accel_y_1))))
+            })
+        sensor_data['IMU_acc_z1'].append({
+            'reading': str(sensor_reading_counter+1),
+            'az1': rIMU(int(('{: 06d}'.format(accel_z_1))))
+            })
+        sensor_data['IMU_acc_x2'].append({
+            'reading': str(sensor_reading_counter+1),
+            'ax2': rIMU(int(('{: 06d}'.format(accel_x_2))))
+            })
+        sensor_data['IMU_acc_y2'].append({
+            'reading': str(sensor_reading_counter+1),
+            'ay2': rIMU(int(('{: 06d}'.format(accel_y_2))))
+            })
+        sensor_data['IMU_acc_z2'].append({
+            'reading': str(sensor_reading_counter+1),
             'az2': rIMU(int(('{: 06d}'.format(accel_z_2))))
             })
 
-        sensor_data['IMU_gy'].append({
+        sensor_data['IMU_gy_x1'].append({
             'reading': str(sensor_reading_counter+1),
             'gx1': rIMU(int(('{: 06d}'.format(gyro_x_1)))),
-            'gy1': rIMU(int(('{: 06d}'.format(gyro_y_1)))),
-            'gz1': rIMU(int(('{: 06d}'.format(gyro_z_1)))),
-            'gx2': rIMU(int(('{: 06d}'.format(gyro_x_2)))),
-            'gy2': rIMU(int(('{: 06d}'.format(gyro_y_2)))),
+        sensor_data['IMU_gy_y1'].append({
+            'reading': str(sensor_reading_counter+1),
+            'gy1': rIMU(int(('{: 06d}'.format(gyro_y_1))))
+        sensor_data['IMU_gy_z1'].append({
+            'reading': str(sensor_reading_counter+1),
+            'gz1': rIMU(int(('{: 06d}'.format(gyro_z_1))))
+        sensor_data['IMU_gy_x2'].append({
+            'reading': str(sensor_reading_counter+1),
+            'gx2': rIMU(int(('{: 06d}'.format(gyro_x_2))))
+        sensor_data['IMU_gy_y2'].append({
+            'reading': str(sensor_reading_counter+1),
+            'gy2': rIMU(int(('{: 06d}'.format(gyro_y_2))))
+        sensor_data['IMU_gy_z2'].append({
+            'reading': str(sensor_reading_counter+1),
             'gz2': rIMU(int(('{: 06d}'.format(gyro_z_2))))
             })
+
         sensor_reading_counter += 1
         time.sleep(.15) # time between each reading 
     # done reading 5 readings
@@ -385,24 +411,20 @@ while True:
         sensorarray.append(sensor_data['MCP13'][x]['P6'])
         sensorarray.append(sensor_data['MCP13'][x]['P7'])
     for x in range(20):
-        sensorarray.append(sensor_data['IMU_acc'][x]['ax1'])
-        sensorarray.append(sensor_data['IMU_acc'][x]['ay1'])
-        sensorarray.append(sensor_data['IMU_acc'][x]['az1'])
-        sensorarray.append(sensor_data['IMU_acc'][x]['ax2'])
-        sensorarray.append(sensor_data['IMU_acc'][x]['ay2'])
-        sensorarray.append(sensor_data['IMU_acc'][x]['az2'])
-        sensorarray.append(sensor_data['IMU_acc'][x]['nc1'])
-        sensorarray.append(sensor_data['IMU_acc'][x]['nc2'])
+        sensorarray.append(sensor_data['IMU_acc_x1'][x]['ax1'])
+        sensorarray.append(sensor_data['IMU_acc_y1'][x]['ay1'])
+        sensorarray.append(sensor_data['IMU_acc_z1'][x]['az1'])
+        sensorarray.append(sensor_data['IMU_acc_x2'][x]['ax2'])
+        sensorarray.append(sensor_data['IMU_acc_y2'][x]['ay2'])
+        sensorarray.append(sensor_data['IMU_acc_z2'][x]['az2'])
 
     for x in range(20):
-        sensorarray.append(sensor_data['IMU_gy'][x]['gx1'])
-        sensorarray.append(sensor_data['IMU_gy'][x]['gy1'])
-        sensorarray.append(sensor_data['IMU_gy'][x]['gz1'])
-        sensorarray.append(sensor_data['IMU_gy'][x]['gx2'])
-        sensorarray.append(sensor_data['IMU_gy'][x]['gy2'])
-        sensorarray.append(sensor_data['IMU_gy'][x]['gz2'])
-        sensorarray.append(sensor_data['IMU_gy'][x]['mc1'])
-        sensorarray.append(sensor_data['IMU_gy'][x]['mc2']) 
+        sensorarray.append(sensor_data['IMU_gy_x1'][x]['gx1'])
+        sensorarray.append(sensor_data['IMU_gy_y1'][x]['gy1'])
+        sensorarray.append(sensor_data['IMU_gy_z1'][x]['gz1'])
+        sensorarray.append(sensor_data['IMU_gy_x2'][x]['gx2'])
+        sensorarray.append(sensor_data['IMU_gy_y2'][x]['gy2'])
+        sensorarray.append(sensor_data['IMU_gy_z2'][x]['gz2'])
     #sensor_data_array = reformatToArray(sensor_data)
     
     #data = np.array([thumb,index,middle,ring,pinky,accel,indexForce,midForce,thumbForce])
@@ -413,7 +435,7 @@ while True:
    
     # 3. 
     svc = SVC(kernel="linear", C=1, gamma = 1) # probably don't need this line
-    svc = load("test.joblib")
+    svc = load("test_final_morgan.joblib")
     prediction = svc.predict(data) # probably need to do some transformation on data before calling predict
     prediction = prediction[0][0]
 
