@@ -357,19 +357,24 @@ while True:
 
         sensor_data['IMU_gy_x1'].append({
             'reading': str(sensor_reading_counter+1),
-            'gx1': rIMU(int(('{: 06d}'.format(gyro_x_1)))),
+            'gx1': rIMU(int(('{: 06d}'.format(gyro_x_1))))
+            })
         sensor_data['IMU_gy_y1'].append({
             'reading': str(sensor_reading_counter+1),
             'gy1': rIMU(int(('{: 06d}'.format(gyro_y_1))))
+            })
         sensor_data['IMU_gy_z1'].append({
             'reading': str(sensor_reading_counter+1),
             'gz1': rIMU(int(('{: 06d}'.format(gyro_z_1))))
+            })
         sensor_data['IMU_gy_x2'].append({
             'reading': str(sensor_reading_counter+1),
             'gx2': rIMU(int(('{: 06d}'.format(gyro_x_2))))
+            })
         sensor_data['IMU_gy_y2'].append({
             'reading': str(sensor_reading_counter+1),
             'gy2': rIMU(int(('{: 06d}'.format(gyro_y_2))))
+            })
         sensor_data['IMU_gy_z2'].append({
             'reading': str(sensor_reading_counter+1),
             'gz2': rIMU(int(('{: 06d}'.format(gyro_z_2))))
