@@ -425,20 +425,31 @@ while True:
         sensorarray.append(sensor_data['MCP13'][x]['P5'])
         sensorarray.append(sensor_data['MCP13'][x]['P6'])
         sensorarray.append(sensor_data['MCP13'][x]['P7'])
+
     for x in range(20):
         sensorarray.append(sensor_data['IMU_acc_x1'][x]['ax1'])
+    for x in range(20):
         sensorarray.append(sensor_data['IMU_acc_y1'][x]['ay1'])
+    for x in range(20):
         sensorarray.append(sensor_data['IMU_acc_z1'][x]['az1'])
+    for x in range(20):
         sensorarray.append(sensor_data['IMU_acc_x2'][x]['ax2'])
+    for x in range(20):
         sensorarray.append(sensor_data['IMU_acc_y2'][x]['ay2'])
+    for x in range(20):
         sensorarray.append(sensor_data['IMU_acc_z2'][x]['az2'])
 
     for x in range(20):
         sensorarray.append(sensor_data['IMU_gy_x1'][x]['gx1'])
+    for x in range(20):
         sensorarray.append(sensor_data['IMU_gy_y1'][x]['gy1'])
+    for x in range(20):
         sensorarray.append(sensor_data['IMU_gy_z1'][x]['gz1'])
+    for x in range(20):
         sensorarray.append(sensor_data['IMU_gy_x2'][x]['gx2'])
+    for x in range(20):
         sensorarray.append(sensor_data['IMU_gy_y2'][x]['gy2'])
+    for x in range(20):
         sensorarray.append(sensor_data['IMU_gy_z2'][x]['gz2'])
     #sensor_data_array = reformatToArray(sensor_data)
     
