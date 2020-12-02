@@ -461,7 +461,7 @@ while True:
    
     # 3. 
     svc = SVC(kernel="linear", C=1, gamma = 1) # probably don't need this line
-    svc = load("test_final_morgan.joblib")
+    svc = load("test_final_combined.joblib")
     prediction = svc.predict(data) # probably need to do some transformation on data before calling predict
     prediction = prediction[0][0]
 
